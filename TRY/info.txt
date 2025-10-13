@@ -1,0 +1,5 @@
+Les genres vont de 2 à 5 (http://localhost:8000/api/v1/genres/?page=5)
+
+Pour récupérer les films possibilité de faire par lot : get http://localhost:8000/api/v1/genres/?page_size=10 ; ici 10 premiers items.
+Un script comme pour les genres semble prendre beaucoup de temps
+
