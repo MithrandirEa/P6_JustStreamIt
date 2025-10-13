@@ -1,0 +1,40 @@
+Les genres vont de 2 à 5 (http://localhost:8000/api/v1/genres/?page=5)
+
+Pour récupérer les films possibilité de faire par lot : get http://localhost:8000/api/v1/genres/?page_size=10 ; ici 10 premiers items.
+Un script comme pour les genres semble prendre beaucoup de temps
+
+Trois script de base pour récupérer les categories, la liste des films et les info d'un film au choix. 
+
+Request pour la maquette :
+    
+    Accueil :
+        - "Meilleur film" : get http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=1
+        - "Films les mieux notés" (6 desk, 4 tab, 2 phone) :
+                - get http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=6
+                - get http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=4
+                - get http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=2
+        - "Category1" (6,4,2) :
+                - get http://localhost:8000/api/v1/titles/?genre=action&sort_by=-imdb_score&page_size=6
+                - get http://localhost:8000/api/v1/titles/?genre=action&sort_by=-imdb_score&page_size=4
+                - get http://localhost:8000/api/v1/titles/?genre=action&sort_by=-imdb_score&page_size=2
+        - "Category2" (6,4,2) :
+                - get http://localhost:8000/api/v1/titles/?genre=fantasy&sort_by=-imdb_score&page_size=6
+                - get http://localhost:8000/api/v1/titles/?genre=fantasy&sort_by=-imdb_score&page_size=4
+                - get http://localhost:8000/api/v1/titles/?genre=fantasy&sort_by=-imdb_score&page_size=2
+        - "Autres" (6,4,2) !LISTE DÉROULANTE! :
+                -
+                -
+                -
+
+    Modal :     get http://localhost:8000/api/v1/titles/[ID_du_film] filters impossible avec API REST, récupérer le JSON puis filtrer
+        - Titre :
+        - Année :
+        - Genres :
+        - Classification PEGI :
+        - Durée :
+        - Pays :
+        - Score IMDB :
+        - BoxOffice$ :
+        - Réalisateur :
+        - Description longue :
+        - Acteur.isse :
