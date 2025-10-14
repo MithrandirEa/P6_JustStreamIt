@@ -1,9 +1,12 @@
 body {
+    width: 1054px;
+    height: 4451px;
     font-family: "Oswald", sans-serif;
     background-color: white;
     font-style : normal;
     text-align: justify;
     margin: auto;
+    border: solid black 1px;
     padding-top: 60px;
     padding-left: 107px;
     padding-right: 110px;

@@ -1,4 +1,6 @@
 body {
+    width: 778px;
+    height: 939px;
     font-family: "Oswald", sans-serif;
     background-color: white;
     font-style : normal;
@@ -11,12 +13,27 @@ body {
     border: 6px solid black;
 }
 
-.header {
-    display: flexbox;
-    width: 70%;
-    justify-content: space-between;
+header {
+    width: 423px;
+    height: 359px;
+    display: flex;
+    justify-content: flex-start;
     align-items: flex-start;
     gap: 40px;
+    border: solid red 10px;
+}
+
+.poster {
+    display: flex;
+    flex-direction: column;
+    width: 227px;
+    height: 334px;
+    align-items: center;
+    justify-items: center;
+    padding-top: 34px;
+    padding-right: 34px;
+    padding-left: 517px;
+    border: solid red 1px;
 }
 
 .filmInfo {
@@ -24,7 +41,10 @@ body {
     flex-direction: column;
     align-items: left;
     justify-content: left;
-    padding-left: 27px;
+    padding-top: 21px;
+    padding-left: 46px;
+    width: 423px;
+    height: 359px;
     border: solid red 1px;
 }
 
@@ -40,11 +60,5 @@ body {
     display: flex;
     align-items: baseline;
     justify-content: flex-start;
-    border: solid red 1px;
-}
-
-.poster {
-    display: flex;
-    position: right;
     border: solid red 1px;
 }

@@ -1,3 +1,5 @@
+lien maquette : https://www.figma.com/design/6KzVM5R2pOBX637RcVWjJ7/Maquettes-JustStreamIt?node-id=0-1&p=f&t=IluMRFdyPnHDY7Cl-0
+
 Les genres vont de 2 à 5 (http://localhost:8000/api/v1/genres/?page=5)
 
 Pour récupérer les films possibilité de faire par lot : get http://localhost:8000/api/v1/genres/?page_size=10 ; ici 10 premiers items.
