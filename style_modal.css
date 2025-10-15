@@ -19,8 +19,27 @@ header {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 40px;
+    gap: 48px
+
     border: solid red 10px;
+}
+
+.filmInfo {
+    display: flex;
+    flex-direction: column;
+    width: 423px;
+    height: 359px;
+    align-items: left;
+    justify-content: left;
+    padding-top: 21px;
+    padding-left: 46px;
+
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 100%;
+    vertical-align: middle;
+    
+    border: solid red 5px;
 }
 
 .poster {
@@ -29,36 +48,60 @@ header {
     width: 227px;
     height: 334px;
     align-items: center;
-    justify-items: center;
-    padding-top: 34px;
+    justify-items: right;
+    /* padding-top: 34px;
     padding-right: 34px;
-    padding-left: 517px;
-    border: solid red 1px;
+    padding-left: 517px; */
+
+    top: 4246px;
+    left: -962px;
+
+    border: solid red 5px;
 }
 
-.filmInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: left;
-    padding-top: 21px;
-    padding-left: 46px;
-    width: 423px;
-    height: 359px;
-    border: solid red 1px;
+.summarized {
+    width: 698px;
+    height: 457px;
+    top: 4502px;
+    left: -1433px;
 }
 
-.year_cat{
-    display: flex;
-    align-items: baseline;
-    justify-content: flex-start;
-    border: solid red 1px;
-    
+.actors_section {
+    width: 692px;
+    height: 248px;
+    top: 4830px;
+    left: -1433px;
+
+    font-weight: bold;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 100%;
+
+    vertical-align: middle;
 }
 
-.class_dur{
-    display: flex;
-    align-items: baseline;
-    justify-content: flex-start;
-    border: solid red 1px;
+.actors_names {
+    font-weight: normal;
 }
+
+.return_button a {
+    width: 214px;
+    height: 36px;
+    top: 5070px;
+    left: -1197px;
+    border-radius: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding-top: 2px;
+    padding-right: 4px;
+    padding-bottom: 2px;
+    padding-left: 4px;
+    gap: 10px;
+
+    background-color: #fa0b0b;
+    color: white;
+}
+
