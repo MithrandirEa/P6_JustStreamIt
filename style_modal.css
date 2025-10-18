@@ -1,107 +1,93 @@
 body {
     width: 778px;
-    height: 939px;
+    min-height: 600px;
+    max-height: 939px;
     font-family: "Oswald", sans-serif;
     background-color: white;
-    font-style : normal;
+    font-style: normal;
     text-align: justify;
     margin: auto;
-    padding-top: 60px;
-    padding-left: 107px;
-    padding-right: 110px;
-    padding-bottom: 75px;
+    padding: 30px;
     border: 6px solid black;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
-    width: 423px;
-    height: 359px;
+    width: 100%;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: row;
     align-items: flex-start;
-    gap: 48px
-
-    border: solid red 10px;
+    gap: 30px;
+    margin-bottom: 30px;
 }
 
 .filmInfo {
-    display: flex;
-    flex-direction: column;
-    width: 423px;
-    height: 359px;
-    align-items: left;
-    justify-content: left;
-    padding-top: 21px;
-    padding-left: 46px;
-
+    width: 70%;
     font-weight: 600;
     font-size: 48px;
-    line-height: 100%;
-    vertical-align: middle;
-    
-    border: solid red 5px;
+    line-height: 1.2;
+    padding: 20px;
 }
 
 .poster {
+    width: 30%;
     display: flex;
-    flex-direction: column;
-    width: 227px;
-    height: 334px;
-    align-items: center;
-    justify-items: right;
-    /* padding-top: 34px;
-    padding-right: 34px;
-    padding-left: 517px; */
+    justify-content: center;
+    padding: 20px;
+}
 
-    top: 4246px;
-    left: -962px;
-
-    border: solid red 5px;
+.poster img {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    object-fit: cover;
 }
 
 .summarized {
-    width: 698px;
-    height: 457px;
-    top: 4502px;
-    left: -1433px;
+    width: 100%;
+    max-width: 698px;
+    margin: 0 auto 20px auto;
+    padding: 0 20px;
 }
 
 .actors_section {
-    width: 692px;
-    height: 248px;
-    top: 4830px;
-    left: -1433px;
-
+    width: 100%;
+    max-width: 692px;
+    margin: 0 auto 20px auto;
+    padding: 0 20px;
     font-weight: bold;
     font-style: normal;
     font-size: 20px;
-    line-height: 100%;
-
-    vertical-align: middle;
+    line-height: 1.4;
 }
 
 .actors_names {
     font-weight: normal;
+    display: block;
+    margin-top: 10px;
+}
+
+.return_button {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .return_button a {
+    display: inline-block;
     width: 214px;
     height: 36px;
-    top: 5070px;
-    left: -1197px;
+    line-height: 36px;
     border-radius: 25px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding-top: 2px;
-    padding-right: 4px;
-    padding-bottom: 2px;
-    padding-left: 4px;
-    gap: 10px;
-
     background-color: #fa0b0b;
     color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
+.return_button a:hover {
+    background-color: #d60909;
 }
 
