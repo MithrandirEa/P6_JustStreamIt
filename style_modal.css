@@ -25,10 +25,20 @@ header {
 
 .filmInfo {
     width: 70%;
-    font-weight: 600;
-    font-size: 48px;
-    line-height: 1.2;
+    font-weight: 400;
     padding: 20px;
+}
+
+.filmInfo h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+}
+
+.filmInfo p {
+    font-size: 16px;
+    line-height: 1.4;
+    margin: 8px 0;
 }
 
 .poster {
