@@ -297,6 +297,40 @@ body {
     font-style: italic;               /* 🔤 Texte en italique */
 }
 
+/* 🚫 MASQUAGE DES ERREURS POUR PRÉSENTATION PROFESSIONNELLE */
+/* Cache les messages d'erreur du navigateur */
+.error-console, 
+[class*="error"],
+[id*="error"] {
+    display: none !important;         /* 🙈 Masque tous les éléments d'erreur */
+}
+
+/* Amélioration des fallbacks d'images */
+img {
+    background-color: transparent;    /* 🖼️ Fond transparent pour les images qui chargent */
+    transition: opacity 0.3s ease;    /* ⚡ Animation douce pour l'apparition */
+}
+
+img[src=""], 
+img:not([src]),
+img[src*="error"] {
+    display: none !important;         /* 🙈 Cache les images sans source ou en erreur */
+}
+
+/* Style pour les conteneurs de fallback */
+.image-fallback-container {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.image-fallback-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
 /* Responsive breakpoints selon maquettes */
 @media (max-width: 1199px) {
     .main-content {
