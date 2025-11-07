@@ -1,6 +1,69 @@
-# OCMovies-API: API de test fournissant des informations sur des films
+# JustStreamIt - Application Web de Streaming
 
-Le projet OCMovies-API est une application web à exécuter localement dans le cadre de projets éducatifs. Cette application est implémentée sous la forme d'une API REST. Elle fournit des informations cinématographiques à partir d'urls interrogeables à l'aide d'un client HTTP graphique comme un navigateur web ou postman, ou d'un client HTTP programmatique comme requests en python ou fetch/axios en javascript. Les points d'entrée fournis par cette API de test sont consultables en lecture seule avec des points d'entrée limités aux requêtes GET.
+## 📋 Description du Projet
+
+JustStreamIt est une application web moderne qui permet de découvrir et explorer une base de données de films via une interface utilisateur intuitive. L'application consomme l'API REST OCMovies pour afficher dynamiquement les informations des films.
+
+## 🚀 Fonctionnalités
+
+### Page d'Accueil
+- **Meilleur Film** : Affichage du film avec le meilleur score IMDb
+- **Films les Mieux Notés** : Sélection des top films, affichage responsive
+- **Catégories** : Sections dédiées Action et Fantasy
+- **Autres Films** : Liste déroulante interactive pour tous les genres
+
+### Page Modale
+- **Détails Complets** : Informations détaillées d'un film sélectionné
+- **Navigation Intuitive** : Retour facile vers l'accueil
+
+### Design Responsive
+- **Mobile First** : Optimisé pour tous les écrans
+- **Breakpoints** : 2/4/6 films selon la taille d'écran
+- **Performance** : Chargement adaptatif du contenu
+
+## 🛠️ Technologies Utilisées
+
+- **HTML5** : Structure sémantique moderne
+- **CSS3** : Flexbox, Grid, Media Queries
+- **JavaScript ES6+** : Async/Await, Fetch API, Modules
+- **API REST** : OCMovies pour les données dynamiques
+
+## 📁 Structure du Projet
+
+```
+JustStreamIt/
+├── index.html                 # Page d'accueil
+├── modalWindows.html         # Page modale détails
+├── script.js                 # Logique JavaScript principale
+├── script_avec_commentaires.js # Version commentée pour formation
+├── modal.js                  # Gestion de la fenêtre modale
+├── style_accueil.css         # Styles page d'accueil
+├── style_modal.css           # Styles page modale
+├── NOTES_SOUTENANCE.md       # Notes pour présentation
+├── README.md                 # Documentation technique
+└── images/                   # Assets graphiques
+```
+
+## 🔧 Installation et Utilisation
+
+### Prérequis
+1. **API OCMovies** : Cloner et lancer le serveur API
+   ```bash
+   git clone https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR.git
+   cd OCMovies-API-EN-FR
+   python -m venv env
+   source env/bin/activate  # ou env\Scripts\activate sur Windows
+   pip install -r requirements.txt
+   python manage.py create_db
+   python manage.py runserver
+   ```
+
+2. **Navigateur Moderne** : Chrome, Firefox, Safari, Edge récents
+
+### Lancement
+1. Vérifier que l'API fonctionne sur `http://localhost:8000`
+2. Ouvrir `index.html` dans un navigateur
+3. Navigation : cliquer sur les films pour ouvrir les détails
 
 ## Installation
 

@@ -2,39 +2,52 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>JustStreamIt</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="style_accueil.css">
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="script.js"></script>
     </head>
     <body>
-        <header>
-            <div class="logo">
-                <img src="images/logo.png" alt="Logo JustStreamIt"><br>
+        <header class="original-header">
+            <div class="container-fluid">
+                <div class="row align-items-center h-100">
+                    <div class="col-auto">
+                        <img src="images/logo.png" alt="Logo JustStreamIt" class="logo-img">
+                    </div>
+                    <div class="col">
+                        <p class="header-title mb-0">Vidéos à la demande</p>
+                    </div>
+                </div>
             </div>
-
-                <p class="txtLogo">Vidéos à la demande</p>
-
         </header>
-        <main>
+        <main class="main-content">
             <section class="bestFilm">
                 <h1>Meilleur film</h1>
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                <div class="loading-text">Chargement du meilleur film...</div>
             </section>
+            
             <section class="bestRatedFilms">
                 <h1>Films les mieux notés</h1>
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                <div class="loading-text">Chargement des films...</div>
             </section>
+            
             <section class="category1">
-                <h1>Catégorie 1</h1>
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                <h1>Action</h1>
+                <div class="loading-text">Chargement des films...</div>
             </section>
+            
             <section class="category2">
-                <h1>Catégorie 2</h1>
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                <h1>Mystery</h1>
+                <div class="loading-text">Chargement des films...</div>
             </section>
+            
             <section class="otherFilms">
-                <h1>Autres films</h1>
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                <h1> Autres :</h1>
+                <div class="loading-text">Chargement des films...</div>
             </section>
         </main>
     </body>

@@ -1,103 +1,374 @@
+/* CSS Modal avec layouts distincts selon maquettes */
 body {
-    width: 778px;
-    min-height: 600px;
-    max-height: 939px;
     font-family: "Oswald", sans-serif;
     background-color: white;
-    font-style: normal;
-    text-align: justify;
-    margin: auto;
-    padding: 30px;
-    border: 6px solid black;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-}
-
-header {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 30px;
-    margin-bottom: 30px;
-}
-
-.filmInfo {
-    width: 70%;
-    font-weight: 400;
-    padding: 20px;
-}
-
-.filmInfo h1 {
-    font-size: 32px;
-    font-weight: 600;
-    margin: 0 0 20px 0;
-}
-
-.filmInfo p {
-    font-size: 16px;
+    margin: 0;
+    padding: 6px;
+    font-size: 14px;
     line-height: 1.4;
-    margin: 8px 0;
+    border: solid black 6px;
+    box-sizing: border-box;
+    min-height: 100vh;
 }
 
-.poster {
-    width: 30%;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
-
-.poster img {
+.modal-container {
     width: 100%;
-    height: auto;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    position: relative;
+    min-height: calc(100vh - 12px); /* Hauteur moins bordures */
+}
+
+/* Responsive breakpoint à 788px */
+@media (max-width: 788px) {
+    .modal-container {
+        width: 100%;
+        margin: 0;
+        padding: 40px 15px 15px 15px; /* Top padding pour le bouton X */
+    }
+}
+
+/* Bouton X pour mobile/tablet (≤ 788px seulement) */
+.btn-close-x {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 10;
+    display: none; /* Masqué par défaut */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Afficher la croix sur mobile/tablet (≤ 788px) */
+@media (max-width: 788px) {
+    .btn-close-x {
+        display: flex;
+    }
+}
+
+.btn-close-x:hover {
+    background-color: #c82333;
+}
+
+/* ===== VERSION DESKTOP (> 788px) ===== */
+.modal-desktop {
+    display: block;
+    padding: 0;
+}
+
+/* Masquer version desktop sur mobile/tablet */
+@media (max-width: 788px) {
+    .modal-desktop {
+        display: none;
+    }
+}
+
+/* Titre du film desktop */
+.modal-desktop .film-title-section h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+/* Détails du film desktop */
+.modal-desktop .film-details-section p {
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold; /* Détails en gras sur desktop aussi */
+}
+
+.modal-desktop .film-details-section strong {
+    font-weight: bold;
+}
+
+/* Section réalisateur desktop */
+.modal-desktop .film-director-section {
+    margin-top: 15px;
+}
+
+.modal-desktop .film-director-section p {
+    margin-bottom: 3px;
+    font-size: 14px;
+    font-weight: bold; /* Réalisateur en gras sur desktop aussi */
+}
+
+/* Image du poster desktop */
+.modal-desktop .modal-poster {
+    width: 100%;
     max-width: 300px;
+    height: auto;
+    border: 1px solid #000;
     object-fit: cover;
 }
 
-.summarized {
-    width: 100%;
-    max-width: 698px;
-    margin: 0 auto 20px auto;
-    padding: 0 20px;
+/* Container du poster pour centrage en cas d'erreur */
+.modal-desktop .poster {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
 }
 
-.actors_section {
-    width: 100%;
-    max-width: 692px;
-    margin: 0 auto 20px auto;
-    padding: 0 20px;
+/* Fallback pour poster modal desktop */
+.modal-desktop .poster .modal-poster[style*="display: none"] + div,
+.modal-desktop .poster > div[style*="background: #f0f0f0"] {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    background-color: #f5f5f5 !important;
+    border: 2px solid #ddd !important;
+    color: #666 !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+}
+
+/* Section résumé desktop */
+.modal-desktop .modal-summary-section {
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+.modal-desktop .summarized p {
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 0;
+    max-height: none;
+    word-wrap: break-word;
+}
+
+/* Section acteurs desktop */
+.modal-desktop .modal-actors-section {
+    margin-bottom: 20px;
+}
+
+.modal-desktop .actors_section p {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+/* Bouton fermer desktop */
+.modal-desktop .btn-close-modal {
+    background-color: #dc3545;
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-size: 14px;
     font-weight: bold;
-    font-style: normal;
-    font-size: 20px;
+    border-radius: 25px;
+    display: inline-block;
+    margin-top: 20px;
+    min-width: 95px;
+}
+
+.modal-desktop .btn-close-modal:hover {
+    background-color: #c82333;
+    color: white;
+    text-decoration: none;
+}
+
+/* Adaptations pour grands écrans desktop */
+@media (min-width: 1200px) {
+    .modal-container {
+        max-width: 1200px;
+        padding: 30px;
+    }
+    
+    .modal-desktop .film-title-section h1 {
+        font-size: 28px;
+    }
+    
+    .modal-desktop .modal-poster {
+        max-width: 350px;
+    }
+    
+    .modal-desktop .summarized p {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+}
+
+/* Adaptations pour écrans moyens */
+@media (min-width: 989px) and (max-width: 1199px) {
+    .modal-container {
+        max-width: 950px;
+        padding: 25px;
+    }
+    
+    .modal-desktop .film-title-section h1 {
+        font-size: 26px;
+    }
+}
+
+/* ===== VERSION MOBILE/TABLET (≤ 788px) ===== */
+.modal-mobile {
+    display: none;
+    padding: 0;
+}
+
+/* Afficher version mobile sur mobile/tablet */
+@media (max-width: 788px) {
+    .modal-mobile {
+        display: block;
+    }
+}
+
+/* Header mobile : titre + détails + réalisateur */
+.mobile-header-section {
+    margin-bottom: 15px;
+}
+
+.mobile-header-section .film-title-section h1 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-top: 0;
+}
+
+.mobile-header-section .film-details-section p {
+    margin-bottom: 2px;
+    font-size: 12px;
+    font-weight: bold; /* Tout le texte des détails en gras */
+}
+
+.mobile-header-section .film-details-section strong {
+    font-weight: bold;
+}
+
+.mobile-header-section .film-director-section {
+    margin-top: 8px;
+}
+
+.mobile-header-section .film-director-section p {
+    margin-bottom: 2px;
+    font-size: 12px;
+    font-weight: bold; /* Réalisateur en gras */
+}
+
+/* Section résumé mobile (pleine largeur) */
+.mobile-summary-section {
+    margin-bottom: 15px;
+}
+
+.mobile-summary p {
+    font-size: 11px;
     line-height: 1.4;
+    text-align: justify;
+    margin-bottom: 0;
+    word-wrap: break-word;
+}
+
+/* Section poster mobile (centrée après le résumé) */
+.mobile-poster-section {
+    margin: 15px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+}
+
+.mobile-poster {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border: 1px solid #000;
+}
+
+/* Fallback pour poster modal mobile */
+.mobile-poster-section .poster .mobile-poster[style*="display: none"] + div,
+.mobile-poster-section .poster > div[style*="background: #f0f0f0"] {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    background-color: #f5f5f5 !important;
+    border: 2px solid #ddd !important;
+    color: #666 !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+}
+
+/* Section acteurs mobile (en bas) */
+.mobile-actors-section {
+    margin-top: 10px;
+}
+
+.mobile-actors p {
+    font-size: 11px;
+    margin-bottom: 0;
+    line-height: 1.3;
+}
+
+/* Styles généraux pour tous les éléments en gras */
+.film-details-section p,
+.film-director-section p {
+    font-weight: bold !important; /* Force le gras sur toutes les tailles */
 }
 
 .actors_names {
     font-weight: normal;
-    display: block;
-    margin-top: 10px;
 }
 
-.return_button {
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+/* Responsive pour écrans très étroits (< 457px) */
+@media (max-width: 456px) {
+    .mobile-header-section .film-title-section h1 {
+        font-size: 16px;
+    }
+    
+    .mobile-header-section .film-details-section p,
+    .mobile-header-section .film-director-section p {
+        font-size: 11px;
+    }
+    
+    .mobile-summary p {
+        font-size: 10px;
+    }
+    
+    .mobile-actors p {
+        font-size: 10px;
+    }
+    
+    .mobile-poster {
+        max-width: 160px;
+    }
+    
+    .mobile-poster-section {
+        margin: 10px 0;
+    }
+    
+    .btn-close-x {
+        width: 26px;
+        height: 26px;
+        font-size: 14px;
+        top: 12px;
+        right: 15px;
+    }
 }
-
-.return_button a {
-    display: inline-block;
-    width: 214px;
-    height: 36px;
-    line-height: 36px;
-    border-radius: 25px;
-    background-color: #fa0b0b;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-}
-
-.return_button a:hover {
-    background-color: #d60909;
-}
-

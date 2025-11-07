@@ -2,29 +2,104 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>JustStreamIt</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="style_modal.css">
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="modal.js"></script>
     </head>
-    <body onload="loadMovieDetails(2101)">
-        <header>
-            <section class="filmInfo">
-                <p>Chargement des informations du film...</p>
-            </section>
-            <div class="poster">
-                <img src="" alt="Chargement du poster..." title="" >
+    <body>
+        <div class="modal-container">
+            <!-- Bouton X pour mobile/tablet seulement (≤ 788px) -->
+            <button class="btn-close-x" onclick="window.location.href='index.html'">✕</button>
+            
+            <!-- Version DESKTOP : Layout horizontal (> 788px) -->
+            <div class="modal-desktop">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <section class="filmInfo">
+                            <div class="film-title-section">
+                                <h1>Chargement du titre...</h1>
+                            </div>
+                            <div class="film-details-section">
+                                <p class="text-muted">Chargement des détails...</p>
+                            </div>
+                            <div class="film-director-section">
+                                <p class="text-muted">Chargement du réalisateur...</p>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-5 text-center">
+                        <div class="poster">
+                            <img src="" alt="Chargement du poster..." class="modal-poster">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row modal-summary-section">
+                    <div class="col-12">
+                        <section class="summarized">
+                            <p>Chargement du résumé...</p>
+                        </section>
+                    </div>
+                </div>
+                
+                <div class="row modal-actors-section">
+                    <div class="col-12">
+                        <section class="actors_section">
+                            <p>Avec : <br> 
+                            <span class="actors_names">Chargement de la distribution...</span></p>
+                        </section>
+                    </div>
+                </div>
+                
+                <div class="row modal-footer-section">
+                    <div class="col-12 text-center">
+                        <a href="index.html" class="btn-close-modal">Fermer</a>
+                    </div>
+                </div>
             </div>
-        </header>
-        <main>
-            <section class="summarized">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </section>
-            <section class="actors_section">
-                <p>Avec : <br> <span class="actors_names">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></p>
-            </section>
-        </main>
-        <footer class="return_button">
-        <a href ="index.html">Fermer</a>
-        </footer>
+            
+            <!-- Version MOBILE/TABLET : Layout vertical (≤ 788px) -->
+            <div class="modal-mobile">
+                <!-- Titre et détails en haut -->
+                <div class="mobile-header-section">
+                    <div class="film-title-section">
+                        <h1>Chargement du titre...</h1>
+                    </div>
+                    <div class="film-details-section">
+                        <p class="text-muted">Chargement des détails...</p>
+                    </div>
+                    <div class="film-director-section">
+                        <p class="text-muted">Chargement du réalisateur...</p>
+                    </div>
+                </div>
+                
+                <!-- Résumé complet -->
+                <div class="mobile-summary-section">
+                    <section class="summarized mobile-summary">
+                        <p>Chargement du résumé...</p>
+                    </section>
+                </div>
+                
+                <!-- Poster centré après le résumé -->
+                <div class="mobile-poster-section text-center">
+                    <div class="poster">
+                        <img src="" alt="Chargement du poster..." class="modal-poster mobile-poster">
+                    </div>
+                </div>
+                
+                <!-- Acteurs en bas -->
+                <div class="mobile-actors-section">
+                    <section class="actors_section mobile-actors">
+                        <p>Avec : <br> 
+                        <span class="actors_names">Chargement de la distribution...</span></p>
+                    </section>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
