@@ -1,14 +1,41 @@
-/* Styles fidèles aux maquettes avec Bootstrap */
+/* =============================================================================
+   JUSTSTREAM IT - STYLES PRINCIPAUX
+   =============================================================================
+   
+   🎨 GUIDE DE PERSONNALISATION :
+   
+   1. COULEURS PRINCIPALES
+      - Couleur header : #61787f (ligne 25)
+      - Couleur bouton rouge : #dc3545 (ligne 98)
+      - Couleur hover bouton : #c82333 (ligne 104)
+   
+   2. TYPOGRAPHIE
+      - Police principale : "Oswald" (ligne 16)
+      - Taille titre principal : 40px (ligne 35) 
+      - Taille titres sections : 32px-36px (lignes 109, 116)
+   
+   3. DIMENSIONS
+      - Largeur max page : 1200px (ligne 22)
+      - Hauteur header : 122px (ligne 27)
+      - Dimensions logo : 127x94px (lignes 30-31)
+   
+   4. ESPACEMENTS
+      - Padding contenu principal : 60px 107px 75px 107px (ligne 39)
+      - Marges entre sections : 40px (ligne 117)
+   
+   ============================================================================= */
+
+/* 📱 STRUCTURE GÉNÉRALE DE LA PAGE */
 body {
-    font-family: "Oswald", sans-serif;
-    background-color: white;
+    font-family: "Oswald", sans-serif;  /* 🔤 Police principale - Changez ici pour une autre police */
+    background-color: white;            /* 🎨 Fond de page - Changez pour autre couleur */
     margin: 0;
     padding: 1px;
-    border: solid black 1px;
+    border: solid black 1px;           /* 🖼️ Bordure page - Modifiez couleur/épaisseur */
     box-sizing: border-box;
     min-height: 100vh;
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 1200px;                 /* 📏 Largeur max - Ajustez selon vos besoins */
+    margin: 0 auto;                    /* 📐 Centrage automatique */
 }
 
 /* Ajustements mobile pour éviter les débordements */
@@ -29,128 +56,134 @@ body {
     }
 }
 
-/* Header original selon maquettes */
+/* 🎯 HEADER - ZONE TITRE ET LOGO */
 .original-header {
-    background-color: #61787f;
-    border: 1px solid #000;
-    height: 122px;
+    background-color: #61787f;         /* 🎨 COULEUR HEADER - Changez ici pour personnaliser */
+    border: 1px solid #000;           /* 🖼️ Bordure header */
+    height: 122px;                    /* 📏 HAUTEUR - Ajustez si nécessaire */
     display: flex;
     align-items: center;
 }
 
 .logo-img {
-    width: 127px;
-    height: 94px;
-    margin-left: 27px;
+    width: 127px;                     /* 📐 LARGEUR LOGO - Redimensionnez ici */
+    height: 94px;                     /* 📐 HAUTEUR LOGO - Redimensionnez ici */
+    margin-left: 27px;                /* 📍 POSITION GAUCHE - Décalez le logo */
 }
 
 .header-title {
-    font-weight: 300;
-    font-size: 40px;
+    font-weight: 300;                 /* 🔤 POIDS TITRE - 300=léger, 400=normal, 700=gras */
+    font-size: 40px;                  /* 📝 TAILLE TITRE - Agrandissez/réduisez ici */
     line-height: 59px;
-    color: #FFFFFF;
-    margin-left: 40px;
+    color: #FFFFFF;                   /* 🎨 COULEUR TITRE - Blanc par défaut */
+    margin-left: 40px;                /* 📍 ESPACE LOGO-TITRE - Ajustez la distance */
 }
 
-/* Main content */
+/* 📄 CONTENU PRINCIPAL */
 .main-content {
-    padding: 60px 107px 75px 107px;
+    padding: 60px 107px 75px 107px;   /* 📍 MARGES CONTENU - Haut Droite Bas Gauche */
 }
 
-/* Section Meilleur Film selon maquettes */
+/* 🏆 SECTION MEILLEUR FILM */
 .bestFilm h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-    font-weight: bold;
+    font-size: 36px;                  /* 📝 TAILLE TITRE "Meilleur Film" */
+    margin-bottom: 20px;              /* 📍 ESPACE SOUS LE TITRE */
+    font-weight: bold;                /* 🔤 Titre en gras */
 }
 
 .best-movie-container {
-    border: 6px solid black;
-    padding: 20px;
-    margin-bottom: 40px;
+    border: 6px solid black;          /* 🖼️ BORDURE MEILLEUR FILM - Changez épaisseur/couleur */
+    padding: 20px;                    /* 📍 ESPACE INTÉRIEUR - Agrandissez pour plus d'air */
+    margin-bottom: 40px;              /* 📍 ESPACE VERS SECTION SUIVANTE */
     display: flex;
     align-items: stretch;
-    gap: 20px;
+    gap: 20px;                        /* 📍 ESPACE POSTER-TEXTE */
 }
 
 .best-movie-poster-container {
     flex-shrink: 0;
 }
 
+/* 🖼️ POSTER DU MEILLEUR FILM */
 .best-movie-poster {
     width: 100%;
     height: auto;
-    max-width: 300px;
-    aspect-ratio: 2/3; /* Format poster de film classique */
+    max-width: 227px;                 /* 📐 TAILLE MAX POSTER - Agrandissez/réduisez */
+    aspect-ratio: 4/5;                /* 📏 Proportion poster classique */
     object-fit: cover;
-    border: 1px solid #ddd;
+    border: 1px solid #ddd;           /* 🖼️ Bordure poster */
 }
 
+/* 📝 INFORMATIONS DU MEILLEUR FILM */
 .best-movie-info {
-    padding-left: 20px;
+    padding-left: 20px;               /* 📍 ESPACE GAUCHE TEXTE */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .best-movie-info .movie-title {
-    font-size: 28px;
+    font-size: 28px;                  /* 📝 TAILLE TITRE FILM - Personnalisez */
     font-weight: bold;
     margin-bottom: 15px;
-    color: #000;
+    color: #000;                      /* 🎨 COULEUR TITRE */
 }
 
 .movie-description {
-    text-align: justify;
-    line-height: 1.5;
+    text-align: justify;              /* 📝 Texte justifié */
+    line-height: 1.5;                 /* 📏 Espacement lignes */
     margin-bottom: 20px;
     flex-grow: 1;
+    max-height: none;                 /* 📏 HAUTEUR ILLIMITÉE - Permet description complète */
+    overflow: visible;                /* 📜 Affichage complet du texte */
+    word-wrap: break-word;            /* 🔤 Coupe les mots longs pour éviter débordement */
 }
 
+/* 🔴 BOUTON "PLAY" DU MEILLEUR FILM */
 .btn-details {
-    background-color: #dc3545;
-    color: white;
+    background-color: #dc3545;        /* 🎨 COULEUR BOUTON - Rouge par défaut */
+    color: white;                     /* 🎨 COULEUR TEXTE BOUTON */
     border: none;
-    padding: 12px 32px;
-    font-size: 16px;
+    padding: 12px 32px;               /* 📍 TAILLE BOUTON - Haut/Bas Gauche/Droite */
+    font-size: 16px;                  /* 📝 TAILLE TEXTE BOUTON */
     font-weight: bold;
     cursor: pointer;
-    border-radius: 25px;
+    border-radius: 25px;              /* 📐 ARRONDI BOUTON - 0=carré, plus=rond */
     align-self: flex-end;
-    text-transform: uppercase;
+    text-transform: uppercase;        /* 🔤 TEXTE MAJUSCULES */
     min-width: 110px;
 }
 
 .btn-details:hover {
-    background-color: #c82333;
-    transform: translateY(-1px);
-    transition: all 0.2s ease;
+    background-color: #c82333;        /* 🎨 COULEUR SURVOL BOUTON - Plus foncé */
+    transform: translateY(-1px);      /* ⬆️ Effet élévation au survol */
+    transition: all 0.2s ease;        /* ⚡ Animation fluide */
 }
 
-/* Sections de films selon maquettes */
+/* 🎬 TITRES DES SECTIONS DE FILMS */
 .bestRatedFilms h1, .category1 h1, .category2 h1, .otherFilms h1 {
-    font-size: 32px;
-    margin: 40px 0 20px 0;
-    font-weight: bold;
+    font-size: 32px;                  /* 📝 TAILLE TITRES CATÉGORIES - Ajustez ici */
+    margin: 40px 0 20px 0;            /* 📍 ESPACES - Haut 0 Bas Gauche */
+    font-weight: bold;                /* 🔤 Titres en gras */
 }
 
-/* Cartes de films selon maquettes - Format carré */
+/* 🎭 CARTES DE FILMS - FORMAT CARRÉ */
 .movie-card-wrapper {
-    margin-bottom: 20px;
-    padding: 0 10px; /* Espacement horizontal entre les films */
+    margin-bottom: 20px;              /* 📍 ESPACE ENTRE RANGÉES */
+    padding: 0 10px;                  /* 📍 ESPACE HORIZONTAL FILMS - Augmentez pour plus d'air */
 }
 
 .movie-card-original {
     position: relative;
     width: 100%;
-    aspect-ratio: 1; /* Force le format carré */
+    aspect-ratio: 1;                  /* 📐 FORMAT CARRÉ - Changez pour rectangulaire */
     overflow: hidden;
 }
 
 .movie-poster {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Maintient les proportions en remplissant le carré */
+    object-fit: cover;                /* 📏 Remplit le carré en gardant proportions */
     display: block;
 }
 
@@ -179,23 +212,24 @@ body {
     box-sizing: border-box !important;
 }
 
+/* 🏷️ BANDEAU TITRE SUR LES POSTERS */
 .movie-title-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 8px 4px;
+    background-color: rgba(0, 0, 0, 0.7);  /* 🎨 FOND BANDEAU - Ajustez transparence (0.7) */
+    color: white;                         /* 🎨 COULEUR TEXTE BANDEAU */
+    padding: 8px 4px;                     /* 📍 ESPACE INTÉRIEUR BANDEAU */
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 40px; /* Hauteur minimale pour le bandeau */
+    min-height: 40px;                     /* 📏 HAUTEUR MIN BANDEAU - Agrandissez si besoin */
 }
 
 .movie-title-text {
-    font-size: 12px;
+    font-size: 12px;                      /* 📝 TAILLE TEXTE TITRE FILM - Augmentez si trop petit */
     font-weight: bold;
     line-height: 1.2;
     word-wrap: break-word;
@@ -251,15 +285,16 @@ body {
     font-weight: bold !important;
 }
 
+/* ✨ EFFET SURVOL DES CARTES DE FILMS */
 .movie-card-original:hover {
-    transform: scale(1.02);
-    transition: transform 0.3s ease;
+    transform: scale(1.02);           /* 📐 AGRANDISSEMENT SURVOL - 1.02 = 2% plus grand */
+    transition: transform 0.3s ease;  /* ⚡ VITESSE ANIMATION - 0.3s = rapide */
 }
 
-/* Style pour les textes de chargement */
+/* ⏳ TEXTES DE CHARGEMENT */
 .loading-text {
-    color: #6c757d;
-    font-style: italic;
+    color: #6c757d;                   /* 🎨 COULEUR GRIS CHARGEMENT */
+    font-style: italic;               /* 🔤 Texte en italique */
 }
 
 /* Responsive breakpoints selon maquettes */

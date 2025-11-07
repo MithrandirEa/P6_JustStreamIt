@@ -1,91 +1,116 @@
-/* CSS Modal avec layouts distincts selon maquettes */
+/* =============================================================================
+   JUSTSTREAM IT - STYLES MODAL (DÉTAILS FILM)
+   =============================================================================
+   
+   🎨 GUIDE DE PERSONNALISATION MODAL :
+   
+   1. STRUCTURE RESPONSIVE
+      - Desktop (> 788px) : Layout côte à côte poster + infos
+      - Mobile/Tablet (≤ 788px) : Layout vertical empilé
+   
+   2. COULEURS PRINCIPALES
+      - Bouton fermer : #dc3545 (ligne 58)
+      - Bordure page : black 6px (ligne 21)
+   
+   3. BREAKPOINT PRINCIPAL
+      - Changement layout : 788px (ligne 35)
+   
+   4. TYPOGRAPHIE
+      - Police : "Oswald" (ligne 16)
+      - Titre desktop : 24px (ligne 72)
+      - Titre mobile : 18px (ligne 142)
+   
+   ============================================================================= */
+
+/* 📱 STRUCTURE GÉNÉRALE MODAL */
 body {
-    font-family: "Oswald", sans-serif;
-    background-color: white;
+    font-family: "Oswald", sans-serif;  /* 🔤 Police - Même que page principale */
+    background-color: white;            /* 🎨 Fond modal */
     margin: 0;
-    padding: 6px;
-    font-size: 14px;
+    padding: 6px;                       /* 📍 Marge extérieure */
+    font-size: 14px;                    /* 📝 Taille texte de base */
     line-height: 1.4;
-    border: solid black 6px;
+    border: solid black 6px;            /* 🖼️ BORDURE MODAL - Changez couleur/épaisseur */
     box-sizing: border-box;
     min-height: 100vh;
 }
 
+/* 📦 CONTENEUR PRINCIPAL MODAL */
 .modal-container {
     width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
+    max-width: 1000px;                /* 📏 LARGEUR MAX MODAL - Ajustez selon besoins */
+    margin: 0 auto;                   /* 📐 Centrage automatique */
+    padding: 20px;                    /* 📍 ESPACE INTÉRIEUR DESKTOP */
+    background-color: white;          /* 🎨 Fond contenu */
     position: relative;
-    min-height: calc(100vh - 12px); /* Hauteur moins bordures */
+    min-height: calc(100vh - 12px);   /* 📏 Hauteur minimale */
 }
 
-/* Responsive breakpoint à 788px */
+/* 📱 BREAKPOINT RESPONSIVE PRINCIPAL : 788px */
 @media (max-width: 788px) {
     .modal-container {
         width: 100%;
         margin: 0;
-        padding: 40px 15px 15px 15px; /* Top padding pour le bouton X */
+        padding: 40px 15px 15px 15px;  /* 📍 ESPACE MOBILE - Plus en haut pour bouton X */
     }
 }
 
-/* Bouton X pour mobile/tablet (≤ 788px seulement) */
+/* ❌ BOUTON FERMER (X) - MOBILE/TABLET SEULEMENT */
 .btn-close-x {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    background-color: #dc3545;
-    color: white;
+    top: 15px;                        /* 📍 POSITION VERTICALE - Descendez si besoin */
+    right: 20px;                      /* 📍 POSITION HORIZONTALE */
+    background-color: #dc3545;        /* 🎨 COULEUR BOUTON X - Rouge par défaut */
+    color: white;                     /* 🎨 Couleur icône X */
     border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 5px;
-    font-size: 16px;
+    width: 30px;                      /* 📐 TAILLE BOUTON X - Carré */
+    height: 30px;                     /* 📐 TAILLE BOUTON X */
+    border-radius: 5px;               /* 📐 ARRONDI BOUTON - 0=carré, plus=rond */
+    font-size: 16px;                  /* 📝 Taille icône X */
     cursor: pointer;
     z-index: 10;
-    display: none; /* Masqué par défaut */
+    display: none;                    /* ⚠️ Masqué par défaut (desktop) */
     align-items: center;
     justify-content: center;
 }
 
-/* Afficher la croix sur mobile/tablet (≤ 788px) */
+/* 📱 Affichage bouton X sur mobile/tablet uniquement */
 @media (max-width: 788px) {
     .btn-close-x {
-        display: flex;
+        display: flex;                /* ✅ Visible sur mobile */
     }
 }
 
 .btn-close-x:hover {
-    background-color: #c82333;
+    background-color: #c82333;        /* 🎨 COULEUR SURVOL - Plus foncé */
 }
 
-/* ===== VERSION DESKTOP (> 788px) ===== */
+/* 💻 ===== VERSION DESKTOP (> 788px) ===== */
 .modal-desktop {
-    display: block;
+    display: block;                   /* ✅ Visible sur desktop */
     padding: 0;
 }
 
-/* Masquer version desktop sur mobile/tablet */
+/* 📱 Masquer version desktop sur mobile/tablet */
 @media (max-width: 788px) {
     .modal-desktop {
-        display: none;
+        display: none;                /* ❌ Masqué sur mobile */
     }
 }
 
-/* Titre du film desktop */
+/* 📝 TITRE DU FILM - DESKTOP */
 .modal-desktop .film-title-section h1 {
-    font-size: 24px;
+    font-size: 24px;                  /* 📝 TAILLE TITRE DESKTOP - Agrandissez si besoin */
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 10px;              /* 📍 Espace sous titre */
     margin-top: 0;
 }
 
-/* Détails du film desktop */
+/* 📋 DÉTAILS DU FILM - DESKTOP */
 .modal-desktop .film-details-section p {
-    margin-bottom: 5px;
-    font-size: 14px;
-    font-weight: bold; /* Détails en gras sur desktop aussi */
+    margin-bottom: 5px;               /* 📍 Espace entre lignes détails */
+    font-size: 14px;                  /* 📝 TAILLE TEXTE DÉTAILS */
+    font-weight: bold;                /* 🔤 Détails en gras */
 }
 
 .modal-desktop .film-details-section strong {
@@ -103,22 +128,22 @@ body {
     font-weight: bold; /* Réalisateur en gras sur desktop aussi */
 }
 
-/* Image du poster desktop */
+/* 🖼️ POSTER DU FILM - DESKTOP */
 .modal-desktop .modal-poster {
     width: 100%;
-    max-width: 300px;
+    max-width: 300px;                 /* 📐 TAILLE MAX POSTER DESKTOP - Ajustez */
     height: auto;
-    border: 1px solid #000;
+    border: 1px solid #000;           /* 🖼️ Bordure poster */
     object-fit: cover;
 }
 
-/* Container du poster pour centrage en cas d'erreur */
+/* 📦 Conteneur poster pour centrage */
 .modal-desktop .poster {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 400px;
+    min-height: 400px;                /* 📏 HAUTEUR MIN ZONE POSTER */
 }
 
 /* Fallback pour poster modal desktop */
@@ -167,22 +192,22 @@ body {
     margin-bottom: 0;
 }
 
-/* Bouton fermer desktop */
+/* 🔴 BOUTON FERMER - DESKTOP */
 .modal-desktop .btn-close-modal {
-    background-color: #dc3545;
-    color: white;
-    padding: 12px 30px;
+    background-color: #dc3545;        /* 🎨 COULEUR BOUTON FERMER */
+    color: white;                     /* 🎨 Couleur texte */
+    padding: 12px 30px;               /* 📍 TAILLE BOUTON - Haut/Bas Gauche/Droite */
     text-decoration: none;
-    font-size: 14px;
+    font-size: 14px;                  /* 📝 TAILLE TEXTE BOUTON */
     font-weight: bold;
-    border-radius: 25px;
+    border-radius: 25px;              /* 📐 ARRONDI BOUTON */
     display: inline-block;
-    margin-top: 20px;
-    min-width: 95px;
+    margin-top: 20px;                 /* 📍 Espace au-dessus */
+    min-width: 95px;                  /* 📏 Largeur minimale */
 }
 
 .modal-desktop .btn-close-modal:hover {
-    background-color: #c82333;
+    background-color: #c82333;        /* 🎨 COULEUR SURVOL - Plus foncé */
     color: white;
     text-decoration: none;
 }
@@ -220,49 +245,52 @@ body {
     }
 }
 
-/* ===== VERSION MOBILE/TABLET (≤ 788px) ===== */
+/* 📱 ===== VERSION MOBILE/TABLET (≤ 788px) ===== */
 .modal-mobile {
-    display: none;
+    display: none;                    /* ❌ Masqué par défaut (desktop) */
     padding: 0;
 }
 
-/* Afficher version mobile sur mobile/tablet */
+/* 📱 Affichage version mobile sur mobile/tablet */
 @media (max-width: 788px) {
     .modal-mobile {
-        display: block;
+        display: block;               /* ✅ Visible sur mobile */
     }
 }
 
-/* Header mobile : titre + détails + réalisateur */
+/* 📱 HEADER MOBILE : titre + détails + réalisateur */
 .mobile-header-section {
-    margin-bottom: 15px;
+    margin-bottom: 15px;              /* 📍 Espace vers section suivante */
 }
 
+/* 📝 TITRE FILM - MOBILE */
 .mobile-header-section .film-title-section h1 {
-    font-size: 18px;
+    font-size: 18px;                  /* 📝 TAILLE TITRE MOBILE - Plus petit que desktop */
     font-weight: bold;
     margin-bottom: 8px;
     margin-top: 0;
 }
 
+/* 📋 DÉTAILS FILM - MOBILE */
 .mobile-header-section .film-details-section p {
-    margin-bottom: 2px;
-    font-size: 12px;
-    font-weight: bold; /* Tout le texte des détails en gras */
+    margin-bottom: 2px;               /* 📍 Espacement réduit */
+    font-size: 12px;                  /* 📝 TAILLE TEXTE DÉTAILS MOBILE */
+    font-weight: bold;                /* 🔤 Détails en gras */
 }
 
 .mobile-header-section .film-details-section strong {
     font-weight: bold;
 }
 
+/* 🎬 RÉALISATEUR - MOBILE */
 .mobile-header-section .film-director-section {
-    margin-top: 8px;
+    margin-top: 8px;                  /* 📍 Séparation avec détails */
 }
 
 .mobile-header-section .film-director-section p {
     margin-bottom: 2px;
-    font-size: 12px;
-    font-weight: bold; /* Réalisateur en gras */
+    font-size: 12px;                  /* 📝 TAILLE TEXTE RÉALISATEUR */
+    font-weight: bold;                /* 🔤 Réalisateur en gras */
 }
 
 /* Section résumé mobile (pleine largeur) */
@@ -278,21 +306,21 @@ body {
     word-wrap: break-word;
 }
 
-/* Section poster mobile (centrée après le résumé) */
+/* 🖼️ POSTER - MOBILE (centrée après le résumé) */
 .mobile-poster-section {
-    margin: 15px 0;
+    margin: 15px 0;                   /* 📍 Espace autour poster mobile */
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 250px;
+    min-height: 250px;                /* 📏 HAUTEUR MIN ZONE POSTER MOBILE */
 }
 
 .mobile-poster {
     width: 100%;
-    max-width: 200px;
+    max-width: 200px;                 /* 📐 TAILLE MAX POSTER MOBILE - Plus petit que desktop */
     height: auto;
-    border: 1px solid #000;
+    border: 1px solid #000;           /* 🖼️ Bordure poster */
 }
 
 /* Fallback pour poster modal mobile */

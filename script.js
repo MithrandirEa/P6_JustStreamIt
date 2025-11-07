@@ -47,11 +47,21 @@ async function loadBestMovie() {
         const detailResponse = await fetch(`http://localhost:8000/api/v1/titles/${movie.id}`);
         if (detailResponse.ok) {
             const detailData = await detailResponse.json();
-            // Utiliser la description détaillée ou la description courte en fallback
-            movie.description = detailData.description || detailData.long_description || movie.description || 'Description non disponible.';
-            console.log('9. Description complète récupérée:', movie.description?.substring(0, 100) + '...');
+            // CORRECTION : Utiliser long_description en priorité, puis description en fallback
+            // Prioriser la description la plus complète
+            let fullDescription = detailData.long_description || detailData.description || movie.description;
+            
+            // Si la description est trop courte (moins de 50 caractères), essayer les autres champs
+            if (!fullDescription || fullDescription.length < 50) {
+                fullDescription = detailData.description || detailData.long_description || movie.description;
+            }
+            
+            movie.description = fullDescription || 'Description non disponible.';
+            console.log('9. Description complète récupérée:', movie.description ? movie.description.substring(0, 100) + '...' : 'Aucune description');
+            console.log('9b. Longueur description:', movie.description ? movie.description.length : 0, 'caractères');
         } else {
             console.log('9. Impossible de récupérer les détails, utilisation de la description de base');
+            movie.description = movie.description || 'Description non disponible.';
         }
         
         console.log('10. Génération du HTML...');
