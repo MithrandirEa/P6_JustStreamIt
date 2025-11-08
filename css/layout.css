@@ -7,8 +7,7 @@
 body {
     font-family: var(--font-primary);
     background-color: var(--color-white);
-    margin: 0;
-    padding: var(--spacing-xl) 1px 1px 1px;
+    padding: var(--spacing-xl) 110px 110px 110px;
     box-sizing: border-box;
     min-height: 100vh;
     max-width: var(--width-max);
@@ -127,4 +126,50 @@ body {
 .loading-text {
     color: var(--color-loading);
     font-style: italic;
+}
+
+/* 🎭 OVERLAY CENTRÉ POUR LES CARTES DE FILMS */
+.movie-card-original {
+    position: relative;
+    overflow: hidden;
+}
+
+.movie-title-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.movie-card-original:hover .movie-title-overlay {
+    opacity: 1;
+}
+
+.movie-title-text {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.movie-details-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.3s ease;
+}
+
+.movie-details-btn:hover {
+    background: #0056b3;
 }

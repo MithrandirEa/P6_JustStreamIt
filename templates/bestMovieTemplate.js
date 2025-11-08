@@ -14,20 +14,8 @@ function generateBestMovieTemplate(movie) {
         `<img src="${movie.image_url}" alt="Poster de ${movie.title}" class="best-movie-poster" style="cursor: pointer;" 
          onerror="handleImageError(this, 'best-movie-fallback')"
          onload="checkImageLoaded(this, 'best-movie-fallback')">
-         <div class="best-movie-fallback" style="display: none; background: #D9D9D9; height: 300px; align-items: center; justify-content: center; color: #666; font-weight: bold;">
-             <div style="text-align: center; padding: 20px;">
-                 <div style="font-size: 48px; margin-bottom: 10px;">🎬</div>
-                 <p style="margin: 0; font-size: 16px; line-height: 1.4;"><strong>${movie.title}</strong></p>
-                 <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.9;">Image temporairement indisponible</p>
-             </div>
-         </div>` :
-        `<div style="background: #D9D9D9; height: 300px; display: flex; align-items: center; justify-content: center; color: #666; font-weight: bold;">
-             <div style="text-align: center; padding: 20px;">
-                 <div style="font-size: 48px; margin-bottom: 10px;">🎬</div>
-                 <p style="margin: 0; font-size: 16px; line-height: 1.4;"><strong>${movie.title}</strong></p>
-                 <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.9;">Image indisponible</p>
-             </div>
-         </div>`;
+         <div class="best-movie-fallback" style="display: none; background: #D9D9D9; height: 300px;"></div>` :
+        `<div style="background: #D9D9D9; height: 300px;"></div>`;
     
     return `
         <h1>Meilleur film</h1>

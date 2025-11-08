@@ -18,13 +18,7 @@ function generateMovieCardTemplate(movie) {
                 <span class="movie-title-text">${movie.title}</span>
                 <button class="movie-details-btn">Détails</button>
             </div>
-            <div class="movie-fallback" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #D9D9D9; align-items: center; justify-content: center; color: #666; font-weight: bold; text-align: center; font-size: 10px; padding: 8px; box-sizing: border-box;">
-                <div style="text-align: center;">
-                    <div style="font-size: 20px; margin-bottom: 4px;">🎬</div>
-                    <div style="font-weight: bold; margin-bottom: 2px; font-size: 10px; line-height: 1.2;">${movie.title}</div>
-                    <div style="font-size: 8px; opacity: 0.8;">Image indisponible</div>
-                </div>
-            </div>
+            <div class="movie-fallback" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #D9D9D9;"></div>
         </div>
     `;
 }
