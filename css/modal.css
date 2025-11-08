@@ -1,0 +1,376 @@
+/**
+ * 🎭 MODAL CSS - FENÊTRES MODALES DE DÉTAILS FILM
+ * Architecture responsive avec breakpoint à 788px
+ * Utilise les variables CSS centralisées
+ */
+
+/* ===== BASE MODAL STRUCTURE ===== */
+body {
+  font-family: var(--font-primary);
+  background-color: var(--modal-bg);
+  margin: 0;
+  padding: var(--modal-border-width);
+  font-size: var(--modal-text-desktop);
+  line-height: 1.4;
+  border: solid var(--modal-border-color) var(--modal-border-width);
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+/* 📦 CONTENEUR PRINCIPAL MODAL */
+.modal-container {
+  width: 100%;
+  max-width: var(--modal-max-width);
+  margin: 0 auto;
+  padding: var(--modal-padding-desktop);
+  background-color: var(--modal-bg);
+  position: relative;
+  min-height: calc(100vh - 12px);
+}
+
+/* 📱 ADAPTATIONS MOBILE */
+@media (max-width: 788px) {
+  .modal-container {
+    width: 100%;
+    margin: 0;
+    padding: var(--modal-padding-mobile);
+  }
+}
+
+/* ===== BOUTON FERMER (X) - MOBILE/TABLET SEULEMENT ===== */
+.btn-close-x {
+  position: absolute;
+  top: var(--modal-close-position-top);
+  right: var(--modal-close-position-right);
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  border: none;
+  width: var(--modal-close-size);
+  height: var(--modal-close-size);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--modal-close-font-size);
+  cursor: pointer;
+  z-index: 10;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast);
+}
+
+@media (max-width: 788px) {
+  .btn-close-x {
+    display: flex;
+  }
+}
+
+.btn-close-x:hover {
+  background-color: var(--color-secondary-hover);
+}
+
+/* ===== VERSION DESKTOP (> 788px) ===== */
+.modal-desktop {
+  display: block;
+  padding: 0;
+}
+
+@media (max-width: 788px) {
+  .modal-desktop {
+    display: none;
+  }
+}
+
+/* 📝 TITRES ET TEXTES - DESKTOP */
+.modal-desktop .film-title-section h1 {
+  font-size: var(--modal-title-desktop);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-sm);
+  margin-top: 0;
+}
+
+.modal-desktop .film-details-section p {
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--modal-text-desktop);
+  font-weight: var(--font-weight-bold);
+}
+
+.modal-desktop .film-details-section strong {
+  font-weight: var(--font-weight-bold);
+}
+
+.modal-desktop .film-director-section {
+  margin-top: var(--spacing-sm);
+}
+
+.modal-desktop .film-director-section p {
+  margin-bottom: 3px;
+  font-size: var(--modal-text-desktop);
+  font-weight: var(--font-weight-bold);
+}
+
+/* 🖼️ POSTER - DESKTOP */
+.modal-desktop .modal-poster {
+  width: 100%;
+  max-width: var(--modal-poster-max-desktop);
+  height: auto;
+  border: 1px solid var(--color-black);
+  object-fit: cover;
+}
+
+.modal-desktop .poster {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--modal-poster-min-height);
+}
+
+/* 🎭 FALLBACK POSTER DESKTOP */
+.modal-desktop .poster .modal-poster[style*="display: none"] + div,
+.modal-desktop .poster > div[style*="background: #f0f0f0"] {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  background-color: #f5f5f5 !important;
+  border: 2px solid #ddd !important;
+  color: var(--color-fallback-text) !important;
+  font-size: var(--modal-text-desktop) !important;
+  font-weight: var(--font-weight-bold) !important;
+  padding: var(--spacing-md) !important;
+  box-sizing: border-box !important;
+}
+
+/* 📖 SECTIONS CONTENU - DESKTOP */
+.modal-desktop .modal-summary-section {
+  margin-bottom: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.modal-desktop .summarized p {
+  font-size: var(--modal-text-desktop);
+  line-height: 1.6;
+  text-align: justify;
+  margin-bottom: 0;
+  max-height: none;
+  word-wrap: break-word;
+}
+
+.modal-desktop .modal-actors-section {
+  margin-bottom: var(--spacing-md);
+}
+
+.modal-desktop .actors_section p {
+  font-size: var(--modal-text-desktop);
+  margin-bottom: 0;
+}
+
+/* 🔴 BOUTON FERMER - DESKTOP */
+.modal-desktop .btn-close-modal {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  padding: var(--modal-close-btn-padding);
+  text-decoration: none;
+  font-size: var(--modal-text-desktop);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--border-radius-xl);
+  display: inline-block;
+  margin-top: var(--spacing-md);
+  min-width: var(--modal-close-btn-min-width);
+  transition: background-color var(--transition-fast);
+}
+
+.modal-desktop .btn-close-modal:hover {
+  background-color: var(--color-secondary-hover);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+/* ===== ADAPTATIONS GRANDS ÉCRANS DESKTOP ===== */
+@media (min-width: 1200px) {
+  .modal-container {
+    max-width: var(--modal-max-width-large);
+    padding: 30px;
+  }
+  
+  .modal-desktop .film-title-section h1 {
+    font-size: var(--modal-title-desktop-large);
+  }
+  
+  .modal-desktop .modal-poster {
+    max-width: var(--modal-poster-max-desktop-large);
+  }
+  
+  .modal-desktop .summarized p {
+    font-size: var(--modal-text-desktop-large);
+    line-height: 1.7;
+  }
+}
+
+/* ===== ÉCRANS MOYENS DESKTOP ===== */
+@media (min-width: 989px) and (max-width: 1199px) {
+  .modal-container {
+    max-width: var(--modal-max-width-medium);
+    padding: 25px;
+  }
+  
+  .modal-desktop .film-title-section h1 {
+    font-size: var(--modal-title-desktop-medium);
+  }
+}
+
+/* ===== VERSION MOBILE/TABLET (≤ 788px) ===== */
+.modal-mobile {
+  display: none;
+  padding: 0;
+}
+
+@media (max-width: 788px) {
+  .modal-mobile {
+    display: block;
+  }
+}
+
+/* 📱 HEADER MOBILE */
+.mobile-header-section {
+  margin-bottom: var(--spacing-sm);
+}
+
+.mobile-header-section .film-title-section h1 {
+  font-size: var(--modal-title-mobile);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+
+.mobile-header-section .film-details-section p {
+  margin-bottom: 2px;
+  font-size: var(--modal-text-mobile);
+  font-weight: var(--font-weight-bold);
+}
+
+.mobile-header-section .film-details-section strong {
+  font-weight: var(--font-weight-bold);
+}
+
+.mobile-header-section .film-director-section {
+  margin-top: 8px;
+}
+
+.mobile-header-section .film-director-section p {
+  margin-bottom: 2px;
+  font-size: var(--modal-text-mobile);
+  font-weight: var(--font-weight-bold);
+}
+
+/* 📖 RÉSUMÉ - MOBILE */
+.mobile-summary-section {
+  margin-bottom: var(--spacing-sm);
+}
+
+.mobile-summary p {
+  font-size: var(--modal-text-mobile-detail);
+  line-height: 1.4;
+  text-align: justify;
+  margin-bottom: 0;
+  word-wrap: break-word;
+}
+
+/* 🖼️ POSTER - MOBILE */
+.mobile-poster-section {
+  margin: var(--spacing-sm) 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--modal-poster-min-height-mobile);
+}
+
+.mobile-poster {
+  width: 100%;
+  max-width: var(--modal-poster-max-mobile);
+  height: auto;
+  border: 1px solid var(--color-black);
+}
+
+/* 🎭 FALLBACK POSTER MOBILE */
+.mobile-poster-section .poster .mobile-poster[style*="display: none"] + div,
+.mobile-poster-section .poster > div[style*="background: #f0f0f0"] {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  background-color: #f5f5f5 !important;
+  border: 2px solid #ddd !important;
+  color: var(--color-fallback-text) !important;
+  font-size: var(--modal-text-mobile) !important;
+  font-weight: var(--font-weight-bold) !important;
+  padding: var(--spacing-sm) !important;
+  box-sizing: border-box !important;
+}
+
+/* 🎭 ACTEURS - MOBILE */
+.mobile-actors-section {
+  margin-top: var(--spacing-sm);
+}
+
+.mobile-actors p {
+  font-size: var(--modal-text-mobile-detail);
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+/* ===== STYLES GÉNÉRAUX ===== */
+.film-details-section p,
+.film-director-section p {
+  font-weight: var(--font-weight-bold) !important;
+}
+
+.actors_names {
+  font-weight: var(--font-weight-normal);
+}
+
+/* ===== ÉCRANS TRÈS PETITS (< 457px) ===== */
+@media (max-width: 456px) {
+  .mobile-header-section .film-title-section h1 {
+    font-size: var(--modal-title-mobile-small);
+  }
+  
+  .mobile-header-section .film-details-section p,
+  .mobile-header-section .film-director-section p {
+    font-size: var(--modal-text-mobile-detail);
+  }
+  
+  .mobile-summary p {
+    font-size: var(--modal-text-mobile-small);
+  }
+  
+  .mobile-actors p {
+    font-size: var(--modal-text-mobile-small);
+  }
+  
+  .mobile-poster {
+    max-width: var(--modal-poster-max-mobile-small);
+  }
+  
+  .mobile-poster-section {
+    margin: var(--spacing-sm) 0;
+  }
+  
+  .btn-close-x {
+    width: var(--modal-close-size-small);
+    height: var(--modal-close-size-small);
+    font-size: var(--modal-close-font-size-small);
+    top: var(--modal-close-position-top-small);
+    right: var(--modal-close-position-right-small);
+  }
+}

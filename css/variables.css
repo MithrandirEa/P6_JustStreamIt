@@ -34,7 +34,7 @@
   --font-size-fallback: 14px;        /* Texte fallback */
   
   /* 📐 DIMENSIONS */
-  --width-max: 1200px;               /* Largeur max page */
+  --width-max: 1820px;               /* Largeur max page */
   --height-header: 122px;            /* Hauteur header */
   --width-logo: 127px;               /* Largeur logo */
   --height-logo: 94px;               /* Hauteur logo */
@@ -71,4 +71,47 @@
   --shadow-heavy: 0 4px 20px rgba(0,0,0,0.3);
   --overlay-dark: rgba(0, 0, 0, 0.5);
   --overlay-modal: rgba(0, 0, 0, 0.8);
+  
+  /* 🎭 VARIABLES MODALES */
+  --modal-border-width: 6px;
+  --modal-border-color: var(--color-black);
+  --modal-bg: var(--color-white);
+  --modal-max-width: 1000px;
+  --modal-max-width-large: 1200px;
+  --modal-max-width-medium: 950px;
+  --modal-breakpoint: 788px;
+  --modal-padding-desktop: var(--spacing-md);
+  --modal-padding-mobile: var(--spacing-lg) var(--spacing-sm) var(--spacing-sm) var(--spacing-sm);
+  
+  /* 🖼️ DIMENSIONS POSTERS MODALES */
+  --modal-poster-max-desktop: 300px;
+  --modal-poster-max-desktop-large: 350px;
+  --modal-poster-max-mobile: 200px;
+  --modal-poster-max-mobile-small: 160px;
+  --modal-poster-min-height: 400px;
+  --modal-poster-min-height-mobile: 250px;
+  
+  /* 📝 TYPOGRAPHY MODALES */
+  --modal-title-desktop: 24px;
+  --modal-title-desktop-large: 28px;
+  --modal-title-desktop-medium: 26px;
+  --modal-title-mobile: 18px;
+  --modal-title-mobile-small: 16px;
+  --modal-text-desktop: 14px;
+  --modal-text-desktop-large: 15px;
+  --modal-text-mobile: 12px;
+  --modal-text-mobile-detail: 11px;
+  --modal-text-mobile-small: 10px;
+  
+  /* ❌ BOUTON FERMER MODAL */
+  --modal-close-size: 30px;
+  --modal-close-size-small: 26px;
+  --modal-close-font-size: 16px;
+  --modal-close-font-size-small: 14px;
+  --modal-close-position-top: 15px;
+  --modal-close-position-top-small: 12px;
+  --modal-close-position-right: 20px;
+  --modal-close-position-right-small: 15px;
+  --modal-close-btn-padding: 12px 30px;
+  --modal-close-btn-min-width: 95px;
 }

@@ -8,6 +8,7 @@
 @import url('./variables.css');      /* Variables globales */
 @import url('./layout.css');         /* Structure et layout */
 @import url('./components.css');     /* Composants réutilisables */
+@import url('./modal.css');          /* Fenêtres modales */
 @import url('./responsive.css');     /* Adaptations mobiles */
 
 /**
@@ -18,6 +19,7 @@
  * Pour changer les espacements → css/variables.css (lignes 42-51)
  * Pour modifier le layout → css/layout.css
  * Pour styliser les composants → css/components.css
+ * Pour personnaliser les modales → css/modal.css + variables.css (lignes 75-105)
  * Pour ajuster le responsive → css/responsive.css
  * 
  * ✅ Avantages de cette architecture :
