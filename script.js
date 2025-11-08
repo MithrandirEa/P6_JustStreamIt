@@ -185,11 +185,16 @@ async function loadBestMovie() {
  * SOLUTION : Boucle while avec pagination automatique
  * CHOIX TECHNIQUE : Accumulation des résultats avec concat()
  */
-// DÉPLACÉ vers services/apiService.js
+// DÉPLACÉ vers services/apiService.js - CORRIGÉ
 async function loadAllGenres() {
-    const genres = await ApiService.getAllGenres();
-    // TRI ALPHABÉTIQUE : Amélioration UX pour la liste déroulante
-    return genres.sort((a, b) => a.localeCompare(b));
+    try {
+        const genres = await window.ApiService.getAllGenres();
+        // TRI ALPHABÉTIQUE : Amélioration UX pour la liste déroulante
+        return genres.sort((a, b) => a.localeCompare(b));
+    } catch (error) {
+        console.error('Erreur dans loadAllGenres:', error);
+        return [];
+    }
 }
 
 /**
@@ -309,7 +314,11 @@ async function loadMovieSection(endpoint, sectionClass) {
             if (detailsBtn) {
                 detailsBtn.addEventListener('click', handleClick);
             }
-            movieList.appendChild(movieCard);
+            
+            // SÉCURITÉ : Vérification avant appendChild
+            if (movieCard && movieList) {
+                movieList.appendChild(movieCard);
+            }
         });
 
         // PAGINATION INTELLIGENTE : Vérifions si nous avons assez de films

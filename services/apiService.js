@@ -153,8 +153,10 @@ class ApiService {
                 console.log(`Genres récupérés: ${genres.length}, prochaine URL: ${nextUrl}`);
             }
 
-            this.cache.set(cacheKey, genres);
-            return genres;
+            // Extraire seulement les noms des genres pour le tri
+            const genreNames = genres.map(genre => genre.name);
+            this.cache.set(cacheKey, genreNames);
+            return genreNames;
         } catch (error) {
             console.error('Erreur récupération genres:', error);
             throw error;
