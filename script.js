@@ -446,23 +446,10 @@ function openModal(movieId) {
  * - Tablette (768px-991px) : 4 films (2 rangées de 2 films)  
  * - Mobile (<768px) : 2 films (1 colonne de 2 films)
  */
+// DÉPLACÉ vers utils/responsive.js
+// Utilisation: ResponsiveUtils.getPageSize()
 function getPageSize() {
-    // RESPONSIVE DESIGN : Adaptation exacte selon spécifications
-    const width = window.innerWidth;
-    let pageSize;
-    
-    if (width >= 992) {
-        pageSize = 6;  // PC : 6 films (3 colonnes × 2 lignes)
-        console.log(`Mode PC détecté (${width}px) - ${pageSize} films en grille 3×2`);
-    } else if (width >= 768) {
-        pageSize = 4;  // Tablette : 4 films (2 colonnes × 2 lignes)
-        console.log(`Mode Tablette détecté (${width}px) - ${pageSize} films en grille 2×2`);
-    } else {
-        pageSize = 2; // Mobile : 2 films (1 colonne × 2 films empilés)
-        console.log(`Mode Mobile détecté (${width}px) - ${pageSize} films empilés verticalement`);
-    }
-    
-    return pageSize;
+    return ResponsiveUtils.getPageSize();
 }
 
 /**
@@ -475,37 +462,18 @@ function getPageSize() {
 /**
  * FONCTION UTILITAIRE : Gérer les échecs de chargement d'images
  */
+// DÉPLACÉ vers utils/imageHandler.js
+// Utilisation: ImageHandler.*
 function handleImageError(img, fallbackClass = 'movie-fallback') {
-    console.log('Image failed to load:', img.src);
-    showFallback(img, fallbackClass);
+    return ImageHandler.handleImageError(img, fallbackClass);
 }
 
 function checkImageLoaded(img, fallbackClass = 'movie-fallback') {
-    console.log('Image load event:', img.src, 'naturalWidth:', img.naturalWidth, 'naturalHeight:', img.naturalHeight);
-    
-    // Vérifier si l'image s'est vraiment chargée (dimensions > 0)
-    if (img.naturalWidth === 0 || img.naturalHeight === 0) {
-        console.log('Image loaded but invalid dimensions, showing fallback');
-        showFallback(img, fallbackClass);
-    } else {
-        console.log('Image loaded successfully');
-    }
+    return ImageHandler.checkImageLoaded(img, fallbackClass);
 }
 
 function showFallback(img, fallbackClass) {
-    img.style.display = 'none';
-    const fallback = img.parentElement.querySelector('.' + fallbackClass);
-    if (fallback) {
-        // Forcer l'affichage avec des styles inline pour surpasser la spécificité
-        fallback.style.display = 'flex';
-        fallback.style.alignItems = 'center';
-        fallback.style.justifyContent = 'center';
-        fallback.style.background = '#D9D9D9';
-        fallback.style.color = '#666';
-        console.log('Fallback activated for:', fallbackClass);
-    } else {
-        console.error('Fallback element not found:', fallbackClass);
-    }
+    return ImageHandler.showFallback(img, fallbackClass);
 }
 
 /**
