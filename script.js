@@ -47,38 +47,29 @@ async function loadBestMovie() {
         }
         console.log('✅ Section bestFilm trouvée:', bestFilmSection);
         
-        console.log('2. Tentative de requête API...');
-        // Récupérer plusieurs films pour pouvoir choisir celui avec une description
-        const response = await fetch('http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=10');
-        console.log('3. Réponse API:', response.status, response.ok);
-        
-        if (!response.ok) {
-            throw new Error(`Erreur HTTP: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        console.log('4. Données reçues:', data);
+        console.log('2. Récupération des meilleurs films via API Service...');
+        // Utilisation du service API centralisé
+        const movies = await window.ApiService.getBestMovies(10);
+        console.log('3. Films reçus:', movies.length);
         
         // Trouver le meilleur score IMDb
-        const bestScore = Math.max(...data.results.map(film => parseFloat(film.imdb_score)));
-        console.log('5. Meilleur score IMDb:', bestScore);
+        const bestScore = Math.max(...movies.map(film => parseFloat(film.imdb_score)));
+        console.log('4. Meilleur score IMDb:', bestScore);
         
         // Récupérer tous les films avec le meilleur score (ex aequo)
-        const bestMovies = data.results.filter(film => parseFloat(film.imdb_score) === bestScore);
-        console.log('6. Films ex aequo avec le meilleur score:', bestMovies.length, 'films');
+        const bestMovies = movies.filter(film => parseFloat(film.imdb_score) === bestScore);
+        console.log('5. Films ex aequo avec le meilleur score:', bestMovies.length, 'films');
         
         // Sélection aléatoire parmi les meilleurs (si plusieurs ex aequo)
         const randomIndex = Math.floor(Math.random() * bestMovies.length);
         const movie = bestMovies[randomIndex];
-        console.log('7. Film sélectionné aléatoirement:', movie.title, 'score:', movie.imdb_score, `(${randomIndex + 1}/${bestMovies.length})`);
+        console.log('6. Film sélectionné aléatoirement:', movie.title, 'score:', movie.imdb_score, `(${randomIndex + 1}/${bestMovies.length})`);
         
-        // Toujours récupérer les détails complets du film pour avoir la description complète
-        console.log('8. Récupération des détails complets du film...');
-        const detailResponse = await fetch(`http://localhost:8000/api/v1/titles/${movie.id}`);
-        if (detailResponse.ok) {
-            const detailData = await detailResponse.json();
+        // Récupération des détails complets via API Service
+        console.log('7. Récupération des détails complets du film...');
+        try {
+            const detailData = await window.ApiService.getMovieDetails(movie.id);
             // CORRECTION : Utiliser long_description en priorité, puis description en fallback
-            // Prioriser la description la plus complète
             let fullDescription = detailData.long_description || detailData.description || movie.description;
             
             // Si la description est trop courte (moins de 50 caractères), essayer les autres champs
@@ -87,10 +78,9 @@ async function loadBestMovie() {
             }
             
             movie.description = fullDescription || 'Description non disponible.';
-            console.log('9. Description complète récupérée:', movie.description ? movie.description.substring(0, 100) + '...' : 'Aucune description');
-            console.log('9b. Longueur description:', movie.description ? movie.description.length : 0, 'caractères');
-        } else {
-            console.log('9. Impossible de récupérer les détails, utilisation de la description de base');
+            console.log('8. Description complète récupérée:', movie.description ? movie.description.substring(0, 100) + '...' : 'Aucune description');
+        } catch (error) {
+            console.log('8. Impossible de récupérer les détails, utilisation de la description de base');
             movie.description = movie.description || 'Description non disponible.';
         }
         
@@ -212,14 +202,8 @@ async function loadAllGenres() {
 async function loadMovieSection(endpoint, sectionClass) {
     try {
         console.log(`Chargement de la section ${sectionClass} depuis ${endpoint}`);
-        const response = await fetch(endpoint);
-        console.log(`Réponse pour ${sectionClass}:`, response.status, response.statusText);
-        
-        if (!response.ok) {
-            throw new Error(`Erreur HTTP: ${response.status} - ${response.statusText}`);
-        }
-        
-        const data = await response.json();
+        // Utilisation du service API centralisé
+        const data = await window.ApiService.getMovieSection(endpoint);
         console.log(`Données reçues pour ${sectionClass}:`, data);
         const movies = data.results;
         
