@@ -1,32 +1,7 @@
 /**
- * GESTION GLOBALE DES ERREURS POUR UNE PRÉSENTATION SANS PROBLÈME
- * Intercepte et masque les erreurs d'images et de CORS qui polluent la console
+ * 🎬 JUSTSTREAMIT - APPLICATION PRINCIPALE
+ * Architecture modulaire avec services, templates et configuration centralisés
  */
-
-// Intercepter les erreurs d'images pour éviter qu'elles apparaissent dans la console
-document.addEventListener('error', function(e) {
-    if (e.target.tagName === 'IMG') {
-        // Image failed to load - log silently without showing error
-        console.log('🖼️ Image loading handled gracefully:', e.target.src);
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-    }
-}, true);
-
-// Intercepter les erreurs JavaScript globales
-window.addEventListener('error', function(e) {
-    // Log error silently without displaying to user
-    console.log('🔇 Error intercepted and handled silently:', e.message);
-    e.preventDefault();
-    return true;
-});
-
-// Intercepter les promesses rejetées (fetch failures, etc.)
-window.addEventListener('unhandledrejection', function(e) {
-    console.log('🔇 Promise rejection handled silently:', e.reason);
-    e.preventDefault();
-});
 
 /**
  * FONCTION 1 : Charger le meilleur film (celui avec le meilleur score IMDb)
@@ -367,75 +342,12 @@ function showFallback(img, fallbackClass) {
     return ImageHandler.showFallback(img, fallbackClass);
 }
 
-/**
- * FONCTION DE TEST : Vérifier la connexion à l'API
- */
-// DÉPLACÉ vers services/apiService.js
-async function testApiConnection() {
-    return await ApiService.testConnection();
-}
+
 
 async function initializePage() {
-    const pageSize = getPageSize();
-    const width = window.innerWidth;
-    console.log(`Initialisation avec ${pageSize} films par section (largeur: ${width}px)`);
-    
-    // Debug : ajouter un indicateur visuel du mode
-    let debugMode = '';
-    if (width >= 992) debugMode = 'PC';
-    else if (width >= 768) debugMode = 'Tablette';
-    else debugMode = 'Mobile';
-    
-    console.log(`Mode détecté: ${debugMode}`);
-    
-    console.log('🚀 Démarrage du chargement des sections...');
-    
-    try {
-        // SECTION HÉRO : Film avec le meilleur score (point focal de la page)
-        console.log('🎬 Chargement du meilleur film...');
-        await loadBestMovie();
-        console.log('✅ Meilleur film chargé');
-        
-        // SECTION GÉNÉRALISTE : Top films tous genres confondus
-        console.log('🎭 Chargement des films les mieux notés...');
-        await loadMovieSection(
-            `http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=${pageSize}`,
-            'bestRatedFilms'
-        );
-        console.log('✅ Films les mieux notés chargés');
-        
-        // CATÉGORIE SPÉCIALISÉE 1 : Films d'action (genre populaire)
-        console.log('🎯 Chargement des films d\'action...');
-        await loadMovieSection(
-            `http://localhost:8000/api/v1/titles/?genre=action&sort_by=-imdb_score&page_size=${pageSize}`,
-            'category1'
-        );
-        console.log('✅ Films d\'action chargés');
-        
-        // CATÉGORIE SPÉCIALISÉE 2 : Films de fantasy (contraste avec l'action)
-        console.log('🏰 Chargement des films mystery...');
-        await loadMovieSection(
-            `http://localhost:8000/api/v1/titles/?genre=mystery&sort_by=-imdb_score&page_size=${pageSize}`,
-            'category2'
-        );
-        console.log('✅ Films mystery chargés');
-        
-        // SECTION DYNAMIQUE : "Autres films" avec sélecteur de genre
-        // Genre par défaut : Adventure (différent des catégories fixes)
-        console.log('🌟 Chargement des autres films...');
-        await loadMovieSection(
-            `http://localhost:8000/api/v1/titles/?genre=adventure&sort_by=-imdb_score&page_size=${pageSize}`,
-            'otherFilms'
-        );
-        console.log('✅ Autres films chargés');
-        
-        console.log('🎉 Initialisation terminée avec succès');
-        
-    } catch (error) {
-        console.error('Erreur lors de l\'initialisation:', error);
-        // En cas d'erreur globale, affichage d'un message général
-        document.body.innerHTML += '<div class="error-global">Erreur lors du chargement de l\'application</div>';
-    }
+    // Utilisation du gestionnaire d'initialisation centralisé
+    const initializer = new window.AppInitializer();
+    await initializer.initialize();
 }
 
 /**
