@@ -185,30 +185,11 @@ async function loadBestMovie() {
  * SOLUTION : Boucle while avec pagination automatique
  * CHOIX TECHNIQUE : Accumulation des résultats avec concat()
  */
+// DÉPLACÉ vers services/apiService.js
 async function loadAllGenres() {
-    let allGenres = []; // Accumulateur pour tous les genres de toutes les pages
-    let nextUrl = 'http://localhost:8000/api/v1/genres/'; // URL de départ
-    
-    // PAGINATION AUTOMATIQUE : Continue tant qu'il y a une page suivante
-    while (nextUrl) {
-        try {
-            const response = await fetch(nextUrl);
-            const data = await response.json();
-            // ACCUMULATION : Fusion des résultats de chaque page
-            allGenres = allGenres.concat(data.results);
-            
-            // PAGINATION : L'API renvoie null quand il n'y a plus de page suivante
-            nextUrl = data.next;
-        } catch (error) {
-            console.error('Erreur lors du chargement des genres:', error);
-            break; // Sortie de la boucle en cas d'erreur pour éviter une boucle infinie
-        }
-    }
-    
+    const genres = await ApiService.getAllGenres();
     // TRI ALPHABÉTIQUE : Amélioration UX pour la liste déroulante
-    allGenres.sort((a, b) => a.name.localeCompare(b.name));
-    
-    return allGenres;
+    return genres.sort((a, b) => a.localeCompare(b));
 }
 
 /**
@@ -479,42 +460,9 @@ function showFallback(img, fallbackClass) {
 /**
  * FONCTION DE TEST : Vérifier la connexion à l'API
  */
+// DÉPLACÉ vers services/apiService.js
 async function testApiConnection() {
-    try {
-        console.log('Test de connexion à l\'API...');
-        console.log('URL testée:', 'http://localhost:8000/api/v1/titles/?page_size=1');
-        
-        const response = await fetch('http://localhost:8000/api/v1/titles/?page_size=1', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        });
-        
-        console.log('Réponse du test API:', {
-            status: response.status,
-            statusText: response.statusText,
-            headers: Object.fromEntries(response.headers.entries()),
-            ok: response.ok
-        });
-        
-        if (response.ok) {
-            const data = await response.json();
-            console.log('✅ API accessible - Premier film:', data.results?.[0]?.title || 'Titre non trouvé');
-            return true;
-        } else {
-            console.log('❌ API non accessible:', response.status, response.statusText);
-            return false;
-        }
-    } catch (error) {
-        console.log('❌ Erreur de connexion API:', {
-            message: error.message,
-            name: error.name,
-            stack: error.stack
-        });
-        return false;
-    }
+    return await ApiService.testConnection();
 }
 
 async function initializePage() {
