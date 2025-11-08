@@ -84,41 +84,10 @@ async function loadBestMovie() {
             movie.description = movie.description || 'Description non disponible.';
         }
         
-        console.log('10. Génération du HTML...');
+        console.log('9. Génération du HTML via template...');
         
-        // Gestion de l'image avec fallback robuste pour éviter les erreurs CORS
-        const imageHtml = movie.image_url ? 
-            `<img src="${movie.image_url}" alt="Poster de ${movie.title}" class="best-movie-poster" style="cursor: pointer;" 
-             onerror="handleImageError(this, 'best-movie-fallback')"
-             onload="checkImageLoaded(this, 'best-movie-fallback')">
-             <div class="best-movie-fallback" style="display: none; background: #D9D9D9; height: 300px; align-items: center; justify-content: center; color: #666; font-weight: bold;">
-                 <div style="text-align: center; padding: 20px;">
-                     <div style="font-size: 48px; margin-bottom: 10px;">🎬</div>
-                     <p style="margin: 0; font-size: 16px; line-height: 1.4;"><strong>${movie.title}</strong></p>
-                     <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.9;">Image temporairement indisponible</p>
-                 </div>
-             </div>` :
-            `<div style="background: #D9D9D9; height: 300px; display: flex; align-items: center; justify-content: center; color: #666; font-weight: bold;">
-                 <div style="text-align: center; padding: 20px;">
-                     <div style="font-size: 48px; margin-bottom: 10px;">🎬</div>
-                     <p style="margin: 0; font-size: 16px; line-height: 1.4;"><strong>${movie.title}</strong></p>
-                     <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.9;">Image indisponible</p>
-                 </div>
-             </div>`;
-        
-        const content = `
-            <h1>Meilleur film</h1>
-            <div class="best-movie-container">
-                <div class="best-movie-poster-container">
-                    ${imageHtml}
-                </div>
-                <div class="best-movie-info">
-                    <h2 class="movie-title">${movie.title}</h2>
-                    <p class="movie-description">${movie.description || 'Description non disponible.'}</p>
-                    <button class="btn-details play-button">Détails</button>
-                </div>
-            </div>
-        `;
+        // Utilisation du template centralisé
+        const content = window.BestMovieTemplate.generate(movie);
         
         console.log('11. Injection du HTML...');
         bestFilmSection.innerHTML = content;
@@ -154,12 +123,7 @@ async function loadBestMovie() {
         
         const errorSection = document.querySelector('.bestFilm');
         if (errorSection) {
-            errorSection.innerHTML = `
-                <h1>Meilleur film</h1>
-                <div class="error-container" style="border: 2px solid red; padding: 20px; margin: 20px 0; background-color: #ffe6e6;">
-                    <p class="error"><strong>❌ Erreur:</strong> ${error.message}</p>
-                </div>
-            `;
+            errorSection.innerHTML = window.BestMovieTemplate.generateError(error);
         }
     }
     
@@ -219,68 +183,21 @@ async function loadMovieSection(endpoint, sectionClass) {
 
         // Sélection de la section cible dans le DOM
         const movieSection = document.querySelector(`.${sectionClass}`);
-        const movieList = document.createElement('div');
         
-        // Grille adaptative selon l'écran
-        const width = window.innerWidth;
-        if (width < 768) {
-            // Mobile : grille verticale personnalisée (films empilés)
-            movieList.className = 'mobile-grid-vertical movie-grid';
-        } else {
-            // Desktop/Tablette : grille Bootstrap horizontale
-            movieList.className = 'row movie-grid';
-        }
+        // Création de la grille via template centralisé
+        const movieList = window.SectionTemplate.createMovieGrid();
 
-        // CRÉATION DYNAMIQUE DES CARTES DE FILMS avec Bootstrap
+        // CRÉATION DYNAMIQUE DES CARTES DE FILMS avec template
         validMovies.forEach((movie, index) => {
             console.log(`Création de la carte pour le film:`, movie);
             
-            // Double vérification (défense en profondeur)
-            if (!movie.image_url) {
-                console.log(`Image manquante pour le film:`, movie);
+            // Création de la carte via template centralisé
+            const movieCard = window.MovieCardTemplate.createElement(movie);
+            
+            // Vérification de sécurité (le template retourne null si pas d'image)
+            if (!movieCard) {
                 return; // Skip ce film
             }
-
-            // FACTORY PATTERN : Création standardisée des cartes selon maquettes
-            const movieCard = document.createElement('div');
-            
-            // Détection responsive pour appliquer les bonnes classes
-            const width = window.innerWidth;
-            let responsiveClasses;
-            
-            if (width >= 992) {
-                // PC : 3 colonnes (3x2 = 6 films)
-                responsiveClasses = 'col-lg-4 col-md-6 col-6';
-            } else if (width >= 768) {
-                // Tablette : 2 colonnes (2x2 = 4 films)
-                responsiveClasses = 'col-md-6 col-6';
-            } else {
-                // Mobile : 1 colonne avec 2 films empilés verticalement
-                responsiveClasses = 'mobile-card-stacked';
-            }
-            
-            movieCard.className = `${responsiveClasses} movie-card-wrapper`;
-            movieCard.dataset.movieId = movie.id; // Data attribute pour référence
-            
-            // Structure conforme maquette : image avec overlay au survol + bouton détails
-            movieCard.innerHTML = `
-                <div class="movie-card-original" style="cursor: pointer;">
-                    <img src="${movie.image_url}" alt="Poster de ${movie.title}" class="movie-poster" 
-                    onerror="handleImageError(this, 'movie-fallback')"
-                    onload="checkImageLoaded(this, 'movie-fallback')">
-                    <div class="movie-title-overlay">
-                        <span class="movie-title-text">${movie.title}</span>
-                        <button class="movie-details-btn">Détails</button>
-                    </div>
-                    <div class="movie-fallback" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #D9D9D9; align-items: center; justify-content: center; color: #666; font-weight: bold; text-align: center; font-size: 10px; padding: 8px; box-sizing: border-box;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 20px; margin-bottom: 4px;">🎬</div>
-                            <div style="font-weight: bold; margin-bottom: 2px; font-size: 10px; line-height: 1.2;">${movie.title}</div>
-                            <div style="font-size: 8px; opacity: 0.8;">Image indisponible</div>
-                        </div>
-                    </div>
-                </div>
-            `;
 
             // EVENT DELEGATION avec CLOSURE pour carte et bouton
             const handleClick = (event) => {
