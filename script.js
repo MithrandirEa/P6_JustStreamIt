@@ -1,31 +1,31 @@
 /**
- * 🎬 JUSTSTREAMIT - APPLICATION PRINCIPALE
- * Architecture modulaire avec services, templates et configuration centralisés
+ * JUSTSTREAMIT - APPLICATION PRINCIPALE
+ * Architecture modulaire avec services, templates et configuration centralises
  */
 
 /**
  * FONCTION 1 : Charger le meilleur film (celui avec le meilleur score IMDb)
  * 
  * CHOIX TECHNIQUE : async/await pour une gestion claire de l'asynchrone
- * ENDPOINT API : Tri par score décroissant, limite à 1 résultat pour la performance
- * GESTION ERREURS : try/catch pour capturer les erreurs réseau ou de parsing JSON
+ * ENDPOINT API : Tri par score decroissant, limite a 1 resultat pour la performance
+ * GESTION ERREURS : try/catch pour capturer les erreurs reseau ou de parsing JSON
  */
 async function loadBestMovie() {
-    console.log('=== DÉBUT loadBestMovie ===');
+    console.log('=== DEBUT loadBestMovie ===');
     
     try {
-        console.log('1. Vérification de l\'élément DOM...');
+        console.log('1. Verification de l\'element DOM...');
         const bestFilmSection = document.querySelector('.bestFilm');
         if (!bestFilmSection) {
-            console.error('❌ Section .bestFilm non trouvée !');
+            console.error('ERREUR: Section .bestFilm non trouvee !');
             return;
         }
-        console.log('✅ Section bestFilm trouvée:', bestFilmSection);
+        console.log('SUCCESS: Section bestFilm trouvee:', bestFilmSection);
         
-        console.log('2. Récupération des meilleurs films via API Service...');
-        // Utilisation du service API centralisé
+        console.log('2. Recuperation des meilleurs films via API Service...');
+        // Utilisation du service API centralise
         const movies = await window.ApiService.getBestMovies(10);
-        console.log('3. Films reçus:', movies.length);
+        console.log('3. Films recus:', movies.length);
         
         // Trouver le meilleur score IMDb
         const bestScore = Math.max(...movies.map(film => parseFloat(film.imdb_score)));
@@ -41,49 +41,49 @@ async function loadBestMovie() {
         console.log('6. Film sélectionné aléatoirement:', movie.title, 'score:', movie.imdb_score, `(${randomIndex + 1}/${bestMovies.length})`);
         
         // Récupération des détails complets via API Service
-        console.log('7. Récupération des détails complets du film...');
+        console.log('7. Recuperation des details complets du film...');
         try {
             const detailData = await window.ApiService.getMovieDetails(movie.id);
-            // CORRECTION : Utiliser long_description en priorité, puis description en fallback
+            // CORRECTION : Utiliser long_description en priorite, puis description en fallback
             let fullDescription = detailData.long_description || detailData.description || movie.description;
             
-            // Si la description est trop courte (moins de 50 caractères), essayer les autres champs
+            // Si la description est trop courte (moins de 50 caracteres), essayer les autres champs
             if (!fullDescription || fullDescription.length < 50) {
                 fullDescription = detailData.description || detailData.long_description || movie.description;
             }
             
             movie.description = fullDescription || 'Description non disponible.';
-            console.log('8. Description complète récupérée:', movie.description ? movie.description.substring(0, 100) + '...' : 'Aucune description');
+            console.log('8. Description complete recuperee:', movie.description ? movie.description.substring(0, 100) + '...' : 'Aucune description');
         } catch (error) {
-            console.log('8. Impossible de récupérer les détails, utilisation de la description de base');
+            console.log('8. Impossible de recuperer les details, utilisation de la description de base');
             movie.description = movie.description || 'Description non disponible.';
         }
         
-        console.log('9. Génération du HTML via template...');
+        console.log('9. Generation du HTML via template...');
         
-        // Utilisation du template centralisé
+        // Utilisation du template centralise
         const content = window.BestMovieTemplate.generate(movie);
         
         console.log('11. Injection du HTML...');
         bestFilmSection.innerHTML = content;
-        console.log('12. ✅ HTML injecté avec succès');
+        console.log('12. SUCCESS: HTML injecte avec succes');
 
         console.log('13. Ajout des event listeners...');
         
-        // EVENT DELEGATION : Ajout des event listeners APRÈS la création du DOM
+        // EVENT DELEGATION : Ajout des event listeners APRES la creation du DOM
         const bestFilmSectionFinal = document.querySelector('.bestFilm');
         const poster = bestFilmSectionFinal.querySelector('.best-movie-poster');
         const button = bestFilmSectionFinal.querySelector('.play-button');
         
         // CLOSURE : La fonction capture movie.id dans son scope
-        // CHOIX UX : Même action pour image et bouton (cohérence utilisateur)
+        // CHOIX UX : Meme action pour image et bouton (coherence utilisateur)
         const handleBestMovieClick = (event) => {
-            event.preventDefault(); // Empêche les comportements par défaut du navigateur
+            event.preventDefault(); // Empeche les comportements par defaut du navigateur
             console.log(`Clic sur le meilleur film: ${movie.title} (ID: ${movie.id})`);
-            openModal(movie.id); // Ouverture de la fenêtre modale
+            openModal(movie.id); // Ouverture de la fenetre modale
         };
 
-        // Vérification de l'existence avant ajout d'événements (robustesse)
+        // Verification de l'existence avant ajout d'evenements (robustesse)
         if (poster) {
             poster.addEventListener('click', handleBestMovieClick);
         }
@@ -91,9 +91,9 @@ async function loadBestMovie() {
             button.addEventListener('click', handleBestMovieClick);
         }
         
-        console.log('14. ✅ SUCCÈS - loadBestMovie terminé');
+        console.log('14. SUCCESS - loadBestMovie termine');
     } catch (error) {
-        console.error('❌ ERREUR dans loadBestMovie:', error);
+        console.error('ERREUR dans loadBestMovie:', error);
         console.log('=== FIN loadBestMovie (ERREUR) ===');
         
         const errorSection = document.querySelector('.bestFilm');
@@ -110,15 +110,15 @@ async function loadBestMovie() {
 /**
  * FONCTION 2 : Charger tous les genres disponibles
  * 
- * PROBLÈME RÉSOLU : L'API pagine les genres (5 par page maximum)
+ * PROBLEME RESOLU : L'API pagine les genres (5 par page maximum)
  * SOLUTION : Boucle while avec pagination automatique
- * CHOIX TECHNIQUE : Accumulation des résultats avec concat()
+ * CHOIX TECHNIQUE : Accumulation des resultats avec concat()
  */
-// DÉPLACÉ vers services/apiService.js - CORRIGÉ
+// DEPLACE vers services/apiService.js - CORRIGE
 async function loadAllGenres() {
     try {
         const genres = await window.ApiService.getAllGenres();
-        // TRI ALPHABÉTIQUE : Amélioration UX pour la liste déroulante
+        // TRI ALPHABETIQUE : Amelioration UX pour la liste deroulante
         return genres.sort((a, b) => a.localeCompare(b));
     } catch (error) {
         console.error('Erreur dans loadAllGenres:', error);
@@ -129,79 +129,79 @@ async function loadAllGenres() {
 /**
  * FONCTION 3 : Charger une section de films
  * 
- * PARAMÈTRES :
- * - endpoint : URL de l'API avec filtres spécifiques (genre, tri, etc.)
- * - sectionClass : Classe CSS de la section à remplir (bestRatedFilms, category1, etc.)
+ * PARAMETRES :
+ * - endpoint : URL de l'API avec filtres specifiques (genre, tri, etc.)
+ * - sectionClass : Classe CSS de la section a remplir (bestRatedFilms, category1, etc.)
  * 
- * FONCTIONNALITÉS :
- * - Filtrage des films sans image (amélioration qualité)
+ * FONCTIONNALITES :
+ * - Filtrage des films sans image (amelioration qualite)
  * - Pagination automatique si pas assez de films valides
- * - Gestion spéciale pour la section "Autres films" (dropdown)
+ * - Gestion speciale pour la section "Autres films" (dropdown)
  */
 async function loadMovieSection(endpoint, sectionClass) {
     try {
         console.log(`Chargement de la section ${sectionClass} depuis ${endpoint}`);
-        // Utilisation du service API centralisé
+        // Utilisation du service API centralise
         const data = await window.ApiService.getMovieSection(endpoint);
-        console.log(`Données reçues pour ${sectionClass}:`, data);
+        console.log(`Donnees recues pour ${sectionClass}:`, data);
         const movies = data.results;
         
-        // FILTRAGE QUALITÉ : Élimination des films sans poster
+        // FILTRAGE QUALITE : Elimination des films sans poster
         // CHOIX UX : Mieux vaut moins de films mais avec des images
         const validMovies = movies.filter(movie => {
             if (!movie.image_url) {
-                console.log(`Film sans image ignoré:`, movie);
+                console.log(`Film sans image ignore:`, movie);
                 return false;
             }
             return true;
         });
 
-        // Sélection de la section cible dans le DOM
+        // Selection de la section cible dans le DOM
         const movieSection = document.querySelector(`.${sectionClass}`);
         
-        // Création de la grille via template centralisé
+        // Creation de la grille via template centralise
         const movieList = window.SectionTemplate.createMovieGrid();
 
-        // CRÉATION DYNAMIQUE DES CARTES DE FILMS avec template
+        // CREATION DYNAMIQUE DES CARTES DE FILMS avec template
         validMovies.forEach((movie, index) => {
-            console.log(`Création de la carte pour le film:`, movie);
+            console.log(`Creation de la carte pour le film:`, movie);
             
-            // Création de la carte via template centralisé
+            // Creation de la carte via template centralise
             const movieCard = window.MovieCardTemplate.createElement(movie);
             
-            // Vérification de sécurité (le template retourne null si pas d'image)
+            // Verification de securite (le template retourne null si pas d'image)
             if (!movieCard) {
                 return; // Skip ce film
             }
 
             // EVENT DELEGATION avec CLOSURE pour carte et bouton
             const handleClick = (event) => {
-                event.preventDefault(); // Empêche la navigation par défaut
-                event.stopPropagation(); // Empêche la propagation
+                event.preventDefault(); // Empeche la navigation par defaut
+                event.stopPropagation(); // Empeche la propagation
                 console.log(`Clic sur le film: ${movie.title} (ID: ${movie.id})`);
                 openModal(movie.id); // Redirection vers la modale
             };
 
-            // Événements sur la carte et le bouton détails
+            // Evenements sur la carte et le bouton details
             movieCard.addEventListener('click', handleClick);
             
-            // Événement spécifique pour le bouton détails
+            // Evenement specifique pour le bouton details
             const detailsBtn = movieCard.querySelector('.movie-details-btn');
             if (detailsBtn) {
                 detailsBtn.addEventListener('click', handleClick);
             }
             
-            // SÉCURITÉ : Vérification avant appendChild
+            // SECURITE : Verification avant appendChild
             if (movieCard && movieList) {
                 movieList.appendChild(movieCard);
             }
         });
 
-        // PAGINATION INTELLIGENTE : Vérifions si nous avons assez de films
+        // PAGINATION INTELLIGENTE : Verifions si nous avons assez de films
         if (validMovies.length < getPageSize()) {
             // CHARGEMENT AUTOMATIQUE : Si pas assez de films, charger la page suivante
             if (data.next) {
-                console.log(`Chargement de films supplémentaires depuis: ${data.next}`);
+                console.log(`Chargement de films supplementaires depuis: ${data.next}`);
                 const nextResponse = await fetch(data.next);
                 const nextData = await nextResponse.json();
                 const nextMovies = nextData.results.filter(movie => movie.image_url);
@@ -211,20 +211,20 @@ async function loadMovieSection(endpoint, sectionClass) {
             }
         }
 
-        // RECONSTRUCTION DU DOM : Préservation du titre, remplacement du contenu
+        // RECONSTRUCTION DU DOM : Preservation du titre, remplacement du contenu
         const title = movieSection.querySelector('h1');
         movieSection.innerHTML = ''; // Vidage complet
-        // Le titre sera ajouté plus tard selon la section
+        // Le titre sera ajoute plus tard selon la section
 
-        // GESTION SPÉCIALE : Section "Autres films" avec sélecteur de genre Bootstrap
+        // GESTION SPECIALE : Section "Autres films" avec selecteur de genre Bootstrap
         if (sectionClass === 'otherFilms') {
             const genres = await loadAllGenres(); // Chargement de tous les genres
             
-            // Créer un conteneur flex pour titre + sélecteur
+            // Creer un conteneur flex pour titre + selecteur
             const titleSelectorContainer = document.createElement('div');
             titleSelectorContainer.className = 'title-selector-container';
             
-            // Déplacer le titre dans le conteneur flex
+            // Deplacer le titre dans le conteneur flex
             titleSelectorContainer.appendChild(title);
             
             const selectContainer = document.createElement('div');
@@ -233,20 +233,20 @@ async function loadMovieSection(endpoint, sectionClass) {
             const select = document.createElement('select');
             select.className = 'form-select'; // Classe Bootstrap pour les selects
             
-            // Les genres sont déjà triés dans loadAllGenres()
+            // Les genres sont deja tries dans loadAllGenres()
             
             // CONSTRUCTION DYNAMIQUE : Template literals avec map() et join()
             select.innerHTML = `
-                <option value="">Sélectionnez un genre</option>
-                ${genres.map(genre => `<option value="${genre.name}">${genre.name}</option>`).join('')}
+                <option value="">Selectionnez un genre</option>
+                ${genres.map(genre => `<option value="${genre}">${genre}</option>`).join('')}
             `;
             
             // EVENT LISTENER : Rechargement de la section lors du changement de genre
             select.addEventListener('change', async (e) => {
                 if (e.target.value) {
-                    // Construction de la nouvelle URL avec le genre sélectionné
+                    // Construction de la nouvelle URL avec le genre selectionne
                     const newEndpoint = `http://localhost:8000/api/v1/titles/?genre=${e.target.value}&sort_by=-imdb_score&page_size=${getPageSize()}`;
-                    // RÉCURSION : Rechargement de la même section avec les nouveaux critères
+                    // RECURSION : Rechargement de la meme section avec les nouveaux criteres
                     await loadMovieSection(newEndpoint, sectionClass);
                 }
             });
@@ -262,10 +262,10 @@ async function loadMovieSection(endpoint, sectionClass) {
         // Ajout de la liste des films au DOM
         movieSection.appendChild(movieList);
     } catch (error) {
-        // GESTION D'ERREURS : Log + message utilisateur détaillé
+        // GESTION D'ERREURS : Log + message utilisateur detaille
         console.error(`Erreur lors du chargement de la section ${sectionClass}:`, error);
         
-        // Interface gracieuse en cas d'erreur avec plus de détails
+        // Interface gracieuse en cas d'erreur avec plus de details
         const movieSection = document.querySelector(`.${sectionClass}`);
         const title = movieSection.querySelector('h1');
         movieSection.innerHTML = '';
@@ -278,21 +278,21 @@ async function loadMovieSection(endpoint, sectionClass) {
             <p class="error"><strong>Erreur de chargement:</strong></p>
             <p>${error.message}</p>
             <p><em>Endpoint: ${endpoint}</em></p>
-            <p><em>Vérifiez que l'API OCMovies-API fonctionne</em></p>
+            <p><em>Verifiez que l'API OCMovies-API fonctionne</em></p>
         `;
         movieSection.appendChild(errorDiv);
     }
 }
 
 /**
- * FONCTION 4 : Ouverture de la fenêtre modale
+ * FONCTION 4 : Ouverture de la fenetre modale
  * 
- * CHOIX TECHNIQUE : Navigation simple avec paramètres URL
- * ALTERNATIVE POSSIBLE : Modal overlay avec fetch des détails (SPA complète)
- * AVANTAGE ACTUEL : Simplicité + URL partageable + bouton retour navigateur
+ * CHOIX TECHNIQUE : Navigation simple avec parametres URL
+ * ALTERNATIVE POSSIBLE : Modal overlay avec fetch des details (SPA complete)
+ * AVANTAGE ACTUEL : Simplicite + URL partageable + bouton retour navigateur
  */
 function openModal(movieId) {
-    // VALIDATION D'ENTRÉE : Défense contre les erreurs de développement
+    // VALIDATION D'ENTREE : Defense contre les erreurs de developpement
     if (!movieId) {
         console.error('Tentative d\'ouverture de modal sans ID de film');
         return;
@@ -300,35 +300,35 @@ function openModal(movieId) {
     
     console.log(`Ouverture de la modal pour le film ID: ${movieId}`);
     
-    // NAVIGATION : Passage de l'ID via paramètre URL
+    // NAVIGATION : Passage de l'ID via parametre URL
     window.location.href = `modalWindows.html?id=${movieId}`;
 }
 
 /**
  * FONCTION 5 : Calcul du nombre de films responsive
  * 
- * SPÉCIFICATIONS EXACTES SELON MAQUETTES :
- * - PC (≥992px) : 6 films (2 rangées de 3 films)
- * - Tablette (768px-991px) : 4 films (2 rangées de 2 films)  
+ * SPECIFICATIONS EXACTES SELON MAQUETTES :
+ * - PC (>=992px) : 6 films (2 rangees de 3 films)
+ * - Tablette (768px-991px) : 4 films (2 rangees de 2 films)  
  * - Mobile (<768px) : 2 films (1 colonne de 2 films)
  */
-// DÉPLACÉ vers utils/responsive.js
+// DEPLACE vers utils/responsive.js
 // Utilisation: ResponsiveUtils.getPageSize()
 function getPageSize() {
     return ResponsiveUtils.getPageSize();
 }
 
 /**
- * FONCTION 6 : Initialisation complète de l'application
+ * FONCTION 6 : Initialisation complete de l'application
  * 
- * STRATÉGIE : Chargement séquentiel des sections
- * CHOIX : await séquentiel plutôt que Promise.all() pour éviter la surcharge serveur
- * DIVERSITÉ : Genres variés pour offrir un contenu éclectique
+ * STRATEGIE : Chargement sequentiel des sections
+ * CHOIX : await sequentiel plutot que Promise.all() pour eviter la surcharge serveur
+ * DIVERSITE : Genres varies pour offrir un contenu eclectique
  */
 /**
- * FONCTION UTILITAIRE : Gérer les échecs de chargement d'images
+ * FONCTION UTILITAIRE : Gerer les echecs de chargement d'images
  */
-// DÉPLACÉ vers utils/imageHandler.js
+// DEPLACE vers utils/imageHandler.js
 // Utilisation: ImageHandler.*
 function handleImageError(img, fallbackClass = 'movie-fallback') {
     return ImageHandler.handleImageError(img, fallbackClass);
@@ -345,80 +345,80 @@ function showFallback(img, fallbackClass) {
 
 
 async function initializePage() {
-    // Utilisation du gestionnaire d'initialisation centralisé
+    // Utilisation du gestionnaire d'initialisation centralise
     const initializer = new window.AppInitializer();
     await initializer.initialize();
 }
 
 /**
- * FONCTION 7 : Gestion du responsive en temps réel
+ * FONCTION 7 : Gestion du responsive en temps reel
  * 
- * STRATÉGIE : Debouncing pour éviter les appels excessifs
- * CHOIX : Réinitialisation complète (simple mais efficace)
- * ALTERNATIVE : Recalcul intelligent des seules sections modifiées
+ * STRATEGIE : Debouncing pour eviter les appels excessifs
+ * CHOIX : Reinitialisation complete (simple mais efficace)
+ * ALTERNATIVE : Recalcul intelligent des seules sections modifiees
  */
 window.addEventListener('resize', () => {
-    // DEBOUNCING : Évite les rechargements excessifs pendant le redimensionnement
+    // DEBOUNCING : Evite les rechargements excessifs pendant le redimensionnement
     clearTimeout(window.resizeTimeout);
     window.resizeTimeout = setTimeout(() => {
         const newWidth = window.innerWidth;
-        console.log(`Redimensionnement détecté vers ${newWidth}px, réinitialisation...`);
+        console.log(`Redimensionnement detecte vers ${newWidth}px, reinitialisation...`);
         initializePage(); // Rechargement complet avec nouveaux breakpoints
-    }, 250); // Délai de 250ms après la fin du redimensionnement
+    }, 250); // Delai de 250ms apres la fin du redimensionnement
 });
 
 /**
- * POINT D'ENTRÉE DE L'APPLICATION
+ * POINT D'ENTREE DE L'APPLICATION
  * 
- * ÉVÉNEMENT : DOMContentLoaded (plus rapide que window.onload)
+ * EVENEMENT : DOMContentLoaded (plus rapide que window.onload)
  * AVANTAGE : N'attend pas les images, CSS externes, etc.
- * STRATÉGIE : Single Point of Entry pour contrôle centralisé
+ * STRATEGIE : Single Point of Entry pour controle centralise
  */
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM chargé, initialisation de l\'application...');
+    console.log('DOM charge, initialisation de l\'application...');
     
-    // Vérification que tous les éléments DOM nécessaires existent
+    // Verification que tous les elements DOM necessaires existent
     const sections = ['.bestFilm', '.bestRatedFilms', '.category1', '.category2', '.otherFilms'];
-    console.log('Vérification des sections DOM:');
+    console.log('Verification des sections DOM:');
     
     sections.forEach(sectionClass => {
         const element = document.querySelector(sectionClass);
         if (element) {
-            console.log(`✅ ${sectionClass} trouvé`);
+            console.log(`SUCCESS ${sectionClass} trouve`);
         } else {
-            console.error(`❌ ${sectionClass} NON TROUVÉ`);
+            console.error(`ERREUR ${sectionClass} NON TROUVE`);
         }
     });
     
-    console.log('Début de l\'initialisation...');
+    console.log('Debut de l\'initialisation...');
     initializePage();
 });
 
 /**
- * RÉSUMÉ DES CHOIX TECHNIQUES DE CE FICHIER :
+ * RESUME DES CHOIX TECHNIQUES DE CE FICHIER :
  * 
  * 1. ARCHITECTURE :
- *    - Fonctions modulaires et réutilisables
- *    - Séparation claire des responsabilités
- *    - Gestion d'erreurs à tous les niveaux
+ *    - Fonctions modulaires et reutilisables
+ *    - Separation claire des responsabilites
+ *    - Gestion d'erreurs a tous les niveaux
  * 
  * 2. PERFORMANCE :
- *    - Chargement adaptatif selon l'écran
+ *    - Chargement adaptatif selon l'ecran
  *    - Pagination intelligente
- *    - Filtrage côté client pour la qualité
+ *    - Filtrage cote client pour la qualite
  * 
  * 3. UX/UI :
  *    - Responsive design natif
  *    - Feedback utilisateur constant
  *    - Navigation intuitive
  * 
- * 4. MAINTENABILITÉ :
- *    - Code commenté et documenté
+ * 4. MAINTENABILITE :
+ *    - Code commente et documente
  *    - Conventions de nommage claires
- *    - Structure logique et prévisible
+ *    - Structure logique et previsible
  * 
  * 5. ROBUSTESSE :
- *    - Validation des données
+ *    - Validation des donnees
  *    - Gestion gracieuse des erreurs
- *    - Logs détaillés pour le débogage
+ *    - Logs detailles pour le debogage
  */
