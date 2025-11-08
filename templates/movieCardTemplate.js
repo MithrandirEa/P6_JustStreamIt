@@ -14,11 +14,11 @@ function generateMovieCardTemplate(movie) {
             <img src="${movie.image_url}" alt="Poster de ${movie.title}" class="movie-poster" 
             onerror="handleImageError(this, 'movie-fallback')"
             onload="checkImageLoaded(this, 'movie-fallback')">
+            <div class="movie-fallback" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #D9D9D9;"></div>
             <div class="movie-title-overlay">
                 <span class="movie-title-text">${movie.title}</span>
                 <button class="movie-details-btn">Détails</button>
             </div>
-            <div class="movie-fallback" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #D9D9D9;"></div>
         </div>
     `;
 }
