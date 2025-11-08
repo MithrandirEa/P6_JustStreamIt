@@ -1,0 +1,29 @@
+/**
+ * 🎨 JUSTSTREAM IT - CSS MODULAIRE
+ * Fichier principal qui importe tous les modules
+ * Version refactorisée et optimisée
+ */
+
+/* 📦 IMPORTS DES MODULES (ordre important) */
+@import url('./variables.css');      /* Variables globales */
+@import url('./layout.css');         /* Structure et layout */
+@import url('./components.css');     /* Composants réutilisables */
+@import url('./responsive.css');     /* Adaptations mobiles */
+
+/**
+ * 🎨 GUIDE DE PERSONNALISATION RAPIDE :
+ * 
+ * Pour modifier les couleurs → css/variables.css (lignes 8-18)
+ * Pour ajuster la typography → css/variables.css (lignes 20-32)
+ * Pour changer les espacements → css/variables.css (lignes 42-51)
+ * Pour modifier le layout → css/layout.css
+ * Pour styliser les composants → css/components.css
+ * Pour ajuster le responsive → css/responsive.css
+ * 
+ * ✅ Avantages de cette architecture :
+ * - Maintenance simplifiée
+ * - Modifications centralisées via variables CSS
+ * - Code réutilisable et modulaire
+ * - Performance optimisée
+ * - Collaboration facilitée
+ */

@@ -1,0 +1,130 @@
+/**
+ * 📐 LAYOUT - STRUCTURE GÉNÉRALE DE LA PAGE
+ * Grilles, conteneurs, header, contenu principal
+ */
+
+/* 📱 STRUCTURE GÉNÉRALE */
+body {
+    font-family: var(--font-primary);
+    background-color: var(--color-white);
+    margin: 0;
+    padding: var(--spacing-xl) 1px 1px 1px;
+    box-sizing: border-box;
+    min-height: 100vh;
+    max-width: var(--width-max);
+    margin: 0 auto;
+}
+
+/* 🎯 HEADER */
+.original-header {
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-black);
+    height: var(--height-header);
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: var(--width-logo);
+    height: var(--height-logo);
+    margin-left: 27px;
+}
+
+.header-title {
+    font-weight: var(--font-weight-light);
+    font-size: var(--font-size-header);
+    line-height: 59px;
+    color: var(--color-white);
+    margin-left: var(--spacing-lg);
+}
+
+/* 📄 CONTENU PRINCIPAL */
+.main-content {
+    padding: var(--spacing-xl) 107px 75px 107px;
+}
+
+/* 🏆 SECTION MEILLEUR FILM */
+.bestFilm h1 {
+    font-size: var(--font-size-best-title);
+    margin-bottom: var(--spacing-md);
+    font-weight: var(--font-weight-bold);
+}
+
+.best-movie-container {
+    border: 6px solid var(--color-black);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: stretch;
+    gap: var(--spacing-md);
+}
+
+.best-movie-poster-container {
+    flex-shrink: 0;
+    position: relative;
+    min-height: var(--height-fallback-min);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.best-movie-info {
+    padding-left: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* 🎬 TITRES DES SECTIONS */
+.bestRatedFilms h1, 
+.category1 h1, 
+.category2 h1, 
+.otherFilms h1 {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-section);
+    font-weight: var(--font-weight-semibold);
+    line-height: 100%;
+    margin: var(--spacing-lg) 0 var(--spacing-md) 0;
+}
+
+/* 🔧 CONTENEUR TITRE + SÉLECTEUR */
+.otherFilms .title-selector-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--spacing-lg) 0 var(--spacing-md) 0;
+}
+
+.otherFilms .title-selector-container h1 {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.otherFilms .title-selector-container .mb-3 {
+    margin-bottom: 0 !important;
+    margin-left: var(--spacing-md);
+}
+
+.otherFilms .title-selector-container .form-select {
+    min-width: 200px;
+    max-width: 250px;
+}
+
+/* 🎭 GRILLES DE FILMS */
+.movie-grid {
+    margin: 0 calc(-1 * var(--spacing-cards-half));
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movie-card-wrapper {
+    margin-bottom: var(--spacing-cards);
+    padding: 0 var(--spacing-cards-half);
+    position: relative;
+}
+
+/* ⏳ TEXTES DE CHARGEMENT */
+.loading-text {
+    color: var(--color-loading);
+    font-style: italic;
+}

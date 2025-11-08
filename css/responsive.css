@@ -1,0 +1,229 @@
+/**
+ * 📱 RESPONSIVE DESIGN - ADAPTATIONS MOBILES/TABLETTES
+ * Toutes les media queries centralisées
+ */
+
+/* 🖥️ DESKTOP LARGE (1200px+) */
+@media (max-width: 1199px) {
+    .main-content {
+        padding: var(--spacing-lg) var(--spacing-xl) 50px var(--spacing-xl);
+    }
+}
+
+/* 📱 TABLETTE (992px - 1199px) */
+@media (max-width: 991px) {
+    .best-movie-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .best-movie-info {
+        padding-left: 0;
+        align-items: center;
+    }
+    
+    .best-movie-poster {
+        max-width: 250px;
+    }
+}
+
+/* 📱 MOBILE (768px - 991px) */
+@media (max-width: 767px) {
+    body {
+        overflow-x: hidden;
+        padding: 30px 1px 1px 1px;
+    }
+    
+    .container-fluid {
+        padding-left: var(--spacing-sm);
+        padding-right: var(--spacing-sm);
+    }
+    
+    .movie-card-wrapper {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+    
+    .main-content {
+        padding: 15px 15px var(--spacing-md) 15px;
+    }
+    
+    .header-title {
+        font-size: 24px;
+        margin-left: var(--spacing-md);
+    }
+    
+    .logo-img {
+        width: 60px;
+        height: 45px;
+        margin-left: 15px;
+    }
+    
+    .original-header {
+        height: 70px;
+    }
+    
+    .bestFilm h1 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    
+    .best-movie-info .movie-title {
+        font-size: var(--spacing-md);
+    }
+    
+    .movie-title-text {
+        font-size: 11px;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .movie-details-btn {
+        font-size: var(--spacing-sm);
+        padding: 6px 12px;
+        min-width: 60px;
+    }
+    
+    .bestRatedFilms h1, 
+    .category1 h1, 
+    .category2 h1, 
+    .otherFilms h1 {
+        font-size: 32px;
+        font-weight: var(--font-weight-semibold);
+        line-height: 100%;
+        margin: 25px 0 15px 0;
+    }
+    
+    /* Titre + sélecteur empilés */
+    .otherFilms .title-selector-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+    
+    .otherFilms .title-selector-container .mb-3 {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .otherFilms .title-selector-container .form-select {
+        min-width: 100%;
+        max-width: 100%;
+    }
+    
+    /* Grilles mobiles verticales */
+    .mobile-grid-vertical {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .mobile-card-stacked {
+        width: 70% !important;
+        max-width: 200px !important;
+        margin-bottom: var(--spacing-cards) !important;
+        padding: 0 !important;
+    }
+}
+
+/* 📱 PETIT MOBILE (576px - 767px) */
+@media (max-width: 576px) {
+    body {
+        padding: var(--spacing-md) 1px 1px 1px;
+    }
+    
+    .main-content {
+        padding: var(--spacing-sm) var(--spacing-sm) 15px var(--spacing-sm);
+    }
+    
+    .header-title {
+        font-size: var(--spacing-md);
+        margin-left: 15px;
+    }
+    
+    .logo-img {
+        width: 50px;
+        height: 38px;
+        margin-left: var(--spacing-sm);
+    }
+    
+    .original-header {
+        height: 60px;
+    }
+    
+    .movie-title-text {
+        font-size: 9px;
+        line-height: 1.1;
+        margin-bottom: 8px;
+    }
+    
+    .movie-title-overlay {
+        padding: var(--spacing-sm) var(--spacing-xs);
+    }
+    
+    .movie-details-btn {
+        font-size: 9px;
+        padding: 4px 8px;
+        min-width: 50px;
+    }
+    
+    .best-movie-poster {
+        max-width: 180px;
+    }
+    
+    .movie-card-wrapper {
+        padding: 0 var(--spacing-cards-half);
+        margin-bottom: var(--spacing-cards);
+    }
+    
+    .bestFilm h1 {
+        font-size: var(--spacing-md);
+        margin-bottom: 12px;
+    }
+    
+    .bestRatedFilms h1, 
+    .category1 h1, 
+    .category2 h1, 
+    .otherFilms h1 {
+        font-size: 28px;
+        font-weight: var(--font-weight-semibold);
+        line-height: 100%;
+        margin: var(--spacing-md) 0 12px 0;
+    }
+    
+    .movie-grid {
+        margin: 0 calc(-1 * var(--spacing-cards-half));
+    }
+}
+
+/* 📱 TRÈS PETIT MOBILE (480px et moins) */
+@media (max-width: 480px) {
+    .mobile-card-stacked {
+        width: 60% !important;
+        max-width: 180px !important;
+        margin-bottom: var(--spacing-cards) !important;
+    }
+    
+    .mobile-grid-vertical {
+        padding: 0 15px !important;
+    }
+}
+
+/* 🎭 GRILLES MOBILES SPÉCIALES */
+.mobile-grid-vertical {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 var(--spacing-md) !important;
+}
+
+.mobile-card-stacked {
+    width: 80% !important;
+    max-width: 250px !important;
+    margin-bottom: var(--spacing-cards) !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+}

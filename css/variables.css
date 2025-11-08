@@ -1,0 +1,74 @@
+/**
+ * 🎨 VARIABLES CSS - CONFIGURATION GLOBALE
+ * Toutes les valeurs personnalisables centralisées
+ */
+
+:root {
+  /* 🎨 COULEURS PRINCIPALES */
+  --color-primary: #61787f;           /* Header et éléments principaux */
+  --color-secondary: #dc3545;         /* Bouton rouge principal */
+  --color-secondary-hover: #c82333;   /* Survol bouton rouge */
+  --color-dark: #2D2C2C;             /* Boutons détails */
+  --color-dark-hover: #1A1919;       /* Survol boutons détails */
+  --color-fallback: #D9D9D9;         /* Arrière-plan fallback images */
+  --color-fallback-text: #666;       /* Texte des fallbacks */
+  --color-loading: #6c757d;          /* Texte de chargement */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  
+  /* 🔤 TYPOGRAPHIE */
+  --font-primary: "Oswald", sans-serif;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* 📝 TAILLES DE POLICE */
+  --font-size-header: 40px;          /* Titre header */
+  --font-size-section: 48px;         /* Titres de sections */
+  --font-size-best-title: 36px;      /* Titre "Meilleur film" */
+  --font-size-movie-title: 28px;     /* Titre du meilleur film */
+  --font-size-overlay-title: 14px;   /* Titre dans overlay */
+  --font-size-btn-main: 16px;        /* Bouton principal */
+  --font-size-btn-details: 12px;     /* Bouton détails */
+  --font-size-fallback: 14px;        /* Texte fallback */
+  
+  /* 📐 DIMENSIONS */
+  --width-max: 1200px;               /* Largeur max page */
+  --height-header: 122px;            /* Hauteur header */
+  --width-logo: 127px;               /* Largeur logo */
+  --height-logo: 94px;               /* Hauteur logo */
+  --width-poster-max: 227px;         /* Largeur max poster meilleur film */
+  --height-fallback-min: 300px;      /* Hauteur min fallback meilleur film */
+  
+  /* 📍 ESPACEMENTS */
+  --spacing-xs: 5px;
+  --spacing-sm: 10px;
+  --spacing-md: 20px;
+  --spacing-lg: 40px;
+  --spacing-xl: 60px;
+  --spacing-cards: 45px;             /* Espacement entre cartes */
+  --spacing-cards-half: 22.5px;      /* Demi-espacement cartes */
+  
+  /* 📱 BREAKPOINTS */
+  --breakpoint-xs: 576px;
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 992px;
+  --breakpoint-lg: 1200px;
+  
+  /* ⚡ ANIMATIONS */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* 🎭 EFFETS */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 20px;
+  --border-radius-xl: 25px;
+  --shadow-light: 0 2px 10px rgba(0,0,0,0.2);
+  --shadow-medium: 0 4px 8px rgba(0,0,0,0.2);
+  --shadow-heavy: 0 4px 20px rgba(0,0,0,0.3);
+  --overlay-dark: rgba(0, 0, 0, 0.5);
+  --overlay-modal: rgba(0, 0, 0, 0.8);
+}
