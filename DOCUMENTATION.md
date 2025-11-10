@@ -1,6 +1,6 @@
-# 📚 DOCUMENTATION TECHNIQUE - JustStreamIt
+#  DOCUMENTATION TECHNIQUE - JustStreamIt
 
-## 📋 **TABLE DES MATIÈRES**
+##  **TABLE DES MATIRES**
 
 1. [Vue d'ensemble du projet](#vue-densemble-du-projet)
 2. [Architecture et choix techniques](#architecture-et-choix-techniques)
@@ -11,176 +11,176 @@
 7. [Configuration](#configuration)
 8. [Interface utilisateur](#interface-utilisateur)
 9. [Styles et responsive](#styles-et-responsive)
-10. [Flux de données](#flux-de-données)
+10. [Flux de donnes](#flux-de-donnes)
 11. [Gestion d'erreurs](#gestion-derreurs)
 12. [Performance et optimisations](#performance-et-optimisations)
-13. [Standards et conformité](#standards-et-conformité)
+13. [Standards et conformit](#standards-et-conformit)
 
 ---
 
-## 🎯 **VUE D'ENSEMBLE DU PROJET**
+##  **VUE D'ENSEMBLE DU PROJET**
 
 ### **Description**
-JustStreamIt est une application web de recommandation de films développée en JavaScript Vanilla. Elle consomme l'API OCMovies-API pour afficher les meilleurs films, des catégories spécifiques et des détails complets dans des modales.
+JustStreamIt est une application web de recommandation de films dveloppe en JavaScript Vanilla. Elle consomme l'API OCMovies-API pour afficher les meilleurs films, des catgories spcifiques et des dtails complets dans des modales.
 
-### **Contraintes techniques respectées**
-- ✅ JavaScript Vanilla uniquement (pas de frameworks)
-- ✅ Consommation de l'API OCMovies-API (localhost:8000)
-- ✅ Interface responsive (mobile, tablette, desktop)
-- ✅ Bootstrap pour le framework CSS
-- ✅ Architecture modulaire et maintenable
+### **Contraintes techniques respectes**
+-  JavaScript Vanilla uniquement (pas de frameworks)
+-  Consommation de l'API OCMovies-API (localhost:8000)
+-  Interface responsive (mobile, tablette, desktop)
+-  Bootstrap pour le framework CSS
+-  Architecture modulaire et maintenable
 
 ### **Statistiques du projet**
 - **Total des fichiers** : 19 fichiers principaux
 - **Lignes de code JavaScript** : 1,466 lignes
 - **Lignes de code CSS** : 1,057 lignes
 - **Lignes de code HTML** : 186 lignes
-- **Architecture** : Modulaire avec séparation des responsabilités
+- **Architecture** : Modulaire avec sparation des responsabilits
 
 ---
 
-## 🏗️ **ARCHITECTURE ET CHOIX TECHNIQUES**
+##  **ARCHITECTURE ET CHOIX TECHNIQUES**
 
-### **Patron architectural : Couches séparées**
+### **Patron architectural : Couches spares**
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                   INTERFACE UTILISATEUR                │
-│                (HTML + CSS Modulaire)                  │
-├─────────────────────────────────────────────────────────┤
-│                    COUCHE LOGIQUE                      │
-│              (script.js + modalWindows.js)             │
-├─────────────────────────────────────────────────────────┤
-│                  COUCHE UTILITAIRES                    │
-│     (responsive.js, imageHandler.js, modalHandler.js)  │
-├─────────────────────────────────────────────────────────┤
-│                  COUCHE TEMPLATES                      │
-│  (bestMovieTemplate.js, movieCardTemplate.js, etc.)   │
-├─────────────────────────────────────────────────────────┤
-│                  COUCHE SERVICES                       │
-│                   (apiService.js)                      │
-├─────────────────────────────────────────────────────────┤
-│                  COUCHE CONFIGURATION                  │
-│                   (appConfig.js)                       │
-└─────────────────────────────────────────────────────────┘
+
+                   INTERFACE UTILISATEUR                
+                (HTML + CSS Modulaire)                  
+
+                    COUCHE LOGIQUE                      
+              (script.js + modalWindows.js)             
+
+                  COUCHE UTILITAIRES                    
+     (responsive.js, imageHandler.js, modalHandler.js)  
+
+                  COUCHE TEMPLATES                      
+  (bestMovieTemplate.js, movieCardTemplate.js, etc.)   
+
+                  COUCHE SERVICES                       
+                   (apiService.js)                      
+
+                  COUCHE CONFIGURATION                  
+                   (appConfig.js)                       
+
 ```
 
-### **Choix techniques justifiés**
+### **Choix techniques justifis**
 
 #### **1. JavaScript Vanilla**
-- **Contrainte imposée** : Aucun framework autorisé
-- **Avantages** : Performance optimale, pas de dépendances
-- **Défis relevés** : Architecture modulaire sans module bundler
+- **Contrainte impose** : Aucun framework autoris
+- **Avantages** : Performance optimale, pas de dpendances
+- **Dfis relevs** : Architecture modulaire sans module bundler
 
 #### **2. Architecture modulaire**
-- **Problème** : JavaScript Vanilla sans modules ES6 (contrainte navigateur)
+- **Problme** : JavaScript Vanilla sans modules ES6 (contrainte navigateur)
 - **Solution** : Export via `window` global avec namespaces
-- **Bénéfices** : Code organisé, réutilisable, maintenable
+- **Bnfices** : Code organis, rutilisable, maintenable
 
-#### **3. Séparation des responsabilités**
-- **Services** : Logique métier et appels API
-- **Templates** : Génération HTML dynamique
-- **Utils** : Fonctions utilitaires réutilisables
-- **Config** : Configuration centralisée
+#### **3. Sparation des responsabilits**
+- **Services** : Logique mtier et appels API
+- **Templates** : Gnration HTML dynamique
+- **Utils** : Fonctions utilitaires rutilisables
+- **Config** : Configuration centralise
 
 #### **4. Pattern Observer**
-- **Implémentation** : Event listeners pour la communication
+- **Implmentation** : Event listeners pour la communication
 - **Usage** : Gestion des interactions utilisateur
-- **Avantage** : Découplage des composants
+- **Avantage** : Dcouplage des composants
 
 ---
 
-## 📁 **STRUCTURE DES FICHIERS**
+##  **STRUCTURE DES FICHIERS**
 
-### **Hiérarchie complète**
+### **Hirarchie complte**
 ```
 JustStreamIt/
-├── 📄 index.html                 (71 lignes)    - Page d'accueil
-├── 📄 modalWindows.html          (115 lignes)   - Page des modales
-├── 📄 modalWindows.js            (42 lignes)    - Script page modale
-├── 📄 script.js                  (201 lignes)   - Script principal
-├── 🗂️ config/
-│   └── 📄 appConfig.js           (118 lignes)   - Configuration app
-├── 🗂️ services/
-│   └── 📄 apiService.js          (281 lignes)   - Service API
-├── 🗂️ templates/
-│   ├── 📄 bestMovieTemplate.js   (61 lignes)    - Template héro
-│   ├── 📄 modalTemplate.js       (100 lignes)   - Template modal
-│   ├── 📄 movieCardTemplate.js   (84 lignes)    - Template cartes
-│   └── 📄 sectionTemplate.js     (104 lignes)   - Template sections
-├── 🗂️ utils/
-│   ├── 📄 appInitializer.js      (132 lignes)   - Initialisation
-│   ├── 📄 imageHandler.js        (141 lignes)   - Gestion images
-│   ├── 📄 modalHandler.js        (161 lignes)   - Gestion modales
-│   └── 📄 responsive.js          (81 lignes)    - Gestion responsive
-├── 🗂️ css/
-│   ├── 📄 main.css               (29 lignes)    - Point d'entrée CSS
-│   ├── 📄 variables.css          (116 lignes)   - Variables CSS
-│   ├── 📄 layout.css             (156 lignes)   - Structure layout
-│   ├── 📄 components.css         (200 lignes)   - Composants UI
-│   ├── 📄 modal.css              (334 lignes)   - Styles modales
-│   └── 📄 responsive.css         (222 lignes)   - Media queries
-└── 🗂️ images/                                   - Assets visuels
+  index.html                 (71 lignes)    - Page d'accueil
+  modalWindows.html          (115 lignes)   - Page des modales
+  modalWindows.js            (42 lignes)    - Script page modale
+  script.js                  (201 lignes)   - Script principal
+  config/
+     appConfig.js           (118 lignes)   - Configuration app
+  services/
+     apiService.js          (281 lignes)   - Service API
+  templates/
+     bestMovieTemplate.js   (61 lignes)    - Template hro
+     modalTemplate.js       (100 lignes)   - Template modal
+     movieCardTemplate.js   (84 lignes)    - Template cartes
+     sectionTemplate.js     (104 lignes)   - Template sections
+  utils/
+     appInitializer.js      (132 lignes)   - Initialisation
+     imageHandler.js        (141 lignes)   - Gestion images
+     modalHandler.js        (161 lignes)   - Gestion modales
+     responsive.js          (81 lignes)    - Gestion responsive
+  css/
+     main.css               (29 lignes)    - Point d'entre CSS
+     variables.css          (116 lignes)   - Variables CSS
+     layout.css             (156 lignes)   - Structure layout
+     components.css         (200 lignes)   - Composants UI
+     modal.css              (334 lignes)   - Styles modales
+     responsive.css         (222 lignes)   - Media queries
+  images/                                   - Assets visuels
 ```
 
 ---
 
-## 🔧 **COUCHE DE SERVICES**
+##  **COUCHE DE SERVICES**
 
 ### **services/apiService.js** (281 lignes)
 
-#### **Responsabilité**
-Service centralisé pour tous les appels à l'API OCMovies-API.
+#### **Responsabilit**
+Service centralis pour tous les appels  l'API OCMovies-API.
 
 #### **Architecture interne**
 ```javascript
 class ApiService {
     constructor() {
         this.baseUrl = 'http://localhost:8000/api/v1'
-        this.cache = new Map() // Cache en mémoire
+        this.cache = new Map() // Cache en mmoire
     }
 }
 ```
 
-#### **Fonctionnalités principales**
+#### **Fonctionnalits principales**
 
 1. **Cache intelligent**
    ```javascript
-   // Évite les appels redondants
+   // vite les appels redondants
    if (this.cache.has(cacheKey)) {
        return this.cache.get(cacheKey);
    }
    ```
 
-2. **Gestion d'erreurs centralisée**
+2. **Gestion d'erreurs centralise**
    ```javascript
    if (!response.ok) {
        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
    }
    ```
 
-3. **Méthodes exposées**
+3. **Mthodes exposes**
    - `getBestMovies(pageSize)` : Top films par score IMDb
-   - `getMovieDetails(movieId)` : Détails complets d'un film
-   - `getAllGenres()` : Liste complète des genres (pagination automatique)
-   - `getMovieSection(endpoint)` : Films d'une section spécifique
+   - `getMovieDetails(movieId)` : Dtails complets d'un film
+   - `getAllGenres()` : Liste complte des genres (pagination automatique)
+   - `getMovieSection(endpoint)` : Films d'une section spcifique
    - `getMoviesByGenre(genre, pageSize)` : Films par genre
    - `testConnection()` : Test de connexion API
 
 #### **Choix techniques**
-- **Cache Map** : Performance et réduction d'appels API
+- **Cache Map** : Performance et rduction d'appels API
 - **Pagination automatique** : Pour les genres (API pagine par 5)
-- **URLs construites dynamiquement** : Flexibilité maximale
+- **URLs construites dynamiquement** : Flexibilit maximale
 - **Singleton pattern** : Une seule instance pour toute l'app
 
 ---
 
-## 🎨 **COUCHE DE TEMPLATES**
+##  **COUCHE DE TEMPLATES**
 
 ### **templates/bestMovieTemplate.js** (61 lignes)
 
-#### **Responsabilité**
-Génération HTML pour la section héro (meilleur film).
+#### **Responsabilit**
+Gnration HTML pour la section hro (meilleur film).
 
 #### **Template principal**
 ```javascript
@@ -202,13 +202,13 @@ function generateBestMovieTemplate(movie) {
 ```
 
 #### **Gestion des erreurs**
-- Template d'erreur dédié avec bouton de rechargement
-- Fallback pour images manquantes intégré
+- Template d'erreur ddi avec bouton de rechargement
+- Fallback pour images manquantes intgr
 
 ### **templates/movieCardTemplate.js** (84 lignes)
 
-#### **Responsabilité**
-Génération des cartes de films pour les sections.
+#### **Responsabilit**
+Gnration des cartes de films pour les sections.
 
 #### **Classes responsive dynamiques**
 ```javascript
@@ -232,16 +232,16 @@ function createMovieCardElement(movie) {
 
 ### **templates/modalTemplate.js** (100 lignes)
 
-#### **Responsabilité**
-Templates pour les différentes sections des modales de films.
+#### **Responsabilit**
+Templates pour les diffrentes sections des modales de films.
 
 #### **Architecture atomique**
 ```javascript
-// Chaque section = fonction séparée
+// Chaque section = fonction spare
 generateTitleSection(movie)      // Titre
-generateDetailsSection(movie)    // Détails (année, durée, score)
-generateDirectorSection(movie)   // Réalisateur
-generateSummarySection(movie)    // Résumé
+generateDetailsSection(movie)    // Dtails (anne, dure, score)
+generateDirectorSection(movie)   // Ralisateur
+generateSummarySection(movie)    // Rsum
 generateActorsSection(movie)     // Distribution
 ```
 
@@ -255,8 +255,8 @@ function configurePosterImage(poster, movie, isMobile = false) {
 
 ### **templates/sectionTemplate.js** (104 lignes)
 
-#### **Responsabilité**
-Templates pour les structures de sections et sélecteurs de genre.
+#### **Responsabilit**
+Templates pour les structures de sections et slecteurs de genre.
 
 #### **Grilles adaptatives**
 ```javascript
@@ -272,18 +272,18 @@ function createMovieGrid() {
 
 ---
 
-## 🛠️ **COUCHE D'UTILITAIRES**
+##  **COUCHE D'UTILITAIRES**
 
 ### **utils/responsive.js** (81 lignes)
 
-#### **Responsabilité**
-Gestion des breakpoints et calcul des éléments responsive.
+#### **Responsabilit**
+Gestion des breakpoints et calcul des lments responsive.
 
 #### **Configuration des breakpoints**
 ```javascript
 const RESPONSIVE_CONFIG = {
     breakpoints: {
-        mobile: { max: 767, pageSize: 2 },    // 2 films empilés
+        mobile: { max: 767, pageSize: 2 },    // 2 films empils
         tablet: { min: 768, max: 991, pageSize: 4 }, // 2x2 films
         desktop: { min: 992, pageSize: 6 }    // 3x2 films
     }
@@ -291,13 +291,13 @@ const RESPONSIVE_CONFIG = {
 ```
 
 #### **Fonctions utilitaires**
-- `getPageSize()` : Nombre de films selon écran
+- `getPageSize()` : Nombre de films selon cran
 - `getDeviceType()` : Type d'appareil (mobile/tablet/desktop)
 - `isMobile()`, `isDesktop()` : Conditions boolean
 
 ### **utils/imageHandler.js** (141 lignes)
 
-#### **Responsabilité**
+#### **Responsabilit**
 Gestion robuste des images avec fallbacks automatiques.
 
 #### **Gestion d'erreurs d'images**
@@ -313,7 +313,7 @@ function handleImageError(img, fallbackClass = 'movie-fallback') {
 ```javascript
 function createEmergencyFallback(img, fallbackClass) {
     const emergencyFallback = document.createElement('div');
-    // Crée un fallback si l'élément prévu n'existe pas
+    // Cre un fallback si l'lment prvu n'existe pas
 }
 ```
 
@@ -328,8 +328,8 @@ function isValidImageUrl(src) {
 
 ### **utils/modalHandler.js** (161 lignes)
 
-#### **Responsabilité**
-Gestionnaire centralisé pour l'affichage des modales de films.
+#### **Responsabilit**
+Gestionnaire centralis pour l'affichage des modales de films.
 
 #### **Architecture en classe**
 ```javascript
@@ -341,15 +341,15 @@ class ModalHandler {
 }
 ```
 
-#### **Méthodes de mise à jour**
+#### **Mthodes de mise  jour**
 ```javascript
-updateTitleSections(movie)    // Met à jour tous les titres (desktop + mobile)
-updateDetailsSections(movie)  // Met à jour tous les détails
+updateTitleSections(movie)    // Met  jour tous les titres (desktop + mobile)
+updateDetailsSections(movie)  // Met  jour tous les dtails
 updatePosterImages(movie)     // Configure toutes les images
-// ... une méthode par section
+// ... une mthode par section
 ```
 
-#### **Gestion d'erreurs intégrée**
+#### **Gestion d'erreurs intgre**
 ```javascript
 async loadMovieDetails(movieId) {
     try {
@@ -363,10 +363,10 @@ async loadMovieDetails(movieId) {
 
 ### **utils/appInitializer.js** (132 lignes)
 
-#### **Responsabilité**
+#### **Responsabilit**
 Orchestrateur principal de l'initialisation de l'application.
 
-#### **Initialisation séquentielle**
+#### **Initialisation squentielle**
 ```javascript
 async initialize() {
     this.initializeSettings();
@@ -390,20 +390,20 @@ initializeSettings() {
 #### **Gestion d'erreur globale**
 ```javascript
 displayGlobalError() {
-    // Affiche une modale d'erreur centrée avec option de rechargement
+    // Affiche une modale d'erreur centre avec option de rechargement
 }
 ```
 
 ---
 
-## ⚙️ **CONFIGURATION**
+##  **CONFIGURATION**
 
 ### **config/appConfig.js** (118 lignes)
 
-#### **Responsabilité**
-Configuration centralisée de toute l'application.
+#### **Responsabilit**
+Configuration centralise de toute l'application.
 
-#### **Sections de films configurées**
+#### **Sections de films configures**
 ```javascript
 const FILM_SECTIONS = {
     bestRated: {
@@ -422,7 +422,7 @@ const FILM_SECTIONS = {
 };
 ```
 
-#### **Messages centralisés**
+#### **Messages centraliss**
 ```javascript
 const APP_MESSAGES = {
     loading: {
@@ -438,16 +438,16 @@ const APP_MESSAGES = {
 
 #### **Utilitaires de configuration**
 - `buildApiUrl(endpoint, pageSize)` : Construction d'URLs API
-- `getCurrentDisplayMode()` : Détection du mode d'affichage
-- `getFilmSections()` : Accès aux sections configurées
+- `getCurrentDisplayMode()` : Dtection du mode d'affichage
+- `getFilmSections()` : Accs aux sections configures
 
 ---
 
-## 🎨 **INTERFACE UTILISATEUR**
+##  **INTERFACE UTILISATEUR**
 
 ### **index.html** (71 lignes)
 
-#### **Structure HTML5 sémantique**
+#### **Structure HTML5 smantique**
 ```html
 <!DOCTYPE html>
 <html lang="fr">
@@ -456,7 +456,7 @@ const APP_MESSAGES = {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap + CSS modulaire -->
-    <!-- Scripts dans l'ordre de dépendance -->
+    <!-- Scripts dans l'ordre de dpendance -->
 </head>
 <body>
     <header class="original-header"><!-- Logo + titre --></header>
@@ -473,7 +473,7 @@ const APP_MESSAGES = {
 ```
 
 #### **Ordre de chargement des scripts**
-1. `presentation-mode.js` - Gestion présentation
+1. `presentation-mode.js` - Gestion prsentation
 2. `utils/responsive.js` - Utilitaires responsive
 3. `utils/imageHandler.js` - Gestion images
 4. `services/apiService.js` - Service API
@@ -492,19 +492,19 @@ const APP_MESSAGES = {
         <div class="col-lg-7"><!-- Infos film --></div>
         <div class="col-lg-5"><!-- Poster --></div>
     </div>
-    <!-- Sections résumé, acteurs, bouton fermer -->
+    <!-- Sections rsum, acteurs, bouton fermer -->
 </div>
 
-<!-- Version MOBILE (≤ 788px) -->
+<!-- Version MOBILE ( 788px) -->
 <div class="modal-mobile">
-    <!-- Layout vertical optimisé mobile -->
+    <!-- Layout vertical optimis mobile -->
 </div>
 ```
 
 #### **Bouton fermer responsive**
 ```html
 <!-- Bouton X visible uniquement mobile/tablet -->
-<button class="btn-close-x">✕</button>
+<button class="btn-close-x"></button>
 ```
 
 ### **modalWindows.js** (42 lignes)
@@ -512,7 +512,7 @@ const APP_MESSAGES = {
 #### **Script d'initialisation modale**
 ```javascript
 document.addEventListener('DOMContentLoaded', async () => {
-    // Vérification des dépendances
+    // Vrification des dpendances
     if (!window.ApiService || !window.ModalTemplate || !window.ModalHandler) {
         console.error('Modules requis non disponibles');
         return;
@@ -536,30 +536,30 @@ closeButton.addEventListener('click', (e) => {
 
 ---
 
-## 🎯 **SCRIPT PRINCIPAL**
+##  **SCRIPT PRINCIPAL**
 
 ### **script.js** (201 lignes)
 
-#### **Responsabilité**
-Logique principale de la page d'accueil et coordination générale.
+#### **Responsabilit**
+Logique principale de la page d'accueil et coordination gnrale.
 
 #### **Fonction principale : loadBestMovie()**
 ```javascript
 async function loadBestMovie() {
-    // 1. Récupération des 10 meilleurs films
+    // 1. Rcupration des 10 meilleurs films
     const movies = await window.ApiService.getBestMovies(10);
     
-    // 2. Sélection du meilleur score
+    // 2. Slection du meilleur score
     const bestScore = Math.max(...movies.map(film => parseFloat(film.imdb_score)));
     
-    // 3. Sélection aléatoire parmi les ex-aequo
+    // 3. Slection alatoire parmi les ex-aequo
     const bestMovies = movies.filter(film => parseFloat(film.imdb_score) === bestScore);
     const movie = bestMovies[Math.floor(Math.random() * bestMovies.length)];
     
-    // 4. Enrichissement avec détails complets
+    // 4. Enrichissement avec dtails complets
     const detailData = await window.ApiService.getMovieDetails(movie.id);
     
-    // 5. Génération et injection HTML
+    // 5. Gnration et injection HTML
     const content = window.BestMovieTemplate.generate(movie);
     bestFilmSection.innerHTML = content;
     
@@ -570,13 +570,13 @@ async function loadBestMovie() {
 #### **Fonction loadMovieSection()**
 ```javascript
 async function loadMovieSection(endpoint, sectionClass) {
-    // 1. Appel API via service centralisé
+    // 1. Appel API via service centralis
     const data = await window.ApiService.getMovieSection(endpoint);
     
     // 2. Filtrage des films avec images
     const validMovies = movies.filter(movie => movie.image_url);
     
-    // 3. Création des cartes via template
+    // 3. Cration des cartes via template
     validMovies.forEach((movie) => {
         const movieCard = window.MovieCardTemplate.createElement(movie);
         // Ajout event listeners + injection DOM
@@ -584,14 +584,14 @@ async function loadMovieSection(endpoint, sectionClass) {
     
     // 4. Gestion pagination automatique
     if (validMovies.length < ResponsiveUtils.getPageSize() && data.next) {
-        // Chargement de films supplémentaires
+        // Chargement de films supplmentaires
     }
     
-    // 5. Gestion spéciale section "Autres films" avec sélecteur genre
+    // 5. Gestion spciale section "Autres films" avec slecteur genre
 }
 ```
 
-#### **Gestion responsive en temps réel**
+#### **Gestion responsive en temps rel**
 ```javascript
 window.addEventListener('resize', () => {
     clearTimeout(window.resizeTimeout);
@@ -601,10 +601,10 @@ window.addEventListener('resize', () => {
 });
 ```
 
-#### **Initialisation avec vérification DOM**
+#### **Initialisation avec vrification DOM**
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
-    // Vérification présence des 5 sections obligatoires
+    // Vrification prsence des 5 sections obligatoires
     const sections = ['.bestFilm', '.bestRatedFilms', '.category1', '.category2', '.otherFilms'];
     sections.forEach(sectionClass => {
         const element = document.querySelector(sectionClass);
@@ -619,13 +619,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-## 🎨 **STYLES ET RESPONSIVE**
+##  **STYLES ET RESPONSIVE**
 
 ### **css/main.css** (29 lignes)
 
 #### **Architecture CSS modulaire**
 ```css
-/* Point d'entrée unique */
+/* Point d'entre unique */
 @import url('./variables.css');      /* Variables globales */
 @import url('./layout.css');         /* Structure */
 @import url('./components.css');     /* Composants */
@@ -635,7 +635,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ### **css/variables.css** (116 lignes)
 
-#### **Variables CSS centralisées**
+#### **Variables CSS centralises**
 ```css
 :root {
   /* Couleurs principales */
@@ -658,7 +658,7 @@ document.addEventListener('DOMContentLoaded', () => {
   --breakpoint-sm: 768px;
   --breakpoint-md: 992px;
   
-  /* Variables modales spécialisées */
+  /* Variables modales spcialises */
   --modal-border-width: 6px;
   --modal-max-width: 1000px;
   --modal-breakpoint: 788px;
@@ -698,7 +698,7 @@ body {
 
 ### **css/components.css** (200 lignes)
 
-#### **Composants réutilisables**
+#### **Composants rutilisables**
 ```css
 /* Cartes de films */
 .movie-card-original {
@@ -725,7 +725,7 @@ body {
 }
 ```
 
-#### **Boutons standardisés**
+#### **Boutons standardiss**
 ```css
 .btn-details {
     background-color: var(--color-secondary);
@@ -742,9 +742,9 @@ body {
 
 ### **css/modal.css** (334 lignes)
 
-#### **Système de breakpoint modal**
+#### **Systme de breakpoint modal**
 ```css
-/* Breakpoint spécial à 788px pour les modales */
+/* Breakpoint spcial  788px pour les modales */
 .modal-desktop {
     display: block;
 }
@@ -763,18 +763,18 @@ body {
 ```css
 /* Version desktop : layout horizontal */
 .modal-desktop .row {
-    /* Poster à droite, infos à gauche */
+    /* Poster  droite, infos  gauche */
 }
 
 /* Version mobile : layout vertical */
 .modal-mobile {
-    /* Titre → Résumé → Poster → Acteurs */
+    /* Titre  Rsum  Poster  Acteurs */
 }
 ```
 
 ### **css/responsive.css** (222 lignes)
 
-#### **Media queries organisées**
+#### **Media queries organises**
 ```css
 /* Desktop Large (1200px+) */
 @media (max-width: 1199px) { }
@@ -788,11 +788,11 @@ body {
 /* Petit Mobile (576px - 767px) */
 @media (max-width: 576px) { }
 
-/* Très petit Mobile (480px et moins) */
+/* Trs petit Mobile (480px et moins) */
 @media (max-width: 480px) { }
 ```
 
-#### **Grilles mobiles spéciales**
+#### **Grilles mobiles spciales**
 ```css
 .mobile-grid-vertical {
     display: flex !important;
@@ -808,66 +808,66 @@ body {
 
 ---
 
-## 📊 **FLUX DE DONNÉES**
+##  **FLUX DE DONNES**
 
 ### **Diagramme de flux principal**
 
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Page Load     │    │  AppInitializer │    │   ApiService    │
-│   (DOMContent)  │───▶│   .initialize() │───▶│  .getBestMovies │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                       │
-                                ▼                       ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│ BestMovieTemp   │◀───│  loadBestMovie  │◀───│   Movie Data    │
-│  .generate()    │    │     Function    │    │    (Cached)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-        │                       │
-        ▼                       ▼
-┌─────────────────┐    ┌─────────────────┐
-│   DOM Update    │    │ Event Listeners │
-│   (innerHTML)   │    │   (Click Modal) │
-└─────────────────┘    └─────────────────┘
+        
+   Page Load           AppInitializer        ApiService    
+   (DOMContent)     .initialize()   .getBestMovies 
+        
+                                                       
+                                                       
+        
+ BestMovieTemp     loadBestMovie     Movie Data    
+  .generate()             Function            (Cached)     
+        
+                               
+                               
+    
+   DOM Update         Event Listeners 
+   (innerHTML)          (Click Modal) 
+    
 ```
 
 ### **Flux des sections de films**
 
 ```
 AppInitializer
-      │
-      ▼
-┌─────────────────────────────────────────────────┐
-│         for each section in FILM_SECTIONS      │
-│                                                 │
-│  1. AppConfig.buildApiUrl(endpoint, pageSize)  │
-│  2. ApiService.getMovieSection(fullUrl)        │
-│  3. SectionTemplate.createMovieGrid()          │
-│  4. MovieCardTemplate.createElement(movie)     │
-│  5. Event listeners + DOM injection            │
-└─────────────────────────────────────────────────┘
+      
+      
+
+         for each section in FILM_SECTIONS      
+                                                 
+  1. AppConfig.buildApiUrl(endpoint, pageSize)  
+  2. ApiService.getMovieSection(fullUrl)        
+  3. SectionTemplate.createMovieGrid()          
+  4. MovieCardTemplate.createElement(movie)     
+  5. Event listeners + DOM injection            
+
 ```
 
 ### **Flux des modales**
 
 ```
-User Click → openModal(movieId) → modalWindows.html?id=123
-                                         │
-                                         ▼
+User Click  openModal(movieId)  modalWindows.html?id=123
+                                         
+                                         
                               modalWindows.js loads
-                                         │
-                                         ▼
-              ModalHandler.initialize() → getMovieIdFromUrl()
-                                         │
-                                         ▼
+                                         
+                                         
+              ModalHandler.initialize()  getMovieIdFromUrl()
+                                         
+                                         
               ApiService.getMovieDetails(movieId) (cached)
-                                         │
-                                         ▼
+                                         
+                                         
               ModalTemplate.generateTitleSection(movie)
               ModalTemplate.generateDetailsSection(movie)
               ModalTemplate.generateSummarySection(movie)
-                                         │
-                                         ▼
+                                         
+                                         
                               DOM Updates (all sections)
 ```
 
@@ -875,22 +875,22 @@ User Click → openModal(movieId) → modalWindows.html?id=123
 
 ```
 Window Resize Event
-        │
-        ▼ (debounced 250ms)
+        
+         (debounced 250ms)
 ResponsiveUtils.getPageSize()
-        │
-        ▼
+        
+        
 AppInitializer.initialize()
-        │
-        ▼
+        
+        
 Complete Page Reload with new breakpoints
 ```
 
 ---
 
-## 🚨 **GESTION D'ERREURS**
+##  **GESTION D'ERREURS**
 
-### **Stratégie en couches**
+### **Stratgie en couches**
 
 #### **1. Niveau API (apiService.js)**
 ```javascript
@@ -902,7 +902,7 @@ try {
     return await response.json();
 } catch (error) {
     console.error('API Error:', error);
-    throw error; // Propagation vers couche supérieure
+    throw error; // Propagation vers couche suprieure
 }
 ```
 
@@ -927,12 +927,12 @@ try {
 } catch (error) {
     console.error(`Erreur section ${sectionClass}:`, error);
     
-    // Interface gracieuse avec détails
+    // Interface gracieuse avec dtails
     movieSection.innerHTML = '';
     movieSection.appendChild(title);
     
     const errorDiv = document.createElement('div');
-    errorDiv.innerHTML = `Template d'erreur détaillé`;
+    errorDiv.innerHTML = `Template d'erreur dtaill`;
     movieSection.appendChild(errorDiv);
 }
 ```
@@ -951,11 +951,11 @@ displayGlobalError() {
 }
 ```
 
-### **Gestion d'images défaillantes**
+### **Gestion d'images dfaillantes**
 
-#### **imageHandler.js - Système de fallbacks**
+#### **imageHandler.js - Systme de fallbacks**
 ```javascript
-// 1. Détection automatique via onerror
+// 1. Dtection automatique via onerror
 <img onerror="handleImageError(this, 'movie-fallback')" />
 
 // 2. Masquage image + activation fallback
@@ -965,19 +965,19 @@ function handleImageError(img, fallbackClass) {
     Object.assign(fallback.style, IMAGE_CONFIG.fallbackStyles);
 }
 
-// 3. Fallback d'urgence si élément prévu inexistant
+// 3. Fallback d'urgence si lment prvu inexistant
 function createEmergencyFallback(img, fallbackClass) {
-    // Création dynamique d'un div de remplacement
+    // Cration dynamique d'un div de remplacement
 }
 ```
 
 ---
 
-## ⚡ **PERFORMANCE ET OPTIMISATIONS**
+##  **PERFORMANCE ET OPTIMISATIONS**
 
 ### **1. Cache API intelligent**
 
-#### **Stratégie de mise en cache**
+#### **Stratgie de mise en cache**
 ```javascript
 class ApiService {
     constructor() {
@@ -997,9 +997,9 @@ class ApiService {
 }
 ```
 
-#### **Bénéfices mesurables**
-- Réduction des appels API de ~80%
-- Temps de réponse : 2ms (cache) vs 200-500ms (réseau)
+#### **Bnfices mesurables**
+- Rduction des appels API de ~80%
+- Temps de rponse : 2ms (cache) vs 200-500ms (rseau)
 - UX plus fluide lors des redimensionnements
 
 ### **2. Debouncing du responsive**
@@ -1009,21 +1009,21 @@ class ApiService {
 window.addEventListener('resize', () => {
     clearTimeout(window.resizeTimeout);
     window.resizeTimeout = setTimeout(() => {
-        initializePage(); // Rechargement seulement après 250ms de stabilité
+        initializePage(); // Rechargement seulement aprs 250ms de stabilit
     }, 250);
 });
 ```
 
 #### **Impact performance**
-- Évite 10-20 rechargements par seconde pendant resize
-- CPU usage réduit de 90% pendant redimensionnement
+- vite 10-20 rechargements par seconde pendant resize
+- CPU usage rduit de 90% pendant redimensionnement
 - Pas de lag perceptible
 
 ### **3. Lazy loading intelligent**
 
 #### **Pagination automatique**
 ```javascript
-// Chargement de films supplémentaires seulement si nécessaire
+// Chargement de films supplmentaires seulement si ncessaire
 if (validMovies.length < ResponsiveUtils.getPageSize() && data.next) {
     const nextResponse = await fetch(data.next);
     const nextData = await nextResponse.json();
@@ -1032,7 +1032,7 @@ if (validMovies.length < ResponsiveUtils.getPageSize() && data.next) {
 }
 ```
 
-### **4. CSS optimisé**
+### **4. CSS optimis**
 
 #### **Variables CSS pour performance**
 ```css
@@ -1042,7 +1042,7 @@ if (validMovies.length < ResponsiveUtils.getPageSize() && data.next) {
 }
 
 .movie-card-original {
-    transition: var(--transition-normal); /* Une seule déclaration */
+    transition: var(--transition-normal); /* Une seule dclaration */
 }
 ```
 
@@ -1057,20 +1057,20 @@ if (validMovies.length < ResponsiveUtils.getPageSize() && data.next) {
 }
 ```
 
-### **5. Réduction du DOM**
+### **5. Rduction du DOM**
 
 #### **Templates efficients**
-- HTML minimal généré
-- Event delegation plutôt que listeners multiples
-- Réutilisation des éléments DOM quand possible
+- HTML minimal gnr
+- Event delegation plutt que listeners multiples
+- Rutilisation des lments DOM quand possible
 
 ---
 
-## ✅ **STANDARDS ET CONFORMITÉ**
+##  **STANDARDS ET CONFORMIT**
 
 ### **W3C Compliance**
 
-#### **HTML5 Sémantique**
+#### **HTML5 Smantique**
 ```html
 <!DOCTYPE html>
 <html lang="fr">
@@ -1088,10 +1088,10 @@ if (validMovies.length < ResponsiveUtils.getPageSize() && data.next) {
 
 #### **Event Listeners Standards**
 ```javascript
-// ❌ Avant (non-conforme)
+//  Avant (non-conforme)
 <button onclick="window.location.href='index.html'">
 
-// ✅ Après (conforme W3C)
+//  Aprs (conforme W3C)
 document.addEventListener('DOMContentLoaded', () => {
     const closeButton = document.querySelector('.btn-close-x');
     closeButton.addEventListener('click', (e) => {
@@ -1124,13 +1124,13 @@ function configurePosterImage(poster, movie, isMobile = false) {
 
 #### **Critical Rendering Path**
 ```html
-<!-- CSS bloquant optimisé -->
+<!-- CSS bloquant optimis -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
 
 <!-- JavaScript non-bloquant -->
 <script src="utils/responsive.js"></script>
-<!-- Ordre d'importance respecté -->
+<!-- Ordre d'importance respect -->
 ```
 
 #### **Responsive Images**
@@ -1146,9 +1146,9 @@ function configurePosterImage(poster, movie, isMobile = false) {
 
 ---
 
-## 🔧 **MAINTENANCE ET EXTENSIBILITÉ**
+##  **MAINTENANCE ET EXTENSIBILIT**
 
-### **Points d'extension prévus**
+### **Points d'extension prvus**
 
 #### **1. Ajout de nouvelles sections**
 ```javascript
@@ -1157,7 +1157,7 @@ const FILM_SECTIONS = {
     // Sections existantes...
     
     newSection: {
-        title: 'Nouvelle catégorie',
+        title: 'Nouvelle catgorie',
         endpoint: '/titles/?genre=comedy&sort_by=-imdb_score',
         sectionClass: 'newCategory',
         emoji: 'COMEDY'
@@ -1182,7 +1182,7 @@ if (typeof window !== 'undefined') {
 // utils/newUtility.js
 class NewUtility {
     constructor() { }
-    // Nouvelle fonctionnalité
+    // Nouvelle fonctionnalit
 }
 
 if (typeof window !== 'undefined') {
@@ -1190,7 +1190,7 @@ if (typeof window !== 'undefined') {
 }
 ```
 
-### **Guidelines de développement**
+### **Guidelines de dveloppement**
 
 #### **1. Conventions naming**
 - **Fichiers** : camelCase.js
@@ -1203,7 +1203,7 @@ if (typeof window !== 'undefined') {
 ```javascript
 /**
  * MODULE NAME
- * Description et responsabilité
+ * Description et responsabilit
  */
 
 // Fonctions internes
@@ -1212,7 +1212,7 @@ function internalFunction() { }
 // Classe principale (si applicable)
 class MainClass { }
 
-// Export standardisé
+// Export standardis
 if (typeof window !== 'undefined') {
     window.ModuleName = {
         // API publique
@@ -1222,52 +1222,52 @@ if (typeof window !== 'undefined') {
 
 #### **3. Gestion des erreurs**
 - Toujours try/catch dans les fonctions async
-- Propagation avec throw vers couche supérieure
-- Templates d'erreur plutôt qu'alert()
+- Propagation avec throw vers couche suprieure
+- Templates d'erreur plutt qu'alert()
 - Messages d'erreur informatifs pour debug
 
 ---
 
-## 📈 **MÉTRIQUES ET STATISTIQUES**
+##  **MTRIQUES ET STATISTIQUES**
 
-### **Complexité du code**
+### **Complexit du code**
 - **Fichier le plus complexe** : apiService.js (281 lignes, classe avec cache)
 - **Fichier le plus simple** : modalWindows.js (42 lignes, simple initialisation)
 - **Moyenne** : 126 lignes par fichier JavaScript
-- **Répartition** : 52% Logic, 28% Templates, 20% Utils
+- **Rpartition** : 52% Logic, 28% Templates, 20% Utils
 
-### **Performance mesurée**
+### **Performance mesure**
 - **Temps de chargement initial** : ~800ms (avec API locale)
-- **Temps de réponse cache** : ~2ms
+- **Temps de rponse cache** : ~2ms
 - **Temps de redimensionnement** : ~50ms (debounced)
-- **Taille DOM** : ~150 éléments (page complète)
+- **Taille DOM** : ~150 lments (page complte)
 
-### **Maintenabilité**
-- **Couplage** : Faible (modules indépendants)
-- **Cohésion** : Élevée (responsabilité unique par module)
-- **Testabilité** : Bonne (fonctions pures, classes isolées)
-- **Documentation** : 100% des fonctions publiques documentées
+### **Maintenabilit**
+- **Couplage** : Faible (modules indpendants)
+- **Cohsion** : leve (responsabilit unique par module)
+- **Testabilit** : Bonne (fonctions pures, classes isoles)
+- **Documentation** : 100% des fonctions publiques documentes
 
 ---
 
-## 🚀 **CONCLUSION**
+##  **CONCLUSION**
 
-Cette architecture modulaire en JavaScript Vanilla respecte toutes les contraintes imposées tout en maintenant une haute qualité de code. La séparation des responsabilités, le système de cache, la gestion d'erreurs robuste et le design responsive font de cette application un exemple de développement front-end moderne sans frameworks.
+Cette architecture modulaire en JavaScript Vanilla respecte toutes les contraintes imposes tout en maintenant une haute qualit de code. La sparation des responsabilits, le systme de cache, la gestion d'erreurs robuste et le design responsive font de cette application un exemple de dveloppement front-end moderne sans frameworks.
 
 ### **Points forts de l'architecture**
-1. **Modularité sans bundler** : Organisation claire via namespaces
-2. **Performance optimisée** : Cache intelligent et debouncing
-3. **Code maintenable** : Documentation complète et conventions cohérentes
+1. **Modularit sans bundler** : Organisation claire via namespaces
+2. **Performance optimise** : Cache intelligent et debouncing
+3. **Code maintenable** : Documentation complte et conventions cohrentes
 4. **UX moderne** : Responsive design et gestion d'erreurs gracieuse
-5. **Standards respectés** : W3C compliance et bonnes pratiques
+5. **Standards respects** : W3C compliance et bonnes pratiques
 
-### **Évolutions possibles**
-- Migration vers ES6 modules (si contraintes levées)
-- Ajout de tests unitaires automatisés
-- Système de logging plus avancé
+### **volutions possibles**
+- Migration vers ES6 modules (si contraintes leves)
+- Ajout de tests unitaires automatiss
+- Systme de logging plus avanc
 - PWA capabilities (Service Worker)
-- Animations plus poussées (GSAP ou CSS animations)
+- Animations plus pousses (GSAP ou CSS animations)
 
 ---
 
-*Documentation générée le 8 novembre 2025 - Version 1.0*
+*Documentation gnre le 8 novembre 2025 - Version 1.0*

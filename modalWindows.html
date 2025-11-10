@@ -8,8 +8,6 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- CSS Modulaire JustStreamIt -->
         <link rel="stylesheet" href="css/main.css">
-        <!-- Script de masquage des erreurs pour présentation -->
-        <script src="presentation-mode.js"></script>
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Service API -->
@@ -21,7 +19,7 @@
         <!-- Script principal modal -->
         <script src="modalWindows.js"></script>
     </head>
-    <body>
+    <body class="modal-page">
         <div class="modal-container">
             <!-- Bouton X pour mobile/tablet seulement (≤ 788px) -->
             <button class="btn-close-x">✕</button>
@@ -60,8 +58,7 @@
                 <div class="row modal-actors-section">
                     <div class="col-12">
                         <section class="actors_section">
-                            <p>Avec : <br> 
-                            <span class="actors_names">Chargement de la distribution...</span></p>
+                            <p>Avec :<br><span class="actors_names">Chargement de la distribution...</span></p>
                         </section>
                     </div>
                 </div>
@@ -105,8 +102,7 @@
                 <!-- Acteurs en bas -->
                 <div class="mobile-actors-section">
                     <section class="actors_section mobile-actors">
-                        <p>Avec : <br> 
-                        <span class="actors_names">Chargement de la distribution...</span></p>
+                        <p>Avec :<br><span class="actors_names">Chargement de la distribution...</span></p>
                     </section>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 /**
  * ========================================
- * 📐 LAYOUT.CSS - STRUCTURE GÉNÉRALE PAGE
+ * LAYOUT.CSS - STRUCTURE GÉNÉRALE PAGE
  * ========================================
  * 
  * Ce fichier définit la STRUCTURE et la MISE EN PAGE de index.html
@@ -16,38 +16,63 @@
  */
 
 /* ==========================================
-   📱 ÉLÉMENT 1 : BODY - STRUCTURE GÉNÉRALE
+   ÉLÉMENT 1 : BODY - STRUCTURE GÉNÉRALE
    ==========================================
    Conteneur principal de toute la page
    Limite la largeur max et centre le contenu
 */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background-color: white !important;  /* Fond blanc pour voir le centrage */
+    width: 100%;
+    height: 100%;
+    margin-top: 60px;
+}
+
 body {
     font-family: var(--font-primary);      /* Police Oswald partout */
-    background-color: var(--color-white);  /* Fond blanc */
-    padding: var(--spacing-xl) 110px 60px 110px; /* Marges autour du contenu */
+    background-color: var(--color-white);  /* Fond blanc du contenu */
+    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-xl) var(--spacing-lg); /* 60px haut/bas, 40px gauche/droite */
     box-sizing: border-box;                /* Inclut padding dans largeur */
     min-height: 100vh;                     /* Hauteur minimale = hauteur écran */
-    max-width: var(--width-max);           /* Largeur max 1200px */
-    margin: 0 auto;                        /* Centre la page horizontalement */
+    max-width: var(--width-max) !important; /* Largeur max 1200px */
+    margin-left: auto !important;          /* Centre à gauche */
+    margin-right: auto !important;         /* Centre à droite */
+    margin-top: 0;
+    margin-bottom: 0;
+    border: none !important;               /* Pas de bordure sur index.html */
 }
 
 /* ==========================================
-   🎯 ÉLÉMENT 2 : HEADER - BANDEAU DU HAUT
+   ÉLÉMENT 2 : HEADER - BANDEAU DU HAUT
    ==========================================
    Bandeau bleu avec logo + titre "JustStreamIt"
 */
 .original-header {
     background-color: var(--color-primary); /* Fond bleu #61787f */
-    border: 1px solid var(--color-black);   /* Bordure noire fine */
     height: var(--height-header);           /* Hauteur fixe 122px */
     display: flex;                          /* Alignement horizontal logo + titre */
     align-items: center;                    /* Centre verticalement */
+    padding: 0 27px;                        /* Padding horizontal pour le contenu */
+}
+
+.original-header .container-fluid {
+    max-width: 100%;                        /* Largeur complète du header */
+    padding: 0;                             /* Supprime le padding Bootstrap */
+}
+
+.original-header .row {
+    margin: 0;                              /* Supprime les marges négatives Bootstrap */
 }
 
 .logo-img {
     width: var(--width-logo);    /* Largeur logo 127px */
     height: var(--height-logo);  /* Hauteur logo 94px */
-    margin-left: 27px;           /* Espace depuis bord gauche */
+    margin-left: 0;              /* Pas de marge (géré par le padding du header) */
 }
 
 .header-title {
@@ -56,19 +81,20 @@ body {
     line-height: 59px;                      /* Espacement vertical texte */
     color: var(--color-white);              /* Texte blanc */
     margin-left: var(--spacing-lg);         /* 40px depuis le logo */
+    margin-bottom: 0 !important;            /* Override Bootstrap */
 }
 
 /* ==========================================
-   📄 ÉLÉMENT 3 : MAIN-CONTENT - CONTENU PRINCIPAL
+   ÉLÉMENT 3 : MAIN-CONTENT - CONTENU PRINCIPAL
    ==========================================
    Zone centrale contenant toutes les sections de films
 */
 .main-content {
-    padding: var(--spacing-xl) 107px 75px 107px; /* Marges internes gauche/droite/bas */
+    padding: var(--spacing-xl) var(--spacing-lg) 75px var(--spacing-lg); /* 60px haut, 40px côtés, 75px bas */
 }
 
 /* ==========================================
-   🏆 ÉLÉMENT 4 : SECTION MEILLEUR FILM (HÉRO)
+   ÉLÉMENT 4 : SECTION MEILLEUR FILM (HÉRO)
    ==========================================
    Première section sous le header
    Affiche le film avec le meilleur score IMDb
@@ -111,7 +137,7 @@ body {
 }
 
 /* ==========================================
-   🎬 ÉLÉMENT 5 : TITRES DES SECTIONS
+   ÉLÉMENT 5 : TITRES DES SECTIONS
    ==========================================
    Titres : "Films les mieux notés", "Action", etc.
 */
@@ -127,7 +153,7 @@ body {
 }
 
 /* ==========================================
-   🔧 ÉLÉMENT 6 : SECTION "AUTRES FILMS" SPÉCIALE
+   ÉLÉMENT 6 : SECTION "AUTRES FILMS" SPÉCIALE
    ==========================================
    Cette section a un titre + sélecteur de genre
 */
@@ -159,7 +185,7 @@ body {
 }
 
 /* ==========================================
-   🎭 ÉLÉMENT 7 : GRILLES DE FILMS
+   ÉLÉMENT 7 : GRILLES DE FILMS
    ==========================================
    Disposition des cartes de films en grille
    Utilise le système Bootstrap avec marges négatives
@@ -180,7 +206,7 @@ body {
 }
 
 /* ==========================================
-   ⏳ ÉLÉMENT 8 : TEXTES DE CHARGEMENT
+   ÉLÉMENT 8 : TEXTES DE CHARGEMENT
    ==========================================
    Affichés pendant le chargement API
 */
@@ -190,7 +216,7 @@ body {
 }
 
 /* ==========================================
-   🎭 ÉLÉMENT 9 : OVERLAY TITRE SUR CARTES
+   ÉLÉMENT 9 : OVERLAY TITRE SUR CARTES
    ==========================================
    Apparaît au survol d'une carte de film
 */
