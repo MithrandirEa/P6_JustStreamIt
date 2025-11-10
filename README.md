@@ -45,9 +45,9 @@ JustStreamIt est une application web moderne qui affiche les films les mieux not
 │  └──────────┘                                   │
 │                                                 │
 │  Films les mieux notés                          │
-│  ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐   │
-│  │ 1 │ │ 2 │ │ 3 │ │ 4 │ │ 5 │ │ 6 │ │ 7 │   │
-│  └───┘ └───┘ └───┘ └───┘ └───┘ └───┘ └───┘   │
+│  ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐ ┌───┐         │
+│  │ 1 │ │ 2 │ │ 3 │ │ 4 │ │ 5 │ │ 6 │         │
+│  └───┘ └───┘ └───┘ └───┘ └───┘ └───┘         │
 │                                                 │
 │  Action / Mystery / Autres...                   │
 └─────────────────────────────────────────────────┘
@@ -57,7 +57,7 @@ JustStreamIt est une application web moderne qui affiche les films les mieux not
 
 ### Page principale (index.html)
 - ✅ **Meilleur film** : Affichage automatique du film avec le meilleur score IMDb
-- ✅ **7 films par catégorie** : 3 colonnes desktop, 2 colonnes mobile
+- ✅ **6 films par catégorie** : 3 colonnes desktop, 2 colonnes mobile
 - ✅ **4 catégories** : Configurables via `config/appConfig.js`
 - ✅ **Overlay au survol** : Titre + bouton "Détails" sur chaque carte
 - ✅ **Sélecteur de genres** : Changement dynamique de la section "Autres films"
@@ -210,7 +210,7 @@ const APP_CONFIG = {
     ],
     apiBaseUrl: 'http://localhost:8000/api/v1',
     itemsPerPage: 5,
-    moviesPerCategory: 7
+    moviesPerCategory: 6  // 6 films par catégorie
 };
 ```
 
@@ -380,11 +380,11 @@ GET http://localhost:8000/api/v1/titles/{id}/
 
 ### Gestion de la pagination
 
-L'application récupère automatiquement plusieurs pages pour obtenir 7 films par catégorie :
+L'application récupère automatiquement plusieurs pages pour obtenir 6 films par catégorie :
 ```javascript
-// Exemple : Récupérer 7 films
+// Exemple : Récupérer 6 films
 // Page 1 : 5 films
-// Page 2 : 2 films supplémentaires
+// Page 2 : 1 film supplémentaire
 ```
 
 ## 📱 Responsive Design
@@ -392,9 +392,9 @@ L'application récupère automatiquement plusieurs pages pour obtenir 7 films pa
 ### Breakpoints
 | Taille d'écran | Breakpoint | Colonnes | Films affichés |
 |---------------|-----------|----------|---------------|
-| Desktop Large | > 1200px | 3 | 7 (2 lignes) |
-| Desktop | 992-1199px | 3 | 7 (2 lignes) |
-| Tablette | 768-991px | 2-3 | 7 (3 lignes) |
+| Desktop Large | > 1200px | 3 | 6 (2 lignes) |
+| Desktop | 992-1199px | 3 | 6 (2 lignes) |
+| Tablette | 768-991px | 2-3 | 6 (2-3 lignes) |
 | Mobile | 576-767px | 2 | 6 (3 lignes) |
 | Petit mobile | < 576px | 1 | 4 (verticale) |
 

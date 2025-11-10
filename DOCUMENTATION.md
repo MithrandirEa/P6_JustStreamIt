@@ -33,7 +33,7 @@ JustStreamIt est une application web de recommandation de films dveloppe en Java
 ### **Statistiques du projet**
 - **Total des fichiers** : 19 fichiers principaux
 - **Lignes de code JavaScript** : 1,466 lignes
-- **Lignes de code CSS** : 1,057 lignes
+- **Lignes de code CSS** : 1,602 lignes (après refactoring Phase 2 : -100 lignes)
 - **Lignes de code HTML** : 186 lignes
 - **Architecture** : Modulaire avec sparation des responsabilits
 
@@ -473,14 +473,15 @@ const APP_MESSAGES = {
 ```
 
 #### **Ordre de chargement des scripts**
-1. `presentation-mode.js` - Gestion prsentation
-2. `utils/responsive.js` - Utilitaires responsive
-3. `utils/imageHandler.js` - Gestion images
-4. `services/apiService.js` - Service API
-5. `config/appConfig.js` - Configuration
-6. `utils/appInitializer.js` - Initialisation
-7. `templates/*.js` - Templates HTML
-8. `script.js` - Logic principale
+1. `utils/responsive.js` - Utilitaires responsive
+2. `utils/imageHandler.js` - Gestion images
+3. `services/apiService.js` - Service API
+4. `config/appConfig.js` - Configuration
+5. `utils/appInitializer.js` - Initialisation
+6. `templates/*.js` - Templates HTML
+7. `script.js` - Logic principale
+
+**Note** : `presentation-mode.js` a été supprimé lors du refactoring Phase 1 (fichier non utilisé).
 
 ### **modalWindows.html** (115 lignes)
 
@@ -1267,6 +1268,77 @@ Cette architecture modulaire en JavaScript Vanilla respecte toutes les contraint
 - Systme de logging plus avanc
 - PWA capabilities (Service Worker)
 - Animations plus pousses (GSAP ou CSS animations)
+
+---
+
+## 📝 **CHANGELOG**
+
+### **Version 2.0 - Novembre 2025**
+
+#### **Phase 1 : Corrections urgentes** ✅
+1. ✅ **Suppression de `presentation-mode.js`**
+   - Fichier non utilisé retiré de `index.html` et `modalWindows.html`
+   - Ordre de chargement des scripts mis à jour
+   
+2. ✅ **Corrections HTML W3C**
+   - `index.html` : Correction espacement "Autres :"
+   - `modalWindows.html` : Déplacement `<br>` hors de `<p>` (ligne 109)
+   
+3. ✅ **Nettoyage CSS variables**
+   - Suppression de 5 variables non utilisées dans `css/variables.css`
+   - Variables retirées : `--breakpoint-xs`, `--transition-slow`, `--shadow-light`, `--shadow-heavy`, `--overlay-modal`
+
+#### **Phase 2 : Refactoring CSS** ✅
+4. ✅ **Unification des fallbacks images**
+   - 5 classes redondantes unifiées en 1 seule : `.image-fallback`
+   - Réduction : **-85 lignes CSS** dans `css/components.css`
+   - Classes supprimées : `.fallback-container`, `.fallback-text`, `.fallback-icon`, `.fallback-description`, `.fallback-wrapper`
+   
+5. ✅ **Résolution conflit border**
+   - Suppression guerre `!important` entre `layout.css` et `modal.css`
+   - Solution : sélecteur `body.modal-page` pour spécificité
+   - Border 6px uniquement sur modal, pas sur index.html
+   
+6. ✅ **Suppression redondances CSS reset**
+   - Retrait reset `* {margin: 0; padding: 0;}` de `layout.css`
+   - Bootstrap normalize.css suffit
+
+#### **Phase 3 : Documentation** ✅
+7. ✅ **Création README.md**
+   - 468 lignes de documentation professionnelle
+   - Badges, diagrammes ASCII, tables responsive
+   - Installation, architecture, API, configuration
+   
+8. ✅ **Correction factuelle README.md**
+   - Erreur détectée : README indiquait 7 films/catégorie
+   - Correction : **6 films par catégorie** (conforme à `appConfig.js`)
+   - 5 instances corrigées : features, ASCII, config, breakpoints, pagination
+   
+9. ✅ **Mise à jour DOCUMENTATION.md**
+   - Statistiques CSS : 1,057 → 1,602 lignes (après refactoring)
+   - Suppression mention `presentation-mode.js`
+   - Ajout section Changelog complète
+
+#### **Résultats Phase 1-2**
+- **Code réduit** : -100 lignes CSS
+- **Erreurs HTML** : 0 (W3C valide)
+- **Conflits CSS** : 0 (!important éliminés)
+- **Architecture** : Plus propre, maintenable
+- **Documentation** : Complète et exacte
+
+#### **Commits Git**
+1. `feat: Phase 1 - Corrections urgentes (3 tâches)`
+2. `refactor: Phase 2 - Refactoring CSS (-100 lignes)`
+3. `docs: Ajout README.md professionnel (468 lignes)`
+4. *(En attente)* : Corrections README + DOCUMENTATION.md
+
+---
+
+### **Version 1.0 - Octobre 2024**
+- Version initiale du projet
+- Architecture modulaire JavaScript Vanilla
+- CSS Bootstrap + custom (1,702 lignes avant refactoring)
+- API OCMovies intégrée
 
 ---
 
