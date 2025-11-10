@@ -1,223 +1,321 @@
 /**
- * 🎭 COMPOSANTS - CARTES, BOUTONS, OVERLAYS
- * Éléments réutilisables et interactifs
+ * ========================================
+ * 🎭 COMPONENTS.CSS - COMPOSANTS RÉUTILISABLES
+ * ========================================
+ * 
+ * Ce fichier contient les styles des COMPOSANTS INTERACTIFS
+ * 
+ * COMPOSANTS INCLUS :
+ * 1. Poster du meilleur film (section héro)
+ * 2. Titre et description du meilleur film
+ * 3. Boutons "Détails" (rouge principal)
+ * 4. Cartes de films (grilles de sections)
+ * 5. Images des posters de films
+ * 6. Overlay au survol des cartes
+ * 7. Bouton "Détails" sur cartes (foncé)
+ * 8. Fallbacks pour images manquantes
  */
 
-/* 🖼️ POSTER DU MEILLEUR FILM */
+/* ==========================================
+   🖼️ COMPOSANT 1 : POSTER DU MEILLEUR FILM
+   ==========================================
+   Image affichée dans la section "Meilleur film"
+   Partie gauche de .best-movie-container
+*/
 .best-movie-poster {
-    width: 100%;
-    height: auto;
-    max-width: var(--width-poster-max);
-    aspect-ratio: 4/5;
-    object-fit: cover;
-    border: 1px solid #ddd;
+    width: 100%;                           /* Prend toute la largeur du conteneur */
+    height: auto;                          /* Hauteur proportionnelle */
+    max-width: var(--width-poster-max);    /* Max 227px */
+    aspect-ratio: 4/5;                     /* Ratio film standard (80% hauteur) */
+    object-fit: cover;                     /* Rogne pour respecter le ratio */
+    border: 1px solid #ddd;                /* Bordure grise fine */
 }
 
+/* ==========================================
+   📝 COMPOSANT 2 : TITRE ET DESCRIPTION MEILLEUR FILM
+   ==========================================
+   Textes dans la partie droite du meilleur film
+*/
+
+/* Titre du film */
 .best-movie-info .movie-title {
-    font-size: var(--font-size-movie-title);
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 15px;
-    color: var(--color-black);
+    font-size: var(--font-size-movie-title); /* 28px - grosse taille */
+    font-weight: var(--font-weight-bold);    /* Gras (700) */
+    margin-bottom: 15px;                     /* Espace sous le titre */
+    color: var(--color-black);               /* Texte noir */
 }
 
+/* Description/résumé du film */
 .movie-description {
-    text-align: justify;
-    line-height: 1.5;
-    margin-bottom: var(--spacing-md);
-    flex-grow: 1;
-    max-height: none;
-    overflow: visible;
-    word-wrap: break-word;
+    text-align: justify;                   /* Justification texte */
+    line-height: 1.5;                      /* Interligne 150% */
+    margin-bottom: var(--spacing-md);      /* 20px sous la description */
+    flex-grow: 1;                          /* Prend l'espace disponible */
+    max-height: none;                      /* Pas de limite de hauteur */
+    overflow: visible;                     /* Affiche tout le texte */
+    word-wrap: break-word;                 /* Coupe les mots longs */
 }
 
-/* 🔴 BOUTONS PRINCIPAUX */
+/* ==========================================
+   🔴 COMPOSANT 3 : BOUTON "DÉTAILS" PRINCIPAL
+   ==========================================
+   Gros bouton rouge dans section "Meilleur film"
+   Et dans la modale desktop en bas
+*/
 .btn-details {
-    background-color: var(--color-secondary);
-    color: var(--color-white);
-    border: none;
-    padding: 12px 32px;
-    font-size: var(--font-size-btn-main);
-    font-weight: var(--font-weight-bold);
-    cursor: pointer;
-    border-radius: var(--border-radius-xl);
-    align-self: flex-end;
-    text-transform: uppercase;
-    min-width: 110px;
-    transition: var(--transition-fast);
+    background-color: var(--color-secondary);   /* Rouge #dc3545 */
+    color: var(--color-white);                  /* Texte blanc */
+    border: none;                               /* Pas de bordure */
+    padding: 12px 32px;                         /* Espacement interne généreux */
+    font-size: var(--font-size-btn-main);       /* 16px */
+    font-weight: var(--font-weight-bold);       /* Gras (700) */
+    cursor: pointer;                            /* Curseur pointeur au survol */
+    border-radius: var(--border-radius-xl);     /* Coins très arrondis (25px) */
+    align-self: flex-end;                       /* Aligné en bas du conteneur flex */
+    text-transform: uppercase;                  /* Texte en MAJUSCULES */
+    min-width: 110px;                           /* Largeur minimale */
+    transition: var(--transition-fast);         /* Animation rapide 0.2s */
 }
 
+/* État survol du bouton rouge */
 .btn-details:hover {
-    background-color: var(--color-secondary-hover);
-    transform: translateY(-1px);
+    background-color: var(--color-secondary-hover); /* Rouge plus foncé #c82333 */
+    transform: translateY(-1px);                     /* Léger décalage vers le haut */
 }
 
-/* 🎭 CARTES DE FILMS */
+/* ==========================================
+   🎭 COMPOSANT 4 : CARTE DE FILM
+   ==========================================
+   Conteneur d'une carte dans les grilles de sections
+   Aspect carré avec effet zoom au survol
+*/
 .movie-card-original {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1;
-    overflow: hidden;
-    transition: var(--transition-normal);
+    position: relative;                    /* Pour overlay en position absolute */
+    width: 100%;                          /* Prend toute la largeur disponible */
+    aspect-ratio: 1;                      /* Format carré 1:1 */
+    overflow: hidden;                     /* Cache débordements lors du zoom */
+    transition: var(--transition-normal); /* Animation normale 0.3s */
 }
 
+/* Effet zoom au survol de la carte */
 .movie-card-original:hover {
-    transform: scale(1.05);
+    transform: scale(1.05);               /* Agrandit de 5% */
 }
 
+/* ==========================================
+   🖼️ COMPOSANT 5 : IMAGE POSTER DANS CARTE
+   ==========================================
+   Image du film dans les grilles
+*/
 .movie-poster {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block !important;
-    opacity: 1 !important;
+    width: 100%;                          /* Largeur complète du conteneur */
+    height: 100%;                         /* Hauteur complète du conteneur */
+    object-fit: cover;                    /* Rogne pour remplir le carré */
+    display: block !important;            /* Toujours en block */
+    opacity: 1 !important;                /* Toujours visible (override JS) */
 }
 
-/* 🏷️ OVERLAY AU SURVOL */
+/* ==========================================
+   🏷️ COMPOSANT 6 : OVERLAY AU SURVOL CARTE
+   ==========================================
+   Bande semi-transparente qui apparaît au survol
+   Contient le titre du film + bouton "Détails"
+*/
 .movie-title-overlay {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 40%;
-    transform: translateY(-50%);
-    background-color: var(--overlay-dark);
-    color: var(--color-white);
-    display: flex !important;
-    flex-direction: column;
-    justify-content: space-between;
-    opacity: 0;
-    transition: var(--transition-normal);
-    padding: var(--spacing-sm);
-    z-index: 10;
+    position: absolute;                      /* Positionnement absolu sur la carte */
+    top: 50%;                               /* Démarre au milieu vertical */
+    left: 0;                                /* Bord gauche de la carte */
+    right: 0;                               /* Bord droit de la carte */
+    height: 40%;                            /* Occupe 40% de la hauteur */
+    transform: translateY(-50%);            /* Centre verticalement */
+    background-color: var(--overlay-dark);  /* Fond noir semi-transparent */
+    color: var(--color-white);              /* Texte blanc */
+    display: flex !important;               /* Layout flex vertical */
+    flex-direction: column;                 /* Titre en haut, bouton en bas */
+    justify-content: space-between;         /* Espace entre titre et bouton */
+    opacity: 0;                             /* Invisible par défaut */
+    transition: var(--transition-normal);   /* Animation douce 0.3s */
+    padding: var(--spacing-sm);             /* Padding interne 10px */
+    z-index: 10;                            /* Au-dessus de tout */
 }
 
+/* Activation de l'overlay au survol */
 .movie-card-original:hover .movie-title-overlay {
-    opacity: 1 !important;
+    opacity: 1 !important;                  /* Devient visible (override JS) */
 }
 
+/* Texte du titre dans l'overlay */
 .movie-title-text {
-    font-size: var(--font-size-overlay-title);
-    font-weight: var(--font-weight-bold);
-    line-height: 1.3;
-    word-wrap: break-word;
-    text-align: left;
-    align-self: flex-start;
-    margin: 0;
+    font-size: var(--font-size-overlay-title); /* 14px */
+    font-weight: var(--font-weight-bold);      /* Gras (700) */
+    line-height: 1.3;                          /* Interligne serré */
+    word-wrap: break-word;                     /* Coupe les titres longs */
+    text-align: left;                          /* Aligné à gauche */
+    align-self: flex-start;                    /* Haut de l'overlay */
+    margin: 0;                                 /* Pas de marge */
 }
 
-/* 🔴 BOUTON DÉTAILS SUR CARTE */
+/* ==========================================
+   🔴 COMPOSANT 7 : BOUTON "DÉTAILS" SUR CARTE
+   ==========================================
+   Petit bouton foncé dans l'overlay de chaque carte
+*/
 .movie-details-btn {
-    background-color: var(--color-dark);
-    color: var(--color-white);
-    border: 2px solid var(--color-dark);
-    padding: 8px 16px;
-    font-size: var(--font-size-btn-details);
-    font-weight: var(--font-weight-bold);
-    border-radius: var(--border-radius-lg);
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: var(--transition-fast);
-    min-width: 80px;
-    align-self: flex-end;
+    background-color: var(--color-dark);       /* Fond foncé #2D2C2C */
+    color: var(--color-white);                 /* Texte blanc */
+    border: 2px solid var(--color-dark);       /* Bordure de même couleur */
+    padding: 8px 16px;                         /* Espacement interne */
+    font-size: var(--font-size-btn-details);   /* 12px - petite taille */
+    font-weight: var(--font-weight-bold);      /* Gras (700) */
+    border-radius: var(--border-radius-lg);    /* Coins arrondis 20px */
+    cursor: pointer;                           /* Curseur pointeur */
+    text-transform: uppercase;                 /* Texte en MAJUSCULES */
+    transition: var(--transition-fast);        /* Animation rapide 0.2s */
+    min-width: 80px;                           /* Largeur minimale */
+    align-self: flex-end;                      /* Bas de l'overlay */
 }
 
+/* État survol du bouton foncé */
 .movie-details-btn:hover {
-    background-color: var(--color-dark-hover);
-    border-color: var(--color-dark-hover);
-    transform: scale(1.05);
+    background-color: var(--color-dark-hover); /* Encore plus foncé #1A1919 */
+    border-color: var(--color-dark-hover);     /* Bordure assortie */
+    transform: scale(1.05);                    /* Légère augmentation taille */
 }
 
-/* 🖼️ FALLBACKS POUR IMAGES MANQUANTES */
+/* ==========================================
+   🖼️ COMPOSANT 8 : FALLBACKS IMAGES MANQUANTES
+   ==========================================
+   Affichés quand une image de poster n'existe pas
+   Gérés dynamiquement par imageHandler.js
+*/
+
+/* Fallback générique pour toutes les images */
 .movie-poster-fallback,
 .movie-fallback {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: var(--color-fallback);
-    border: none;
-    color: var(--color-fallback-text);
-    font-size: var(--font-size-fallback);
-    font-weight: var(--font-weight-bold);
-    z-index: 1;
-    border-radius: var(--border-radius-md);
+    position: absolute;                    /* Recouvre l'emplacement image */
+    top: 0;                               /* Haut du conteneur */
+    left: 0;                              /* Gauche du conteneur */
+    right: 0;                             /* Droite du conteneur */
+    bottom: 0;                            /* Bas du conteneur */
+    display: none;                        /* Caché par défaut */
+    align-items: center;                  /* Centre le texte verticalement */
+    justify-content: center;              /* Centre le texte horizontalement */
+    text-align: center;                   /* Texte centré */
+    background-color: var(--color-fallback); /* Fond gris clair #D9D9D9 */
+    border: none;                         /* Pas de bordure */
+    color: var(--color-fallback-text);    /* Texte gris foncé #666 */
+    font-size: var(--font-size-fallback); /* 14px */
+    font-weight: var(--font-weight-bold); /* Gras (700) */
+    z-index: 1;                           /* Au-dessus de l'image cassée */
+    /* border-radius: var(--border-radius-md); Coins légèrement arrondis */
 }
 
-/* Activation des fallbacks par JavaScript */
+/* Activation des fallbacks par JavaScript (display: flex) */
 .movie-fallback[style*="display: flex"],
 .movie-poster-fallback[style*="display: flex"] {
-    display: flex !important;
+    display: flex !important;             /* Force l'affichage */
 }
 
+/* Style forcé des fallbacks */
 .movie-fallback,
 .best-movie-fallback {
-    background: var(--color-fallback) !important;
-    color: var(--color-fallback-text) !important;
+    background: var(--color-fallback) !important; /* Force le fond gris */
+    color: var(--color-fallback-text) !important; /* Force le texte gris foncé */
 }
 
-/* Fallbacks complexes avec styles inline */
+/* ==========================================
+   🎨 FALLBACKS COMPLEXES AVEC STYLES INLINE
+   ==========================================
+   Gère les cas où JavaScript applique des styles inline
+   Sélecteurs complexes pour cibler différents cas
+*/
+
+/* Fallbacks dans les cartes de films */
 .movie-card-wrapper .movie-poster[style*="display: none"] + div,
 .movie-card-wrapper > div[style*="background: #f0f0f0"],
 .best-movie-poster-container > div[style*="display: none"] + div,
 .best-movie-poster-container > div[style*="background: #f0f0f0"] {
-    position: absolute !important;
+    position: absolute !important;         /* Position absolue forcée */
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     bottom: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    background-color: var(--color-fallback) !important;
-    border: none !important;
-    color: var(--color-fallback-text) !important;
-    font-size: 12px !important;
-    font-weight: var(--font-weight-bold) !important;
-    padding: var(--spacing-sm) !important;
-    box-sizing: border-box !important;
+    display: flex !important;              /* Layout flex forcé */
+    align-items: center !important;        /* Centre vertical forcé */
+    justify-content: center !important;    /* Centre horizontal forcé */
+    text-align: center !important;         /* Texte centré forcé */
+    background-color: var(--color-fallback) !important; /* Fond gris forcé */
+    border: none !important;               /* Pas de bordure */
+    color: var(--color-fallback-text) !important; /* Texte gris forcé */
+    font-size: 12px !important;           /* Petite police */
+    font-weight: var(--font-weight-bold) !important; /* Gras forcé */
+    padding: var(--spacing-sm) !important; /* Padding 10px */
+    box-sizing: border-box !important;    /* Inclut padding dans dimensions */
 }
 
+/* Fallback spécifique meilleur film (plus grand) */
 .best-movie-poster-container > div[style*="display: none"] + div,
 .best-movie-poster-container > div[style*="background: #f0f0f0"] {
-    min-height: var(--height-fallback-min) !important;
-    width: 100% !important;
-    font-size: var(--font-size-fallback) !important;
+    min-height: var(--height-fallback-min) !important; /* Hauteur min 300px */
+    width: 100% !important;               /* Largeur complète */
+    font-size: var(--font-size-fallback) !important; /* Police 14px */
 }
 
-/* 🎨 CONTENEURS DE FALLBACK STYLISÉS */
+/* ==========================================
+   🎨 CONTENEURS STYLISÉS POUR FALLBACKS
+   ==========================================
+   Style alternatif avec effets au survol
+*/
 .image-fallback-container {
-    background: var(--color-fallback);
-    color: var(--color-fallback-text);
-    border-radius: var(--border-radius-sm);
-    transition: var(--transition-normal);
+    background: var(--color-fallback);     /* Fond gris */
+    color: var(--color-fallback-text);     /* Texte gris foncé */
+    border-radius: var(--border-radius-sm); /* Coins légèrement arrondis */
+    transition: var(--transition-normal);  /* Animation douce */
 }
 
+/* Effet au survol du fallback */
 .image-fallback-container:hover {
-    transform: scale(1.02);
-    box-shadow: var(--shadow-medium);
+    transform: scale(1.02);                /* Légère augmentation */
+    box-shadow: var(--shadow-medium);      /* Ombre moyenne */
 }
 
-/* 🚫 MASQUAGE DES ERREURS */
+/* ==========================================
+   🚫 MASQUAGE DES ERREURS
+   ==========================================
+   Cache tous les messages d'erreur console visibles
+*/
 .error-console, 
 [class*="error"],
 [id*="error"] {
-    display: none !important;
+    display: none !important;              /* Force le masquage */
 }
 
-/* 🖼️ AMÉLIORATION DES IMAGES */
+/* ==========================================
+   🖼️ AMÉLIORATION GÉNÉRALE DES IMAGES
+   ==========================================
+   Styles de base pour toutes les images
+*/
 img {
-    background-color: transparent;
-    transition: var(--transition-normal);
+    background-color: transparent;         /* Fond transparent par défaut */
+    transition: var(--transition-normal);  /* Animation douce */
 }
 
+/* Masquage des images cassées/vides */
 img[src=""], 
 img:not([src]),
 img[src*="error"] {
-    display: none !important;
+    display: none !important;              /* Cache les images invalides */
 }
+
+/**
+ * ========================================
+ * FIN DU FICHIER COMPONENTS.CSS
+ * ========================================
+ * 
+ * COMPOSANTS COUVERTS :
+ * ✅ Posters de films (héro + grilles)
+ * ✅ Boutons "Détails" (rouge principal + foncé cartes)
+ * ✅ Overlay au survol des cartes
+ * ✅ Fallbacks pour images manquantes (multiples variantes)
+ * ✅ Masquage erreurs
+ */

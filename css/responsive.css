@@ -1,229 +1,329 @@
 /**
- * 📱 RESPONSIVE DESIGN - ADAPTATIONS MOBILES/TABLETTES
- * Toutes les media queries centralisées
+ * ========================================
+ * 📱 RESPONSIVE.CSS - ADAPTATIONS MOBILES/TABLETTES
+ * ========================================
+ * 
+ * Ce fichier contient TOUTES les media queries pour index.html
+ * Adapte la mise en page selon la taille d'écran
+ * 
+ * BREAKPOINTS PRINCIPAUX :
+ * - 1199px : Desktop large → Desktop standard
+ * - 991px  : Desktop → Tablette
+ * - 767px  : Tablette → Mobile
+ * - 576px  : Mobile → Petit mobile
+ * - 480px  : Petit mobile → Très petit mobile
+ * 
+ * SECTIONS :
+ * 1. Desktop large (1200px+)
+ * 2. Tablette (768px - 991px)
+ * 3. Mobile (jusqu'à 767px)
+ * 4. Petit mobile (jusqu'à 576px)
+ * 5. Très petit mobile (jusqu'à 480px)
+ * 6. Grilles mobiles spéciales
  */
 
-/* 🖥️ DESKTOP LARGE (1200px+) */
+/* ==========================================
+   🖥️ SECTION 1 : DESKTOP LARGE (< 1199px)
+   ==========================================
+   Réduction des paddings pour écrans < 1200px
+*/
 @media (max-width: 1199px) {
     .main-content {
         padding: var(--spacing-lg) var(--spacing-xl) 50px var(--spacing-xl);
+        /* 40px haut, 60px côtés, 50px bas */
     }
 }
 
-/* 📱 TABLETTE (992px - 1199px) */
+/* ==========================================
+   📱 SECTION 2 : TABLETTE (768px - 991px)
+   ==========================================
+   Passage en layout vertical pour section "Meilleur film"
+*/
 @media (max-width: 991px) {
+    /* Section meilleur film passe en colonne */
     .best-movie-container {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 15px;
+        flex-direction: column;          /* Poster au-dessus, infos en-dessous */
+        align-items: center;             /* Centre horizontalement */
+        text-align: center;              /* Texte centré */
+        gap: 15px;                       /* Espace entre poster et infos */
     }
     
+    /* Infos du meilleur film centrées */
     .best-movie-info {
-        padding-left: 0;
-        align-items: center;
+        padding-left: 0;                 /* Pas de padding gauche */
+        align-items: center;             /* Centre les éléments (bouton) */
     }
     
+    /* Poster du meilleur film réduit */
     .best-movie-poster {
-        max-width: 250px;
+        max-width: 250px;                /* Largeur max réduite */
     }
 }
 
-/* 📱 MOBILE (768px - 991px) */
+/* ==========================================
+   📱 SECTION 3 : MOBILE (jusqu'à 767px)
+   ==========================================
+   Adaptations majeures pour mobile
+*/
 @media (max-width: 767px) {
+    /* Body avec padding minimal */
     body {
-        overflow-x: hidden;
-        padding: 30px 1px 1px 1px;
+        overflow-x: hidden;              /* Évite défilement horizontal */
+        padding: 30px 1px 1px 1px;       /* Marges externes réduites */
     }
     
+    /* Conteneurs Bootstrap réduits */
     .container-fluid {
-        padding-left: var(--spacing-sm);
+        padding-left: var(--spacing-sm);  /* 10px de côté */
         padding-right: var(--spacing-sm);
     }
     
+    /* Cartes films : 2 par ligne au lieu de 3 */
     .movie-card-wrapper {
-        flex: 0 0 50% !important;
+        flex: 0 0 50% !important;        /* 50% de largeur = 2 colonnes */
         max-width: 50% !important;
     }
     
+    /* Contenu principal réduit */
     .main-content {
-        padding: 15px 15px var(--spacing-md) 15px;
+        padding: 15px 15px var(--spacing-md) 15px; /* Padding minimal */
     }
     
+    /* 🎯 HEADER RÉDUIT */
     .header-title {
-        font-size: 24px;
-        margin-left: var(--spacing-md);
+        font-size: 24px;                 /* Titre réduit de 40px → 24px */
+        margin-left: var(--spacing-md);  /* 20px depuis logo */
     }
     
     .logo-img {
-        width: 60px;
-        height: 45px;
-        margin-left: 15px;
+        width: 60px;                     /* Logo réduit 127px → 60px */
+        height: 45px;                    /* Hauteur réduite 94px → 45px */
+        margin-left: 15px;               /* Marge gauche réduite */
     }
     
     .original-header {
-        height: 70px;
+        height: 70px;                    /* Hauteur header réduite 122px → 70px */
     }
     
+    /* 🏆 SECTION MEILLEUR FILM RÉDUITE */
     .bestFilm h1 {
-        font-size: 24px;
+        font-size: 24px;                 /* Titre réduit 36px → 24px */
         margin-bottom: 15px;
     }
     
     .best-movie-info .movie-title {
-        font-size: var(--spacing-md);
+        font-size: var(--spacing-md);    /* 20px */
     }
     
+    /* 🏷️ OVERLAY CARTES RÉDUIT */
     .movie-title-text {
-        font-size: 11px;
-        margin-bottom: var(--spacing-sm);
+        font-size: 11px;                 /* Texte réduit 14px → 11px */
+        margin-bottom: var(--spacing-sm); /* 10px */
     }
     
     .movie-details-btn {
-        font-size: var(--spacing-sm);
-        padding: 6px 12px;
-        min-width: 60px;
+        font-size: var(--spacing-sm);    /* Bouton réduit 10px */
+        padding: 6px 12px;               /* Padding réduit */
+        min-width: 60px;                 /* Largeur min réduite */
     }
     
+    /* 🎬 TITRES DES SECTIONS RÉDUITS */
     .bestRatedFilms h1, 
     .category1 h1, 
     .category2 h1, 
     .otherFilms h1 {
-        font-size: 32px;
-        font-weight: var(--font-weight-semibold);
+        font-size: 32px;                 /* Réduit 48px → 32px */
+        font-weight: var(--font-weight-semibold); /* Semi-gras */
         line-height: 100%;
-        margin: 25px 0 15px 0;
+        margin: 25px 0 15px 0;           /* Marges réduites */
     }
     
-    /* Titre + sélecteur empilés */
+    /* 🔧 SECTION "AUTRES FILMS" EMPILÉE */
+    /* Titre + sélecteur passent en colonne */
     .otherFilms .title-selector-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--spacing-sm);
+        flex-direction: column;          /* Layout vertical */
+        align-items: flex-start;         /* Alignement gauche */
+        gap: var(--spacing-sm);          /* 10px entre titre et sélecteur */
     }
     
     .otherFilms .title-selector-container .mb-3 {
-        margin-left: 0;
-        width: 100%;
+        margin-left: 0;                  /* Pas de marge gauche */
+        width: 100%;                     /* Largeur complète */
     }
     
     .otherFilms .title-selector-container .form-select {
-        min-width: 100%;
+        min-width: 100%;                 /* Largeur complète */
         max-width: 100%;
     }
     
-    /* Grilles mobiles verticales */
+    /* 🎭 GRILLES MOBILES VERTICALES */
+    /* Pour mobile, les films s'empilent verticalement */
     .mobile-grid-vertical {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
+        display: flex !important;        /* Layout flex */
+        flex-direction: column !important; /* Colonne verticale */
+        align-items: center !important;  /* Centre horizontalement */
     }
     
+    /* Cartes empilées centrées */
     .mobile-card-stacked {
-        width: 70% !important;
-        max-width: 200px !important;
-        margin-bottom: var(--spacing-cards) !important;
-        padding: 0 !important;
+        width: 70% !important;           /* 70% de largeur écran */
+        max-width: 200px !important;     /* Max 200px */
+        margin-bottom: var(--spacing-cards) !important; /* 45px entre cartes */
+        padding: 0 !important;           /* Pas de padding */
     }
 }
 
-/* 📱 PETIT MOBILE (576px - 767px) */
+/* ==========================================
+   📱 SECTION 4 : PETIT MOBILE (jusqu'à 576px)
+   ==========================================
+   Réductions supplémentaires pour petits écrans
+*/
 @media (max-width: 576px) {
+    /* Body avec padding encore plus réduit */
     body {
-        padding: var(--spacing-md) 1px 1px 1px;
+        padding: var(--spacing-md) 1px 1px 1px; /* 20px haut, 1px côtés/bas */
     }
     
+    /* Contenu principal très réduit */
     .main-content {
         padding: var(--spacing-sm) var(--spacing-sm) 15px var(--spacing-sm);
+        /* 10px haut/côtés, 15px bas */
     }
     
+    /* 🎯 HEADER TRÈS RÉDUIT */
     .header-title {
-        font-size: var(--spacing-md);
+        font-size: var(--spacing-md);    /* 20px (encore plus petit) */
         margin-left: 15px;
     }
     
     .logo-img {
-        width: 50px;
-        height: 38px;
-        margin-left: var(--spacing-sm);
+        width: 50px;                     /* Logo 60px → 50px */
+        height: 38px;                    /* Hauteur 45px → 38px */
+        margin-left: var(--spacing-sm);  /* 10px de marge */
     }
     
     .original-header {
-        height: 60px;
+        height: 60px;                    /* Header 70px → 60px */
     }
     
+    /* 🏷️ OVERLAY TRÈS RÉDUIT */
     .movie-title-text {
-        font-size: 9px;
-        line-height: 1.1;
+        font-size: 9px;                  /* Texte 11px → 9px */
+        line-height: 1.1;                /* Interligne serré */
         margin-bottom: 8px;
     }
     
     .movie-title-overlay {
-        padding: var(--spacing-sm) var(--spacing-xs);
+        padding: var(--spacing-sm) var(--spacing-xs); /* Padding réduit */
     }
     
     .movie-details-btn {
-        font-size: 9px;
-        padding: 4px 8px;
-        min-width: 50px;
+        font-size: 9px;                  /* Bouton 10px → 9px */
+        padding: 4px 8px;                /* Padding minimal */
+        min-width: 50px;                 /* Largeur min réduite */
     }
     
+    /* 🖼️ POSTER MEILLEUR FILM RÉDUIT */
     .best-movie-poster {
-        max-width: 180px;
+        max-width: 180px;                /* 250px → 180px */
     }
     
+    /* 🎬 ESPACEMENT CARTES */
     .movie-card-wrapper {
-        padding: 0 var(--spacing-cards-half);
-        margin-bottom: var(--spacing-cards);
+        padding: 0 var(--spacing-cards-half); /* 22.5px de côté */
+        margin-bottom: var(--spacing-cards);  /* 45px en bas */
     }
     
+    /* 🏆 SECTION MEILLEUR FILM */
     .bestFilm h1 {
-        font-size: var(--spacing-md);
+        font-size: var(--spacing-md);    /* 20px */
         margin-bottom: 12px;
     }
     
+    /* 🎬 TITRES SECTIONS RÉDUITS */
     .bestRatedFilms h1, 
     .category1 h1, 
     .category2 h1, 
     .otherFilms h1 {
-        font-size: 28px;
+        font-size: 28px;                 /* 32px → 28px */
         font-weight: var(--font-weight-semibold);
         line-height: 100%;
-        margin: var(--spacing-md) 0 12px 0;
+        margin: var(--spacing-md) 0 12px 0; /* Marges réduites */
     }
     
+    /* 🎭 GRILLES */
     .movie-grid {
-        margin: 0 calc(-1 * var(--spacing-cards-half));
+        margin: 0 calc(-1 * var(--spacing-cards-half)); /* Marges négatives */
     }
 }
 
-/* 📱 TRÈS PETIT MOBILE (480px et moins) */
+/* ==========================================
+   📱 SECTION 5 : TRÈS PETIT MOBILE (jusqu'à 480px)
+   ==========================================
+   Adaptations ultimes pour smartphones compacts
+*/
 @media (max-width: 480px) {
+    /* Cartes encore plus petites et centrées */
     .mobile-card-stacked {
-        width: 60% !important;
-        max-width: 180px !important;
-        margin-bottom: var(--spacing-cards) !important;
+        width: 60% !important;           /* 70% → 60% */
+        max-width: 180px !important;     /* 200px → 180px */
+        margin-bottom: var(--spacing-cards) !important; /* 45px */
     }
     
+    /* Grille avec padding latéral */
     .mobile-grid-vertical {
-        padding: 0 15px !important;
+        padding: 0 15px !important;      /* 15px de côté */
     }
 }
 
-/* 🎭 GRILLES MOBILES SPÉCIALES */
+/* ==========================================
+   🎭 SECTION 6 : GRILLES MOBILES SPÉCIALES
+   ==========================================
+   Classes utilitaires pour grilles verticales mobiles
+   Appliquées dynamiquement par responsive.js
+*/
+
+/* Conteneur de grille verticale mobile */
 .mobile-grid-vertical {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 var(--spacing-md) !important;
+    display: flex !important;            /* Layout flex forcé */
+    flex-direction: column !important;   /* Colonne verticale forcée */
+    align-items: center !important;      /* Centre horizontalement */
+    width: 100% !important;              /* Largeur complète */
+    margin: 0 !important;                /* Pas de marge négative */
+    padding: 0 var(--spacing-md) !important; /* 20px de côté par défaut */
 }
 
+/* Carte individuelle empilée */
 .mobile-card-stacked {
-    width: 80% !important;
-    max-width: 250px !important;
-    margin-bottom: var(--spacing-cards) !important;
-    box-sizing: border-box !important;
-    padding: 0 !important;
+    width: 80% !important;               /* 80% de largeur écran par défaut */
+    max-width: 250px !important;         /* Max 250px par défaut */
+    margin-bottom: var(--spacing-cards) !important; /* 45px entre cartes */
+    box-sizing: border-box !important;   /* Inclut padding dans largeur */
+    padding: 0 !important;               /* Pas de padding horizontal */
 }
+
+/**
+ * ========================================
+ * FIN DU FICHIER RESPONSIVE.CSS
+ * ========================================
+ * 
+ * RÉSUMÉ DES BREAKPOINTS :
+ * 
+ * > 1200px  : Desktop large (layout complet)
+ * 992-1199px : Desktop standard (layout complet)
+ * 768-991px  : Tablette (meilleur film en colonne, 2-3 cartes par ligne)
+ * 576-767px  : Mobile (header réduit, 2 cartes par ligne)
+ * 480-575px  : Petit mobile (textes réduits, cartes plus petites)
+ * < 480px    : Très petit mobile (cartes empilées, layout minimal)
+ * 
+ * COMPORTEMENT DES GRILLES :
+ * - Desktop : 3 colonnes (Bootstrap col-lg-4)
+ * - Tablette : 2 colonnes (Bootstrap col-md-6)
+ * - Mobile : 2 colonnes (flex 50%) OU 1 colonne (.mobile-grid-vertical)
+ * - Petit mobile : 1 colonne centrée (.mobile-card-stacked)
+ * 
+ * GESTION DYNAMIQUE :
+ * - responsive.js calcule le nombre de films à afficher
+ * - appInitializer.js recharge la page au redimensionnement (debounced 250ms)
+ * - Classes .mobile-grid-vertical appliquées selon breakpoint
+ */
