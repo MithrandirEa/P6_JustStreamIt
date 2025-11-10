@@ -29,10 +29,10 @@ body.modal-page {
   font-family: var(--font-primary);        /* Police Oswald */
   background-color: var(--modal-bg);       /* Fond blanc */
   margin: 0;                               /* Pas de marge externe */
-  padding: var(--modal-border-width) !important;      /* Padding 6px pour bordure */
+  padding: var(--modal-border-width);      /* Padding 6px pour bordure */
   font-size: var(--modal-text-desktop);    /* Texte 14px par défaut */
   line-height: 1.4;                        /* Interligne 140% */
-  border: solid var(--modal-border-color) var(--modal-border-width) !important; /* Bordure noire 6px */
+  border: solid var(--modal-border-color) var(--modal-border-width); /* Bordure noire 6px */
   box-sizing: border-box;                  /* Inclut padding dans dimensions */
   min-height: 100vh;                       /* Hauteur minimale = hauteur écran */
 }

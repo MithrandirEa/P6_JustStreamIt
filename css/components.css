@@ -111,8 +111,6 @@
     width: 100%;                          /* Largeur complte du conteneur */
     height: 100%;                         /* Hauteur complte du conteneur */
     object-fit: cover;                    /* Rogne pour remplir le carr */
-    display: block !important;            /* Toujours en block */
-    opacity: 1 !important;                /* Toujours visible (override JS) */
 }
 
 /* ==========================================
@@ -183,110 +181,41 @@
 }
 
 /* ==========================================
-    COMPOSANT 8 : FALLBACKS IMAGES MANQUANTES
+    COMPOSANT 8 : FALLBACK UNIVERSEL IMAGES MANQUANTES
    ==========================================
-   Affichs quand une image de poster n'existe pas
-   Grs dynamiquement par imageHandler.js
+   Affiché quand une image de poster n'existe pas
+   Géré dynamiquement par imageHandler.js
 */
-
-/* Fallback gnrique pour toutes les images */
-.movie-poster-fallback,
-.movie-fallback {
-    position: absolute;                    /* Recouvre l'emplacement image */
-    top: 0;                               /* Haut du conteneur */
-    left: 0;                              /* Gauche du conteneur */
-    right: 0;                             /* Droite du conteneur */
-    bottom: 0;                            /* Bas du conteneur */
-    display: none;                        /* Cach par dfaut */
-    align-items: center;                  /* Centre le texte verticalement */
-    justify-content: center;              /* Centre le texte horizontalement */
-    text-align: center;                   /* Texte centr */
-    background-color: var(--color-fallback); /* Fond gris clair #D9D9D9 */
-    border: none;                         /* Pas de bordure */
-    color: var(--color-fallback-text);    /* Texte gris fonc #666 */
-    font-size: var(--font-size-fallback); /* 14px */
-    font-weight: var(--font-weight-bold); /* Gras (700) */
-    z-index: 1;                           /* Au-dessus de l'image casse */
+.image-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--color-fallback);
+    color: var(--color-fallback-text);
+    font-size: var(--font-size-fallback);
+    font-weight: var(--font-weight-bold);
+    padding: var(--spacing-sm);
+    box-sizing: border-box;
+    z-index: 1;
 }
 
-/* Activation des fallbacks par JavaScript (display: flex) */
-.movie-fallback[style*="display: flex"],
-.movie-poster-fallback[style*="display: flex"] {
-    display: flex !important;             /* Force l'affichage */
+/* Fallback spécifique meilleur film (plus grand) */
+.best-movie-poster-container .image-fallback {
+    min-height: var(--height-fallback-min);
+    font-size: var(--font-size-fallback);
 }
 
-/* Style forc des fallbacks */
-.movie-fallback,
-.best-movie-fallback {
-    background: var(--color-fallback) !important; /* Force le fond gris */
-    color: var(--color-fallback-text) !important; /* Force le texte gris fonc */
-}
-
-/* ==========================================
-    FALLBACKS COMPLEXES AVEC STYLES INLINE
-   ==========================================
-   Gre les cas o JavaScript applique des styles inline
-   Slecteurs complexes pour cibler diffrents cas
-*/
-
-/* Fallbacks dans les cartes de films */
-.movie-card-wrapper .movie-poster[style*="display: none"] + div,
-.movie-card-wrapper > div[style*="background: #f0f0f0"],
-.best-movie-poster-container > div[style*="display: none"] + div,
-.best-movie-poster-container > div[style*="background: #f0f0f0"] {
-    position: absolute !important;         /* Position absolue force */
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    display: flex !important;              /* Layout flex forc */
-    align-items: center !important;        /* Centre vertical forc */
-    justify-content: center !important;    /* Centre horizontal forc */
-    text-align: center !important;         /* Texte centr forc */
-    background-color: var(--color-fallback) !important; /* Fond gris forc */
-    border: none !important;               /* Pas de bordure */
-    color: var(--color-fallback-text) !important; /* Texte gris forc */
-    font-size: 12px !important;           /* Petite police */
-    font-weight: var(--font-weight-bold) !important; /* Gras forc */
-    padding: var(--spacing-sm) !important; /* Padding 10px */
-    box-sizing: border-box !important;    /* Inclut padding dans dimensions */
-}
-
-/* Fallback spcifique meilleur film (plus grand) */
-.best-movie-poster-container > div[style*="display: none"] + div,
-.best-movie-poster-container > div[style*="background: #f0f0f0"] {
-    min-height: var(--height-fallback-min) !important; /* Hauteur min 300px */
-    width: 100% !important;               /* Largeur complte */
-    font-size: var(--font-size-fallback) !important; /* Police 14px */
-}
-
-/* ==========================================
-    CONTENEURS STYLISS POUR FALLBACKS
-   ==========================================
-   Style alternatif avec effets au survol
-*/
-.image-fallback-container {
-    background: var(--color-fallback);     /* Fond gris */
-    color: var(--color-fallback-text);     /* Texte gris fonc */
-    border-radius: var(--border-radius-sm); /* Coins lgrement arrondis */
-    transition: var(--transition-normal);  /* Animation douce */
-}
-
-/* Effet au survol du fallback */
-.image-fallback-container:hover {
-    transform: scale(1.02);                /* Lgre augmentation */
-    box-shadow: var(--shadow-medium);      /* Ombre moyenne */
-}
-
-/* ==========================================
-    MASQUAGE DES ERREURS
-   ==========================================
-   Cache tous les messages d'erreur console visibles
-*/
-.error-console, 
-[class*="error"],
-[id*="error"] {
-    display: none !important;              /* Force le masquage */
+/* Effet au survol des fallbacks */
+.image-fallback:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition-normal);
 }
 
 /* ==========================================
@@ -297,13 +226,6 @@
 img {
     background-color: transparent;         /* Fond transparent par dfaut */
     transition: var(--transition-normal);  /* Animation douce */
-}
-
-/* Masquage des images casses/vides */
-img[src=""], 
-img:not([src]),
-img[src*="error"] {
-    display: none !important;              /* Cache les images invalides */
 }
 
 /**

@@ -21,11 +21,6 @@
    Conteneur principal de toute la page
    Limite la largeur max et centre le contenu
 */
-* {
-    margin: 0;
-    padding: 0;
-}
-
 html {
     background-color: white !important;  /* Fond blanc pour voir le centrage */
     width: 100%;
@@ -44,7 +39,6 @@ body {
     margin-right: auto !important;         /* Centre à droite */
     margin-top: 0;
     margin-bottom: 0;
-    border: none !important;               /* Pas de bordure sur index.html */
 }
 
 /* ==========================================
