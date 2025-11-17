@@ -1,35 +1,49 @@
-# 🎬 JustStreamIt - Application Web de Recommandation de Films
+# JustStreamIt
 
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)](https://developer.mozilla.org/fr/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)](https://developer.mozilla.org/fr/docs/Web/CSS)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/fr/docs/Web/JavaScript)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/fr/docs/Web/JavaScript)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.0-7952B3?style=flat&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 [![W3C Valid](https://img.shields.io/badge/W3C-Valid-green)](https://validator.w3.org/)
+[![License](https://img.shields.io/badge/License-Educational-blue)](LICENSE)
 
-Application web responsive permettant de découvrir les meilleurs films via l'API OCMovies. Interface élégante avec système de recommandations par catégories et fenêtres modales de détails.
+Application web responsive de découverte et recommandation de films, développée dans le cadre du projet 6 de la formation OpenClassrooms "Développeur d'application Python".
 
-## 📋 Table des matières
+**JustStreamIt** exploite l'API REST OCMovies pour présenter une sélection dynamique de films triés par score IMDb, organisés en catégories personnalisables avec une interface utilisateur moderne et intuitive.
 
-- [Aperçu](#-aperçu)
-- [Fonctionnalités](#-fonctionnalités)
-- [Prérequis](#-prérequis)
-- [Installation](#-installation)
-- [Utilisation](#-utilisation)
-- [Architecture](#-architecture)
-- [Technologies](#-technologies)
-- [API](#-api)
-- [Responsive Design](#-responsive-design)
-- [Contributions](#-contributions)
-- [Licence](#-licence)
+## Table des matières
 
-## 🎯 Aperçu
+- [Aperçu](#aperçu)
+- [Fonctionnalités principales](#fonctionnalités-principales)
+- [Prérequis](#prérequis)
+- [Installation](#installation)
+- [Utilisation](#utilisation)
+- [Architecture technique](#architecture-technique)
+- [Stack technologique](#stack-technologique)
+- [API REST OCMovies](#api-rest-ocmovies)
+- [Design responsive](#design-responsive)
+- [Développement](#développement)
+- [Support et contribution](#support-et-contribution)
+- [Licence](#licence)
 
-JustStreamIt est une application web moderne qui affiche les films les mieux notés et permet de naviguer par catégories. L'interface présente :
+## Aperçu
 
-- **Section héro** : Le meilleur film avec poster et description
-- **4 catégories de films** : Films les mieux notés, Action, Mystery, et une catégorie personnalisable
-- **Système de navigation** : Sélecteur de genres dynamique
-- **Fenêtres modales** : Détails complets des films au clic
+JustStreamIt est une application web monopage (SPA) construite en JavaScript vanilla qui consomme l'API REST OCMovies pour présenter une interface de découverte de films organisée et intuitive.
+
+### Composants principaux
+
+**Page principale (index.html)**
+- Section hero présentant le film ayant le meilleur score IMDb
+- 4 catégories configurables affichant 6 films chacune
+- Grille responsive adaptative (3/2/1 colonnes selon la largeur d'écran)
+- Sélecteur de genres dynamique pour personnaliser la dernière catégorie
+- Overlays interactifs au survol avec boutons d'action
+
+**Fenêtre modale (modalWindows.html)**
+- Page dédiée affichant les détails complets d'un film
+- Architecture dual-layout (horizontal desktop / vertical mobile)
+- Boutons de fermeture contextuels selon le type d'appareil
+- Chargement asynchrone des données via l'API
 
 ### Captures d'écran
 
@@ -53,39 +67,65 @@ JustStreamIt est une application web moderne qui affiche les films les mieux not
 └─────────────────────────────────────────────────┘
 ```
 
-## ✨ Fonctionnalités
+## Fonctionnalités principales
 
-### Page principale (index.html)
-- ✅ **Meilleur film** : Affichage automatique du film avec le meilleur score IMDb
-- ✅ **6 films par catégorie** : 3 colonnes desktop, 2 colonnes mobile
-- ✅ **4 catégories** : Configurables via `config/appConfig.js`
-- ✅ **Overlay au survol** : Titre + bouton "Détails" sur chaque carte
-- ✅ **Sélecteur de genres** : Changement dynamique de la section "Autres films"
-- ✅ **Fallbacks intelligents** : Affichage de remplacement pour images manquantes
-- ✅ **Rechargement adaptatif** : Recalcul du nombre de films selon la taille d'écran
+### Interface utilisateur
 
-### Page modale (modalWindows.html)
-- ✅ **Détails complets** : Titre, année, durée, note IMDb, genres, réalisateur, acteurs, résumé
-- ✅ **Layouts dual** : Version desktop (2 colonnes) et mobile (vertical)
-- ✅ **Boutons de fermeture** : X en haut à droite (mobile) + bouton "Fermer" (desktop)
-- ✅ **Bordure distinctive** : Cadre noir 6px pour différencier de la page principale
-- ✅ **Responsive** : Breakpoint spécial à 788px (différent du site principal)
+**Affichage des films**
+- Tri automatique par score IMDb décroissant
+- Grille responsive adaptative selon la largeur d'écran
+- 6 films par catégorie avec pagination automatique de l'API
+- Images avec fallback en cas d'échec de chargement
+- Overlays interactifs au survol (titre + bouton d'action)
+
+**Navigation et interaction**
+- Sélecteur de genres dynamique (35+ genres disponibles)
+- Ouverture de fenêtres modales au clic sur les cartes
+- Fermeture contextuelle selon le type d'appareil
+- Rechargement adaptatif lors du redimensionnement de la fenêtre
+
+**Affichage des détails (modale)**
+- Informations complètes : titre, année, durée, note IMDb, genres, réalisateur, acteurs, pays, classification, résumé
+- Poster haute résolution avec fallback
+- Layout adaptatif : 2 colonnes (desktop) / vertical (mobile)
+- Breakpoint dédié à 788px
 
 ### Fonctionnalités techniques
-- ✅ **Architecture modulaire** : CSS et JS séparés par responsabilité
-- ✅ **Variables CSS** : Configuration centralisée des couleurs, espacements, tailles
-- ✅ **Code valide W3C** : HTML et CSS conformes aux standards
-- ✅ **Gestion d'erreurs** : Fallbacks pour images manquantes, gestion API
-- ✅ **Performance** : Debounce sur redimensionnement, lazy loading
 
-## 🔧 Prérequis
+**Architecture logicielle**
+- Architecture modulaire avec séparation des responsabilités
+- Pattern Factory pour la génération de templates HTML
+- Service centralisé pour les appels API
+- Gestion d'erreurs robuste avec fallbacks
 
-### Logiciels requis
-- **Navigateur web moderne** : Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
-- **Serveur local** (recommandé) : 
-  - [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) (VS Code)
-  - [Python HTTP Server](https://docs.python.org/3/library/http.server.html)
-  - [Node.js http-server](https://www.npmjs.com/package/http-server)
+**Performance et optimisation**
+- Debounce sur les événements de redimensionnement (250ms)
+- Chargement asynchrone des données via Promises
+- Variables CSS pour éviter la duplication de code
+- Code minimaliste sans framework lourd
+
+**Standards et qualité**
+- Validation W3C pour HTML et CSS
+- JavaScript ES6+ (modules, async/await, template literals)
+- Commentaires professionnels et documentation JSDoc
+- Responsive design mobile-first
+
+## Prérequis
+
+### Environnement d'exécution
+
+**Navigateur web moderne** (support ES6+ requis)
+- Google Chrome 90+
+- Mozilla Firefox 88+
+- Safari 14+
+- Microsoft Edge 90+
+
+**Serveur HTTP local** (recommandé pour éviter les restrictions CORS)
+
+Options disponibles :
+- [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) (Extension VS Code)
+- Python HTTP Server : `python -m http.server 8080`
+- Node.js http-server : `npx http-server -p 8080`
 
 ### API OCMovies
 L'application nécessite l'API OCMovies fonctionnelle sur `http://localhost:8000`
@@ -112,13 +152,16 @@ python manage.py runserver
 
 L'API sera accessible sur : `http://localhost:8000`
 
-## 📥 Installation
+## Installation
 
-### 1. Cloner le projet
+### Clonage du projet
+
 ```bash
 git clone https://github.com/MithrandirEa/P6_JustStreamIt.git
 cd P6_JustStreamIt
 ```
+
+**Aucune installation de dépendances requise** : le projet utilise uniquement JavaScript vanilla et Bootstrap CDN.
 
 ### 2. Structure du projet
 ```
@@ -181,13 +224,28 @@ http-server -p 8080
 # http://localhost:8080
 ```
 
-## 🚀 Utilisation
+## Utilisation
 
-### Navigation de base
-1. **Consulter le meilleur film** : Section en haut avec poster et description
-2. **Parcourir les catégories** : Scroller verticalement pour voir les 4 sections
-3. **Voir les détails** : Cliquer sur "DÉTAILS" ou sur une carte de film
-4. **Changer de genre** : Utiliser le sélecteur dans la section "Autres films"
+### Démarrage rapide
+
+1. **S'assurer que l'API OCMovies est active** sur `http://localhost:8000`
+2. **Lancer un serveur HTTP local** dans le dossier du projet
+3. **Ouvrir** `http://localhost:8080` dans un navigateur
+
+### Navigation
+
+**Exploration des films**
+- Consulter le film ayant le meilleur score IMDb dans la section hero
+- Parcourir les 4 catégories en scrollant verticalement
+- Survoler une carte pour afficher le titre et le bouton d'action
+
+**Accès aux détails**
+- Cliquer sur une carte de film ou sur le bouton "DÉTAILS"
+- Consulter les informations complètes dans la fenêtre modale
+- Fermer la modale via le bouton X (mobile) ou "Fermer" (desktop)
+
+**Personnalisation**
+- Utiliser le sélecteur de genres dans "Autres films" pour changer la catégorie dynamiquement
 
 ### Interactions
 - **Survol de carte** : Affiche un overlay avec titre + bouton
@@ -224,9 +282,9 @@ const APP_CONFIG = {
 }
 ```
 
-## 🏗️ Architecture
+## Architecture technique
 
-### Architecture CSS Modulaire
+### Architecture CSS modulaire
 ```
 main.css (point d'entrée)
 ├── variables.css    → Configuration globale (couleurs, tailles, espacements)
@@ -307,7 +365,7 @@ script.js (point d'entrée)
 └─────────────────┘
 ```
 
-## 🛠️ Technologies
+## Stack technologique
 
 ### Frontend
 - **HTML5** : Structure sémantique, validation W3C
@@ -326,7 +384,11 @@ script.js (point d'entrée)
 - **Live Server** : Serveur de développement
 - **Chrome DevTools** : Débogage
 
-## 📡 API
+## API REST OCMovies
+
+### Documentation des endpoints
+
+L'application consomme deux endpoints principaux de l'API OCMovies.
 
 ### Endpoints utilisés
 
@@ -387,16 +449,23 @@ L'application récupère automatiquement plusieurs pages pour obtenir 6 films pa
 // Page 2 : 1 film supplémentaire
 ```
 
-## 📱 Responsive Design
+## Design responsive
 
-### Breakpoints
-| Taille d'écran | Breakpoint | Colonnes | Films affichés |
-|---------------|-----------|----------|---------------|
-| Desktop Large | > 1200px | 3 | 6 (2 lignes) |
-| Desktop | 992-1199px | 3 | 6 (2 lignes) |
-| Tablette | 768-991px | 2-3 | 6 (2-3 lignes) |
-| Mobile | 576-767px | 2 | 6 (3 lignes) |
-| Petit mobile | < 576px | 1 | 4 (verticale) |
+### Système de breakpoints
+
+L'application utilise un système responsive à 3 niveaux défini dans `css/variables.css` :
+
+```css
+--breakpoint-desktop: 789px;   /* ≥ 789px : Desktop */
+--breakpoint-tablet: 788px;    /* 788px → 457px : Tablette */
+--breakpoint-phone: 456px;     /* ≤ 456px : Mobile */
+```
+
+### Adaptations par taille d'écranage | Grille | Films/catégorie |
+|----------|-------|--------|----------------|
+| Desktop | ≥ 789px | 3 colonnes | 6 films (2 lignes) |
+| Tablette | 788px → 457px | 2 colonnes | 6 films (3 lignes) |
+| Mobile | ≤ 456px | 1 colonne | 6 films (verticale) |
 
 ### Adaptations spécifiques
 
@@ -429,40 +498,80 @@ window.addEventListener('resize', debounce(() => {
 }, 250));
 ```
 
-## 🤝 Contributions
-
-Les contributions sont les bienvenues ! Pour contribuer :
-
-1. **Fork** le projet
-2. **Créer une branche** : `git checkout -b feature/amelioration`
-3. **Commit** : `git commit -m 'Ajout fonctionnalité X'`
-4. **Push** : `git push origin feature/amelioration`
-5. **Pull Request** : Ouvrir une PR avec description détaillée
+## Développement
 
 ### Standards de code
-- HTML valide W3C
-- CSS organisé et commenté
-- JavaScript ES6+ avec JSDoc
+
+**HTML**
+- Validation W3C stricte
+- Sémantique HTML5
+- Accessibilité ARIA (à améliorer)
+
+**CSS**
+- Architecture modulaire (6 fichiers séparés)
+- Variables CSS pour la configuration globale
+- Commentaires professionnels en français
+- Nommage BEM-like pour les composants
+
+**JavaScript**
+- ES6+ (modules, async/await, destructuring)
+- Architecture modulaire avec séparation des responsabilités
+- JSDoc pour la documentation des fonctions
+- Gestion d'erreurs avec try/catch
 - Nommage en camelCase
-- Indentation 4 espaces
 
-## 📄 Licence
+### Contribution
 
-Ce projet est développé dans le cadre de la formation OpenClassrooms - Développeur d'application Python.
+Les contributions sont les bienvenues. Pour proposer une amélioration :
 
-**Ressources utilisées** :
-- API OCMovies (OpenClassrooms)
-- Bootstrap 5.3.0 (MIT License)
-- Google Fonts - Oswald (Open Font License)
+1. Fork du projet
+2. Création d'une branche feature : `git checkout -b feature/nom-feature`
+3. Commit des modifications : `git commit -m 'feat: description'`
+4. Push vers la branche : `git push origin feature/nom-feature`
+5. Ouverture d'une Pull Request avec description détaillée
+
+**Format des messages de commit** (Conventional Commits) :
+- `feat:` Nouvelle fonctionnalité
+- `fix:` Correction de bug
+- `docs:` Documentation
+- `style:` Formatage CSS/code
+- `refactor:` Refactorisation
+- `perf:` Amélioration de performance
+- `test:` Ajout de tests
+
+## Support et contribution
+
+### Signalement de bugs
+
+Pour signaler un bug ou proposer une amélioration :
+- [Ouvrir une issue](https://github.com/MithrandirEa/P6_JustStreamIt/issues) sur GitHub
+- Décrire le comportement attendu vs observé
+- Inclure les étapes de reproduction
+- Préciser le navigateur et la version
+
+### Documentation
+
+Consulter le fichier `GUIDE_PERSONNALISATION_CSS.md` pour des instructions détaillées sur la personnalisation de l'interface.
 
 ---
 
-## 📞 Support
+## Licence
 
-Pour toute question ou problème :
-- **Issues GitHub** : [Ouvrir une issue](https://github.com/MithrandirEa/P6_JustStreamIt/issues)
-- **Documentation complète** : Voir `DOCUMENTATION.md`
+**Projet éducatif** développé dans le cadre de la formation OpenClassrooms - Parcours Développeur d'application Python (Projet 6).
+
+### Ressources tierces
+
+- **API OCMovies** : Fournie par OpenClassrooms (usage éducatif)
+- **Bootstrap 5.3.0** : Framework CSS ([Licence MIT](https://github.com/twbs/bootstrap/blob/main/LICENSE))
+- **Google Fonts - Oswald** : Police de caractères ([Open Font License](https://fonts.google.com/specimen/Oswald/about))
+
+### Droits d'auteur
+
+© 2025 MithrandirEa - Projet éducatif OpenClassrooms
 
 ---
 
-**Projet réalisé par MithrandirEa** | OpenClassrooms 2025
+**Auteur** : MithrandirEa  
+**Formation** : OpenClassrooms - Développeur d'application Python  
+**Projet** : P6 - Développez une interface utilisateur pour une application web Python  
+**Année** : 2025
