@@ -3,108 +3,118 @@
  * VARIABLES CSS - CONFIGURATION GLOBALE
  * ========================================
  * 
- * Ce fichier centralise TOUTES les variables CSS du projet.
- * Modifier ces valeurs affectera l'ensemble de l'interface.
+ * Centralise l'ensemble des variables CSS du projet JustStreamIt.
+ * Toute modification de ces valeurs impacte l'intégralité de l'interface.
  * 
- * SECTIONS :
- * 1. Couleurs principales (header, boutons, textes)
- * 2. Typographie (polices, poids, tailles)
- * 3. Dimensions (largeurs, hauteurs, tailles d'éléments)
+ * ORGANISATION DES SECTIONS :
+ * 1. Palette de couleurs (interface, boutons, textes)
+ * 2. Typographie (polices, graisses, tailles)
+ * 3. Dimensions des éléments (largeurs, hauteurs)
  * 4. Espacements (marges, paddings, gaps)
- * 5. Breakpoints responsive
- * 6. Animations et transitions
+ * 5. Breakpoints responsive (desktop, tablette, mobile)
+ * 6. Transitions et animations
  * 7. Effets visuels (ombres, bordures, overlays)
- * 8. Variables modales spécifiques
+ * 8. Configuration des modales
+ * 
+ * @author MithrandirEa
+ * @project JustStreamIt - OpenClassrooms P6
+ * @version 2.0
  */
 
 :root {
   /* ==========================================
-     SECTION 1 : COULEURS PRINCIPALES
+     SECTION 1 : PALETTE DE COULEURS
      ==========================================
-     Utilisées dans : header, boutons, textes, fond
+     Définit l'ensemble des couleurs de l'interface utilisateur.
+     Contexte d'utilisation : header, boutons, textes, fonds.
   */
-  --color-primary: #61787f;           /* Couleur du header et logo */
-  --color-secondary: #dc3545;         /* Boutons rouges "Détails" et "Fermer" */
-  --color-secondary-hover: #c82333;   /* État survol des boutons rouges */
-  --color-dark: #2D2C2C;             /* Boutons "Détails" sur cartes films */
-  --color-dark-hover: #1A1919;       /* État survol boutons foncés */
-  --color-fallback: #D9D9D9;         /* Fond pour images manquantes */
-  --color-fallback-text: #666;       /* Texte des images manquantes */
-  --color-loading: #6c757d;          /* Texte "Chargement en cours..." */
-  --color-white: #FFFFFF;            /* Fond général et textes blancs */
-  --color-black: #000000;            /* Bordures et textes noirs */
+  --color-primary: #61787f;           /* Couleur principale (header, logo) */
+  --color-secondary: #dc3545;         /* Couleur secondaire (boutons d'action) */
+  --color-secondary-hover: #c82333;   /* Variante hover de la couleur secondaire */
+  --color-dark: #2D2C2C;              /* Couleur sombre (boutons alternatifs) */
+  --color-dark-hover: #1A1919;        /* Variante hover de la couleur sombre */
+  --color-fallback: #D9D9D9;          /* Fond de remplacement (images manquantes) */
+  --color-fallback-text: #666;        /* Texte de remplacement (images manquantes) */
+  --color-border-light: #ddd;         /* Bordures subtiles (cadres, séparateurs) */
+  --color-loading: #6c757d;           /* Indicateurs de chargement */
+  --color-white: #FFFFFF;             /* Blanc (fonds, textes sur fonds sombres) */
+  --color-black: #000000;             /* Noir (textes, bordures) */
   
   /* ==========================================
-     SECTION 2 : TYPOGRAPHIE - POLICES ET POIDS
+     SECTION 2 : TYPOGRAPHIE
      ==========================================
-     Police Oswald utilisée partout (Google Fonts)
+     Police, graisses et tailles de texte.
   */
-  --font-primary: "Oswald", sans-serif;  /* Police principale du site */
-  --font-weight-light: 300;              /* Textes légers (peu utilisé) */
-  --font-weight-normal: 400;             /* Texte normal/paragraphes */
-  --font-weight-semibold: 600;           /* Titres de sections */
-  --font-weight-bold: 700;               /* Titres importants et boutons */
+  --font-primary: "Oswald", sans-serif;  /* Police Oswald (Google Fonts) */
+  --font-weight-light: 300;              /* Graisse légère */
+  --font-weight-normal: 400;             /* Graisse normale */
+  --font-weight-semibold: 600;           /* Graisse intermédiaire */
+  --font-weight-bold: 700;               /* Graisse épaisse */
   
-  /* ==========================================
-     SECTION 3 : TAILLES DE POLICE
-     ==========================================
-     Adaptées automatiquement en responsive
-  */
-  --font-size-header: 40px;          /* "JustStreamIt" dans le header */
-  --font-size-section: 48px;         /* Titres : "Films les mieux notés", "Action", etc. */
+  /* Tailles de police adaptées selon le contexte */
+  --font-size-header: 40px;          /* Titre "JustStreamIt" (header) */
+  --font-size-section: 48px;         /* Titres de catégories de films */
   --font-size-best-title: 36px;      /* Titre "Meilleur film" */
-  --font-size-movie-title: 28px;     /* Nom du film dans section héro */
-  --font-size-overlay-title: 14px;   /* Titre dans l'overlay au survol de carte */
-  --font-size-btn-main: 16px;        /* Texte du bouton "Détails" principal */
-  --font-size-btn-details: 12px;     /* Texte bouton "Détails" sur cartes */
-  --font-size-fallback: 14px;        /* Texte "Image non disponible" */
+  --font-size-movie-title: 28px;     /* Titre du film (section hero) */
+  --font-size-overlay-title: 14px;   /* Titre dans l'overlay au survol */
+  --font-size-btn-main: 16px;        /* Texte des boutons principaux */
+  --font-size-btn-details: 12px;     /* Texte des boutons sur cartes */
+  --font-size-fallback: 14px;        /* Texte de remplacement (images manquantes) */
   
   /* ==========================================
-     SECTION 4 : DIMENSIONS DES ÉLÉMENTS
+     SECTION 3 : DIMENSIONS DES ÉLÉMENTS
      ==========================================
-     Tailles fixes des éléments principaux
+     Tailles fixes des composants principaux.
   */
-  --width-max: 1054px;               /* Largeur maximale de toute la page */
-  --height-header: 122px;            /* Hauteur du bandeau header bleu */
-  --width-logo: 127px;               /* Largeur de l'image logo dans header */
-  --height-logo: 94px;               /* Hauteur de l'image logo dans header */
-  --width-poster-max: 227px;         /* Largeur max poster section "Meilleur film" */
-  --height-fallback-min: 300px;      /* Hauteur minimale du fallback meilleur film */
+  --width-max: 1054px;               /* Largeur maximale du conteneur principal */
+  --height-header: 122px;            /* Hauteur de l'en-tête */
+  --width-logo: 127px;               /* Largeur du logo */
+  --height-logo: 94px;               /* Hauteur du logo */
+  --width-poster-max: 227px;         /* Largeur maximale du poster (section hero) */
+  --height-fallback-min: 300px;      /* Hauteur minimale du remplacement d'image */
+  --btn-min-width-main: 110px;       /* Largeur minimale des boutons principaux */
+  --btn-min-width-card: 80px;        /* Largeur minimale des boutons de carte */
   
   /* ==========================================
-     SECTION 5 : ESPACEMENTS
+     SECTION 4 : ESPACEMENTS
      ==========================================
-     Marges et paddings standardisés
+     Marges et paddings standardisés.
   */
-  --spacing-xs: 5px;                 /* Très petit espacement */
-  --spacing-sm: 10px;                /* Petit espacement */
-  --spacing-md: 20px;                /* Espacement moyen (le plus utilisé) */
-  --spacing-lg: 40px;                /* Grand espacement */
-  --spacing-xl: 60px;                /* Très grand espacement */
-  --spacing-cards: 45px;             /* Espacement vertical entre les cartes films */
+  --spacing-xs: 5px;                 /* Espacement minimal */
+  --spacing-sm: 10px;                /* Espacement réduit */
+  --spacing-md-sm: 15px;             /* Espacement intermédiaire */
+  --spacing-md: 20px;                /* Espacement moyen */
+  --spacing-lg: 40px;                /* Espacement large */
+  --spacing-xl: 60px;                /* Espacement maximal */
+  --spacing-cards: 45px;             /* Espacement vertical entre les cartes */
   --spacing-cards-half: 22.5px;      /* Espacement horizontal entre les cartes */
   
-  /* ==========================================
-     SECTION 6 : BREAKPOINTS RESPONSIVE
-     ==========================================
-     Points de rupture pour les media queries
-  */
-  --breakpoint-sm: 768px;            /* Mobile vers Tablette */
-  --breakpoint-md: 992px;            /* Tablette vers Desktop */
-  --breakpoint-lg: 1200px;           /* Desktop vers Grand écran */
+  /* Paddings spécifiques des boutons */
+  --btn-padding-main: 12px 32px;     /* Padding des boutons principaux */
+  --btn-padding-card: 8px 16px;      /* Padding des boutons de carte */
   
   /* ==========================================
-     SECTION 7 : ANIMATIONS ET TRANSITIONS
+     SECTION 5 : BREAKPOINTS RESPONSIVE
      ==========================================
-     Vitesses d'animation standardisées
+     Points de rupture pour l'adaptation multi-écrans.
+     Trois tailles : Desktop, Tablette, Mobile.
   */
-  --transition-fast: 0.2s ease;      /* Survol boutons */
-  --transition-normal: 0.3s ease;    /* Survol cartes et overlays */
+  --breakpoint-desktop: 789px;       /* Desktop : ≥ 789px (grille 3 colonnes) */
+  --breakpoint-tablet: 788px;        /* Tablette : 788px → 457px (grille 2 colonnes) */
+  --breakpoint-phone: 456px;         /* Mobile : ≤ 456px (grille 1 colonne) */
   
   /* ==========================================
-     SECTION 8 : EFFETS VISUELS
+     SECTION 6 : ANIMATIONS ET TRANSITIONS
      ==========================================
-     Bordures arrondies, ombres, overlays
+     Durées et courbes d'animation standardisées.
+  */
+  --transition-fast: 0.2s ease;      /* Transition rapide (survol de boutons) */
+  --transition-normal: 0.3s ease;    /* Transition normale (survol de cartes) */
+  
+  /* ==========================================
+     SECTION 7 : EFFETS VISUELS
+     ==========================================
+     Bordures, ombres et overlays.
   */
   --border-radius-sm: 4px;           /* Petits arrondis (fallbacks) */
   --border-radius-md: 8px;           /* Arrondis moyens */
@@ -124,8 +134,6 @@
   --modal-bg: var(--color-white);               /* Fond blanc de la modale */
   --modal-max-width: 1000px;                    /* Largeur max modale desktop */
   --modal-max-width-large: 1200px;              /* Largeur max grands écrans (>1200px) */
-  --modal-max-width-medium: 950px;              /* Largeur max écrans moyens (989-1199px) */
-  --modal-breakpoint: 788px;                    /* Seuil de basculement desktop/mobile */
   --modal-padding-desktop: var(--spacing-md);   /* Padding modale desktop */
   --modal-padding-mobile: var(--spacing-lg) var(--spacing-sm) var(--spacing-sm) var(--spacing-sm); /* Padding modale mobile */
   
@@ -148,7 +156,6 @@
   */
   --modal-title-desktop: 24px;                  /* Titre du film - desktop normal */
   --modal-title-desktop-large: 28px;            /* Titre du film - grand écran */
-  --modal-title-desktop-medium: 26px;           /* Titre du film - écran moyen */
   --modal-title-mobile: 18px;                   /* Titre du film - mobile */
   --modal-title-mobile-small: 16px;             /* Titre du film - petit mobile */
   --modal-text-desktop: 14px;                   /* Texte général desktop */
@@ -180,8 +187,9 @@
  * FIN DU FICHIER VARIABLES.CSS
  * ========================================
  * 
- * Pour modifier l'apparence de la page :
+ * GUIDE D'UTILISATION :
+ * 
  * 1. Modifier les valeurs ci-dessus
- * 2. Les changements s'appliquent automatiquement partout
- * 3. Ne pas modifier les noms des variables
+ * 2. Les changements s'appliquent globalement
+ * 3. Conserver les noms des variables
  */

@@ -1,11 +1,11 @@
 /**
  * API SERVICE
- * Service centralise pour tous les appels API vers JustStreamIt
+ * Service centralisé pour les appels API vers JustStreamIt
  */
 
 /**
  * Configuration de l'API
- * Centralise tous les parametres de connexion a l'API JustStreamIt
+ * Paramètres de connexion à l'API JustStreamIt
  */
 const API_CONFIG = {
     baseUrl: 'http://localhost:8000/api/v1',
@@ -18,12 +18,11 @@ const API_CONFIG = {
 
 /**
  * Service API principal
- * Classe singleton qui gere tous les appels vers l'API JustStreamIt
- * Fonctionnalites principales :
- * - Cache des requetes pour optimiser les performances
- * - Gestion d'erreurs centralisee
+ * Singleton pour la gestion des appels API
+ * - Cache des requêtes pour optimisation
+ * - Gestion d'erreurs centralisée
  * - Construction automatique des URLs
- * - Pagination automatique pour les genres
+ * - Pagination automatique
  */
 class ApiService {
     constructor() {
@@ -32,11 +31,10 @@ class ApiService {
     }
 
     /**
-     * Effectue un appel API generique avec gestion d'erreurs
-     * Methode de base utilisee par toutes les autres methodes de la classe
-     * @param {string} endpoint - URL relative ou absolue vers l'API
-     * @param {Object} options - Options fetch (headers, method, body, etc.)
-     * @returns {Promise<Object>} Donnees JSON retournees par l'API
+     * Effectue un appel API avec gestion d'erreurs
+     * @param {string} endpoint - URL de l'API
+     * @param {Object} options - Options fetch
+     * @returns {Promise<Object>} Données JSON
      */
     async fetchApi(endpoint, options = {}) {
         const url = endpoint.startsWith('http') ? endpoint : `${this.baseUrl}${endpoint}`;
@@ -74,9 +72,8 @@ class ApiService {
     }
 
     /**
-     * Teste la connexion a l'API
-     * Effectue un appel minimal pour verifier que l'API repond correctement
-     * @returns {Promise<boolean>} true si l'API est accessible, false sinon
+     * Teste la connexion à l'API
+     * @returns {Promise<boolean>} true si accessible
      */
     async testConnection() {
         try {
@@ -91,10 +88,9 @@ class ApiService {
     }
 
     /**
-     * Recupere les meilleurs films pour selectionner le top
-     * Utilise le tri par score IMDb decroissant pour obtenir les meilleurs films
-     * @param {number} pageSize - Nombre de films a recuperer (defaut: 10)
-     * @returns {Promise<Array>} Liste des films tries par score IMDb decroissant
+     * Récupère les meilleurs films par score IMDb
+     * @param {number} pageSize - Nombre de films (défaut: 10)
+     * @returns {Promise<Array>} Films triés par score décroissant
      */
     async getBestMovies(pageSize = 10) {
         const cacheKey = `best_movies_${pageSize}`;
@@ -117,10 +113,9 @@ class ApiService {
     }
 
     /**
-     * Recupere les details complets d'un film
-     * Utilise l'endpoint /titles/{id} pour obtenir toutes les informations d'un film
-     * @param {number|string} movieId - ID unique du film dans l'API
-     * @returns {Promise<Object>} Objet contenant tous les details du film
+     * Récupère les détails d'un film
+     * @param {number|string} movieId - Identifiant du film
+     * @returns {Promise<Object>} Détails complets du film
      */
     async getMovieDetails(movieId) {
         const cacheKey = `movie_${movieId}`;
@@ -141,10 +136,8 @@ class ApiService {
     }
 
     /**
-     * Recupere tous les genres disponibles
-     * L'API pagine les genres (5 par page), cette methode fait donc une boucle
-     * pour recuperer tous les genres disponibles automatiquement
-     * @returns {Promise<Array>} Liste complete des noms de genres (chaines de caracteres)
+     * Récupère tous les genres disponibles (pagination automatique)
+     * @returns {Promise<Array>} Liste des noms de genres
      */
     async getAllGenres() {
         const cacheKey = 'all_genres';
@@ -166,7 +159,7 @@ class ApiService {
                 console.log(`Genres recuperes: ${genres.length}, prochaine URL: ${nextUrl}`);
             }
 
-            // Extraire seulement les noms des genres pour le tri
+            // Extraction des noms de genres
             const genreNames = genres.map(genre => genre.name);
             this.cache.set(cacheKey, genreNames);
             return genreNames;
@@ -177,10 +170,9 @@ class ApiService {
     }
 
     /**
-     * Recupere les films d'une section (genre, top rated, etc.)
-     * Methode generique pour recuperer n'importe quelle section de films
-     * @param {string} endpoint - URL complete de l'endpoint API
-     * @returns {Promise<Object>} Donnees brutes avec films et informations de pagination
+     * Récupère les films d'une section
+     * @param {string} endpoint - URL de l'endpoint
+     * @returns {Promise<Object>} Données avec pagination
      */
     async getMovieSection(endpoint) {
         try {
@@ -193,11 +185,10 @@ class ApiService {
     }
 
     /**
-     * Recupere des films par genre specifique
-     * Filtre les films par genre et les trie par score IMDb decroissant
-     * @param {string} genre - Nom exact du genre a filtrer
-     * @param {number} pageSize - Nombre de films a recuperer (defaut: 7)
-     * @returns {Promise<Array>} Liste des films du genre specifie
+     * Récupère les films par genre
+     * @param {string} genre - Nom du genre
+     * @param {number} pageSize - Nombre de films (défaut: 7)
+     * @returns {Promise<Array>} Films du genre triés par score
      */
     async getMoviesByGenre(genre, pageSize = 7) {
         const cacheKey = `genre_${genre}_${pageSize}`;
@@ -220,10 +211,9 @@ class ApiService {
     }
 
     /**
-     * Recupere les films les mieux notes
-     * Equivalent a getBestMovies mais avec un nom plus explicite pour les sections
-     * @param {number} pageSize - Nombre de films a recuperer (defaut: 7)
-     * @returns {Promise<Array>} Liste des films tries par score IMDb decroissant
+     * Récupère les films les mieux notés
+     * @param {number} pageSize - Nombre de films (défaut: 7)
+     * @returns {Promise<Array>} Films triés par score
      */
     async getTopRatedMovies(pageSize = 7) {
         const cacheKey = `top_rated_${pageSize}`;
@@ -246,11 +236,10 @@ class ApiService {
     }
 
     /**
-     * Construit une URL pour un endpoint avec parametres
-     * Utilitaire pour construire des URLs avec parametres de requete
-     * @param {string} path - Chemin relatif de l'endpoint API
-     * @param {Object} params - Parametres de requete (genre, sort_by, page_size, etc.)
-     * @returns {string} URL complete prete a etre utilisee
+     * Construit une URL avec paramètres
+     * @param {string} path - Chemin relatif
+     * @param {Object} params - Paramètres de requête
+     * @returns {string} URL complète
      */
     buildUrl(path, params = {}) {
         const url = new URL(path, this.baseUrl);
@@ -265,8 +254,7 @@ class ApiService {
     }
 
     /**
-     * Vide completement le cache
-     * Utile pour forcer le rechargement des donnees ou en cas de probleme
+     * Vide le cache complètement
      */
     clearCache() {
         this.cache.clear();
@@ -275,8 +263,7 @@ class ApiService {
 
     /**
      * Obtient les statistiques du cache
-     * Utile pour le debogage et le monitoring des performances
-     * @returns {Object} Statistiques du cache (taille et cles)
+     * @returns {Object} Taille et clés du cache
      */
     getCacheStats() {
         return {
@@ -286,7 +273,7 @@ class ApiService {
     }
 }
 
-// Instance singleton - une seule instance pour toute l'application
+// Instance singleton
 const apiService = new ApiService();
 
 // Export pour utilisation dans script.js via l'objet window

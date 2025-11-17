@@ -1,19 +1,24 @@
 /**
  * ========================================
- *  COMPONENTS.CSS - COMPOSANTS RUTILISABLES
+ * COMPONENTS.CSS - COMPOSANTS RÉUTILISABLES
  * ========================================
  * 
- * Ce fichier contient les styles des COMPOSANTS INTERACTIFS
+ * Définit les styles des composants interactifs de l'application.
+ * Ces composants sont utilisés à travers l'ensemble de l'interface.
  * 
- * COMPOSANTS INCLUS :
- * 1. Poster du meilleur film (section hro)
- * 2. Titre et description du meilleur film
- * 3. Boutons "Dtails" (rouge principal)
- * 4. Cartes de films (grilles de sections)
- * 5. Images des posters de films
- * 6. Overlay au survol des cartes
- * 7. Bouton "Dtails" sur cartes (fonc)
- * 8. Fallbacks pour images manquantes
+ * COMPOSANTS DÉFINIS :
+ * 1. Poster du meilleur film (section hero)
+ * 2. Informations du meilleur film (titre, description)
+ * 3. Boutons d'action principaux
+ * 4. Cartes de films (éléments de grille)
+ * 5. Images des posters
+ * 6. Overlays interactifs au survol
+ * 7. Boutons d'action secondaires
+ * 8. États de remplacement (fallbacks)
+ * 
+ * @author MithrandirEa
+ * @project JustStreamIt - OpenClassrooms P6
+ * @version 2.0
  */
 
 /* ==========================================
@@ -23,12 +28,12 @@
    Partie gauche de .best-movie-container
 */
 .best-movie-poster {
-    width: 100%;                           /* Prend toute la largeur du conteneur */
+    width: 100%;                           /* Largeur pleine */
     height: auto;                          /* Hauteur proportionnelle */
-    max-width: var(--width-poster-max);    /* Max 227px */
-    aspect-ratio: 4/5;                     /* Ratio film standard (80% hauteur) */
-    object-fit: cover;                     /* Rogne pour respecter le ratio */
-    border: 1px solid #ddd;                /* Bordure grise fine */
+    max-width: var(--width-poster-max);    /* Maximum 227px */
+    aspect-ratio: 4/5;                     /* Ratio standard 4:5 */
+    object-fit: cover;                     /* Rognage proportionnel */
+    border: 1px solid var(--color-border-light); /* Bordure fine */
 }
 
 /* ==========================================
@@ -39,78 +44,79 @@
 
 /* Titre du film */
 .best-movie-info .movie-title {
-    font-size: var(--font-size-movie-title); /* 28px - grosse taille */
-    font-weight: var(--font-weight-bold);    /* Gras (700) */
-    margin-bottom: 15px;                     /* Espace sous le titre */
-    color: var(--color-black);               /* Texte noir */
+    font-size: var(--font-size-movie-title); /* Taille 28px */
+    font-weight: var(--font-weight-bold);    /* Graisse 700 */
+    margin-bottom: var(--spacing-md-sm);     /* Marge inférieure 15px */
+    color: var(--color-black);               /* Noir */
 }
 
-/* Description/rsum du film */
+/* Description du film */
 .movie-description {
-    text-align: justify;                   /* Justification texte */
-    line-height: 1.5;                      /* Interligne 150% */
-    margin-bottom: var(--spacing-md);      /* 20px sous la description */
-    flex-grow: 1;                          /* Prend l'espace disponible */
-    max-height: none;                      /* Pas de limite de hauteur */
-    overflow: visible;                     /* Affiche tout le texte */
-    word-wrap: break-word;                 /* Coupe les mots longs */
+    text-align: justify;                   /* Justification */
+    line-height: 1.5;                      /* Interligne 1.5 */
+    margin-bottom: var(--spacing-md);      /* Marge inférieure 20px */
+    flex-grow: 1;                          /* Expansion disponible */
+    max-height: none;                      /* Hauteur illimitée */
+    overflow: visible;                     /* Contenu visible */
+    word-wrap: break-word;                 /* Césure automatique */
 }
 
 /* ==========================================
-    COMPOSANT 3 : BOUTON "DTAILS" PRINCIPAL
+    COMPOSANT 3 : BOUTON D'ACTION PRINCIPAL
    ==========================================
-   Gros bouton rouge dans section "Meilleur film"
-   Et dans la modale desktop en bas
+   Bouton "Détails" rouge dans la section hero.
+   Réutilisé dans les modales desktop.
 */
 .btn-details {
-    background-color: var(--color-secondary);   /* Rouge #dc3545 */
+    background-color: var(--color-secondary);   /* Fond secondaire */
     color: var(--color-white);                  /* Texte blanc */
-    border: none;                               /* Pas de bordure */
-    padding: 12px 32px;                         /* Espacement interne gnreux */
-    font-size: var(--font-size-btn-main);       /* 16px */
-    font-weight: var(--font-weight-bold);       /* Gras (700) */
-    cursor: pointer;                            /* Curseur pointeur au survol */
-    border-radius: var(--border-radius-xl);     /* Coins trs arrondis (25px) */
-    align-self: flex-end;                       /* Align en bas du conteneur flex */
-    text-transform: uppercase;                  /* Texte en MAJUSCULES */
-    min-width: 110px;                           /* Largeur minimale */
-    transition: var(--transition-fast);         /* Animation rapide 0.2s */
+    border: none;                               /* Sans bordure */
+    padding: var(--btn-padding-main);           /* Espacement 12px 32px */
+    font-size: var(--font-size-btn-main);       /* Taille 16px */
+    font-weight: var(--font-weight-bold);       /* Graisse 700 */
+    cursor: pointer;                            /* Pointeur actif */
+    border-radius: var(--border-radius-xl);     /* Rayon 25px */
+    align-self: flex-end;                       /* Alignement inférieur */
+    text-transform: uppercase;                  /* Capitales */
+    min-width: var(--btn-min-width-main);       /* Largeur minimale 110px */
+    transition: var(--transition-fast);         /* Transition 0.2s */
 }
 
-/* tat survol du bouton rouge */
+/* État de survol */
 .btn-details:hover {
-    background-color: var(--color-secondary-hover); /* Rouge plus fonc #c82333 */
-    transform: translateY(-1px);                     /* Lger dcalage vers le haut */
+    background-color: var(--color-secondary-hover); /* Fond accentué */
+    transform: translateY(-1px);                     /* Décalage vertical */
 }
 
 /* ==========================================
     COMPOSANT 4 : CARTE DE FILM
    ==========================================
-   Conteneur d'une carte dans les grilles de sections
-   Aspect carr avec effet zoom au survol
+   Conteneur principal d'une carte dans les grilles.
+   Format carré avec effet zoom au survol.
 */
 .movie-card-original {
-    position: relative;                    /* Pour overlay en position absolute */
-    width: 100%;                          /* Prend toute la largeur disponible */
-    aspect-ratio: 1;                      /* Format carr 1:1 */
-    overflow: hidden;                     /* Cache dbordements lors du zoom */
-    transition: var(--transition-normal); /* Animation normale 0.3s */
+    position: relative;                    /* Contexte de positionnement */
+    width: 100%;                          /* Largeur pleine */
+    aspect-ratio: 1;                      /* Ratio carré 1:1 */
+    overflow: hidden;                     /* Masquage débordement */
+    transition: var(--transition-normal); /* Transition 0.3s */
 }
 
-/* Effet zoom au survol de la carte */
+/* Effet de zoom */
 .movie-card-original:hover {
-    transform: scale(1.05);               /* Agrandit de 5% */
+    transform: scale(1.05);               /* Échelle 105% */
 }
 
 /* ==========================================
     COMPOSANT 5 : IMAGE POSTER DANS CARTE
    ==========================================
-   Image du film dans les grilles
+   Image du film affichée dans la grille.
 */
 .movie-poster {
-    width: 100%;                          /* Largeur complte du conteneur */
-    height: 100%;                         /* Hauteur complte du conteneur */
-    object-fit: cover;                    /* Rogne pour remplir le carr */
+    width: 100%;                          /* Largeur pleine */
+    height: 100%;                         /* Hauteur pleine */
+    object-fit: cover;                    /* Ajustement proportionnel */
+    display: block;                       /* Affichage bloc */
 }
 
 /* ==========================================
@@ -120,37 +126,37 @@
    Contient le titre du film + bouton "Dtails"
 */
 .movie-title-overlay {
-    position: absolute;                      /* Positionnement absolu sur la carte */
-    top: 50%;                               /* Dmarre au milieu vertical */
-    left: 0;                                /* Bord gauche de la carte */
-    right: 0;                               /* Bord droit de la carte */
-    height: 40%;                            /* Occupe 40% de la hauteur */
-    transform: translateY(-50%);            /* Centre verticalement */
-    background-color: var(--overlay-dark);  /* Fond noir semi-transparent */
+    position: absolute;                      /* Positionnement absolu */
+    top: 50%;                               /* Centrage vertical */
+    left: 0;                                /* Bord gauche */
+    right: 0;                               /* Bord droit */
+    height: 40%;                            /* Hauteur 40% */
+    transform: translateY(-50%);            /* Translation verticale */
+    background-color: var(--overlay-dark);  /* Fond semi-transparent */
     color: var(--color-white);              /* Texte blanc */
-    display: flex !important;               /* Layout flex vertical */
-    flex-direction: column;                 /* Titre en haut, bouton en bas */
-    justify-content: space-between;         /* Espace entre titre et bouton */
-    opacity: 0;                             /* Invisible par dfaut */
-    transition: var(--transition-normal);   /* Animation douce 0.3s */
-    padding: var(--spacing-sm);             /* Padding interne 10px */
-    z-index: 10;                            /* Au-dessus de tout */
+    display: flex !important;               /* Disposition flex */
+    flex-direction: column;                 /* Organisation verticale */
+    justify-content: space-between;         /* Espacement équilibré */
+    opacity: 0;                             /* Masqué par défaut */
+    transition: var(--transition-normal);   /* Transition 0.3s */
+    padding: var(--spacing-sm);             /* Espacement interne 10px */
+    z-index: 10;                            /* Plan supérieur */
 }
 
-/* Activation de l'overlay au survol */
+/* Activation au survol */
 .movie-card-original:hover .movie-title-overlay {
-    opacity: 1 !important;                  /* Devient visible (override JS) */
+    opacity: 1 !important;                  /* Affichage complet */
 }
 
-/* Texte du titre dans l'overlay */
+/* Titre de l'overlay */
 .movie-title-text {
-    font-size: var(--font-size-overlay-title); /* 14px */
-    font-weight: var(--font-weight-bold);      /* Gras (700) */
-    line-height: 1.3;                          /* Interligne serr */
-    word-wrap: break-word;                     /* Coupe les titres longs */
-    text-align: left;                          /* Align  gauche */
-    align-self: flex-start;                    /* Haut de l'overlay */
-    margin: 0;                                 /* Pas de marge */
+    font-size: var(--font-size-overlay-title); /* Taille 14px */
+    font-weight: var(--font-weight-bold);      /* Graisse 700 */
+    line-height: 1.3;                          /* Interligne 1.3 */
+    word-wrap: break-word;                     /* Césure automatique */
+    text-align: left;                          /* Alignement gauche */
+    align-self: flex-start;                    /* Position haute */
+    margin: 0;                                 /* Sans marge */
 }
 
 /* ==========================================
@@ -159,25 +165,25 @@
    Petit bouton fonc dans l'overlay de chaque carte
 */
 .movie-details-btn {
-    background-color: var(--color-dark);       /* Fond fonc #2D2C2C */
+    background-color: var(--color-dark);       /* Fond sombre */
     color: var(--color-white);                 /* Texte blanc */
-    border: 2px solid var(--color-dark);       /* Bordure de mme couleur */
-    padding: 8px 16px;                         /* Espacement interne */
-    font-size: var(--font-size-btn-details);   /* 12px - petite taille */
-    font-weight: var(--font-weight-bold);      /* Gras (700) */
-    border-radius: var(--border-radius-lg);    /* Coins arrondis 20px */
-    cursor: pointer;                           /* Curseur pointeur */
-    text-transform: uppercase;                 /* Texte en MAJUSCULES */
-    transition: var(--transition-fast);        /* Animation rapide 0.2s */
-    min-width: 80px;                           /* Largeur minimale */
-    align-self: flex-end;                      /* Bas de l'overlay */
+    border: 2px solid var(--color-dark);       /* Bordure assortie */
+    padding: var(--btn-padding-card);          /* Espacement 8px 16px */
+    font-size: var(--font-size-btn-details);   /* Taille 12px */
+    font-weight: var(--font-weight-bold);      /* Graisse 700 */
+    border-radius: var(--border-radius-lg);    /* Rayon 20px */
+    cursor: pointer;                           /* Pointeur actif */
+    text-transform: uppercase;                 /* Capitales */
+    transition: var(--transition-fast);        /* Transition 0.2s */
+    min-width: var(--btn-min-width-card);      /* Largeur minimale 80px */
+    align-self: flex-end;                      /* Position inférieure */
 }
 
-/* tat survol du bouton fonc */
+/* État de survol */
 .movie-details-btn:hover {
-    background-color: var(--color-dark-hover); /* Encore plus fonc #1A1919 */
+    background-color: var(--color-dark-hover); /* Fond plus foncé */
     border-color: var(--color-dark-hover);     /* Bordure assortie */
-    transform: scale(1.05);                    /* Lgre augmentation taille */
+    transform: scale(1.05);                    /* Échelle 105% */
 }
 
 /* ==========================================
@@ -224,8 +230,8 @@
    Styles de base pour toutes les images
 */
 img {
-    background-color: transparent;         /* Fond transparent par dfaut */
-    transition: var(--transition-normal);  /* Animation douce */
+    background-color: transparent;         /* Fond transparent */
+    transition: var(--transition-normal);  /* Transition 0.3s */
 }
 
 /**

@@ -1,15 +1,15 @@
 /**
  * MODAL WINDOWS - PAGE MODALE
- * Script pour la page modalWindows.html
- * Utilise l'architecture modulaire avec modalHandler et apiService
+ * Script de gestion de la page modalWindows.html
+ * Utilise l'architecture modulaire (modalHandler, apiService, modalTemplate)
  */
 
 /**
- * Initialisation de la page modale
- * Point d'entrée principal qui coordonne le chargement du film
+ * Initialise la page modale au chargement du DOM
+ * Coordonne le chargement des données du film
  */
 document.addEventListener('DOMContentLoaded', async () => {
-    // Vérification que tous les modules nécessaires sont chargés
+    // Vérification des modules requis
     if (!window.ApiService) {
         console.error('ApiService non disponible');
         return;
@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 /**
- * Gestionnaire pour le bouton fermer X (mobile/tablet)
- * Remplace l'onclick inline pour respecter les standards W3C
+ * Gestionnaire du bouton fermer X (mobile/tablette)
+ * Conforme aux standards W3C (sans onclick inline)
  */
 document.addEventListener('DOMContentLoaded', () => {
     const closeButton = document.querySelector('.btn-close-x');

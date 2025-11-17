@@ -1,13 +1,12 @@
 /**
  * APP INITIALIZER
- * Gestionnaire centralise de l'initialisation de l'application
- * Orchestre le chargement sequentiel de toutes les sections de films
+ * Gestionnaire d'initialisation de l'application
+ * Orchestre le chargement séquentiel des sections
  */
 
 /**
- * Classe pour gerer l'initialisation complete de l'application
- * Coordonne le chargement du meilleur film et de toutes les sections
- * Gere les erreurs globales et les parametres responsives
+ * Classe de gestion de l'initialisation
+ * Coordonne le chargement du meilleur film et des sections
  */
 class AppInitializer {
     constructor() {
@@ -16,12 +15,11 @@ class AppInitializer {
     }
 
     /**
-     * Initialise les parametres de base selon la taille d'ecran
-     * Determine le nombre de films a afficher et le mode responsive
+     * Initialise les paramètres selon la taille d'écran
      */
     initializeSettings() {
         this.pageSize = window.ResponsiveUtils.getPageSize();
-        this.displayMode = window.AppConfig.getCurrentDisplayMode();
+        this.displayMode = window.ResponsiveUtils.getDeviceType();
         
         console.log(`Initialisation avec ${this.pageSize} films par section`);
         console.log(`Mode detecte: ${this.displayMode} (largeur: ${window.innerWidth}px)`);
@@ -29,8 +27,7 @@ class AppInitializer {
 
     /**
      * Charge une section de films avec gestion d'erreur
-     * Construit l'URL API complete et appelle la fonction de chargement appropriee
-     * @param {Object} sectionConfig - Configuration de la section (title, endpoint, sectionClass, etc.)
+     * @param {Object} sectionConfig - Configuration de la section
      */
     async loadSection(sectionConfig) {
         const { title, endpoint, sectionClass, emoji } = sectionConfig;
@@ -51,7 +48,6 @@ class AppInitializer {
 
     /**
      * Charge le meilleur film avec gestion d'erreur
-     * Appelle la fonction loadBestMovie() avec gestion centralisee des messages
      */
     async loadBestMovieSection() {
         const messages = window.AppConfig.getMessages();
@@ -67,9 +63,8 @@ class AppInitializer {
     }
 
     /**
-     * Initialise toute l'application
-     * Point d'entree principal qui orchestre le chargement complet
-     * Charge sequentiellement le meilleur film puis toutes les sections configurees
+     * Initialise l'application complètement
+     * Charge séquentiellement toutes les sections
      */
     async initialize() {
         const messages = window.AppConfig.getMessages();
@@ -98,9 +93,7 @@ class AppInitializer {
     }
 
     /**
-     * Affiche une erreur globale a l'utilisateur
-     * Cree une modal d'erreur centree sur l'ecran en cas d'echec critique
-     * Fournit une option de rechargement de la page
+     * Affiche une erreur globale à l'utilisateur
      */
     displayGlobalError() {
         const errorHtml = `

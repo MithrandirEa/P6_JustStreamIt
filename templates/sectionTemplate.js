@@ -1,14 +1,12 @@
 /**
  * SECTION TEMPLATE
- * Templates pour les sections de films et les selecteurs de genre
- * Gere la creation des structures HTML pour les differentes sections de films
+ * Templates pour les sections de films et sélecteurs de genre
  */
 
 /**
- * Genere le template HTML pour un selecteur de genre
- * Cree les options HTML d'un element select pour choisir un genre de film
- * @param {Array} genres - Liste des noms de genres disponibles (chaines de caracteres)
- * @returns {string} HTML des options du selecteur pret a etre injecte dans un select
+ * Génère le template d'un sélecteur de genre
+ * @param {Array} genres - Liste des genres disponibles
+ * @returns {string} HTML des options du select
  */
 function generateGenreSelectorTemplate(genres) {
     return `
@@ -18,12 +16,10 @@ function generateGenreSelectorTemplate(genres) {
 }
 
 /**
- * Cree un element de titre avec selecteur de genre
- * Construit un conteneur avec titre de section et optionnellement un selecteur de genre
- * Utilise pour la section "Autres films" qui permet de filtrer par genre
- * @param {string} titleText - Texte du titre de la section a afficher
- * @param {Array} genres - Liste des genres disponibles (optionnel, pour section Autres films)
- * @returns {Object} Objet avec container (element DOM) et selector (element select ou null)
+ * Crée un titre avec sélecteur de genre
+ * @param {string} titleText - Texte du titre
+ * @param {Array} genres - Liste des genres (optionnel)
+ * @returns {Object} {container, selector}
  */
 function createTitleWithSelector(titleText, genres = null) {
     const titleSelectorContainer = document.createElement('div');
@@ -54,12 +50,10 @@ function createTitleWithSelector(titleText, genres = null) {
 }
 
 /**
- * Genere le template d'erreur pour une section de films
- * Cree un affichage d'erreur comprehensible avec details et option de rechargement
- * Utilise en cas d'echec de chargement d'une section de films
- * @param {string} sectionName - Nom de la section qui a echoue (ex: "Films les mieux notes")
- * @param {Error} error - Objet Error avec les details de l'erreur
- * @returns {string} HTML d'erreur style avec message explicatif
+ * Génère le template d'erreur pour une section
+ * @param {string} sectionName - Nom de la section
+ * @param {Error} error - Erreur survenue
+ * @returns {string} HTML d'erreur avec rechargement
  */
 function generateSectionErrorTemplate(sectionName, error) {
     return `
@@ -76,21 +70,19 @@ function generateSectionErrorTemplate(sectionName, error) {
 }
 
 /**
- * Cree la grille responsive pour les films
- * Genere le conteneur principal qui accueillera les cartes de films
- * Adapte automatiquement la structure selon la taille d'ecran
- * @returns {HTMLElement} Element DOM de la grille pret a recevoir les cartes
+ * Crée la grille responsive pour les films
+ * @returns {HTMLElement} Conteneur de grille adapté
  */
 function createMovieGrid() {
     const movieList = document.createElement('div');
     
-    // Grille adaptative selon l'ecran
+    // Grille adaptée selon l'écran
     const width = window.innerWidth;
-    if (width < 768) {
-        // Mobile : grille verticale personnalisee (films empiles)
+    if (width <= 456) {
+        // Mobile : grille verticale
         movieList.className = 'mobile-grid-vertical movie-grid';
     } else {
-        // Desktop/Tablette : grille Bootstrap horizontale
+        // Desktop/Tablette : grille horizontale
         movieList.className = 'row movie-grid';
     }
     

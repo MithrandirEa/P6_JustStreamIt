@@ -1,18 +1,23 @@
 /**
  * ========================================
- * LAYOUT.CSS - STRUCTURE GÉNÉRALE PAGE
+ * LAYOUT.CSS - STRUCTURE ET DISPOSITION
  * ========================================
  * 
- * Ce fichier définit la STRUCTURE et la MISE EN PAGE de index.html
+ * Définit la structure globale et la disposition des éléments de index.html.
+ * Gère le positionnement, l'alignement et l'espacement des sections principales.
  * 
  * ÉLÉMENTS STRUCTURÉS :
- * 1. Body (conteneur principal de toute la page)
- * 2. Header (bandeau bleu avec logo)
- * 3. Main-content (contenu central)
- * 4. Section "Meilleur film" (héro avec poster + description)
- * 5. Sections de films (grilles de cartes)
- * 6. Titres de sections
- * 7. Grilles et espacements
+ * 1. Conteneur principal (html, body)
+ * 2. En-tête de navigation (logo, titre)
+ * 3. Zone de contenu principal
+ * 4. Section hero (meilleur film)
+ * 5. Grilles de films par catégorie
+ * 6. Titres et en-têtes de sections
+ * 7. Système de grille et espacements
+ * 
+ * @author MithrandirEa
+ * @project JustStreamIt - OpenClassrooms P6
+ * @version 2.0
  */
 
 /* ==========================================
@@ -22,21 +27,21 @@
    Limite la largeur max et centre le contenu
 */
 html {
-    background-color: white !important;  /* Fond blanc pour voir le centrage */
+    background-color: white !important;  /* Fond blanc */
     width: 100%;
     height: 100%;
-    margin-top: 60px;
+    margin-top: var(--spacing-xl);       /* Marge supérieure 60px */
 }
 
 body {
-    font-family: var(--font-primary);      /* Police Oswald partout */
-    background-color: var(--color-white);  /* Fond blanc du contenu */
-    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-xl) var(--spacing-lg); /* 60px haut/bas, 40px gauche/droite */
-    box-sizing: border-box;                /* Inclut padding dans largeur */
-    min-height: 100vh;                     /* Hauteur minimale = hauteur écran */
-    max-width: var(--width-max) !important; /* Largeur max 1200px */
-    margin-left: auto !important;          /* Centre à gauche */
-    margin-right: auto !important;         /* Centre à droite */
+    font-family: var(--font-primary);      /* Police Oswald */
+    background-color: var(--color-white);  /* Fond blanc */
+    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-xl) var(--spacing-lg); /* Espacement 60px 40px */
+    box-sizing: border-box;                /* Boîte inclusive */
+    min-height: 100vh;                     /* Hauteur minimale viewport */
+    max-width: var(--width-max) !important; /* Largeur maximale 1200px */
+    margin-left: auto !important;          /* Centrage horizontal */
+    margin-right: auto !important;         /* Centrage horizontal */
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -47,35 +52,35 @@ body {
    Bandeau bleu avec logo + titre "JustStreamIt"
 */
 .original-header {
-    background-color: var(--color-primary); /* Fond bleu #61787f */
-    height: var(--height-header);           /* Hauteur fixe 122px */
-    display: flex;                          /* Alignement horizontal logo + titre */
-    align-items: center;                    /* Centre verticalement */
-    padding: 0 27px;                        /* Padding horizontal pour le contenu */
+    background-color: var(--color-primary); /* Fond primaire */
+    height: var(--height-header);           /* Hauteur 122px */
+    display: flex;                          /* Disposition flexbox */
+    align-items: center;                    /* Centrage vertical */
+    padding: 0 var(--spacing-md);           /* Espacement horizontal 20px */
 }
 
 .original-header .container-fluid {
-    max-width: 100%;                        /* Largeur complète du header */
-    padding: 0;                             /* Supprime le padding Bootstrap */
+    max-width: 100%;                        /* Largeur pleine */
+    padding: 0;                             /* Sans espacement */
 }
 
 .original-header .row {
-    margin: 0;                              /* Supprime les marges négatives Bootstrap */
+    margin: 0;                              /* Sans marge */
 }
 
 .logo-img {
-    width: var(--width-logo);    /* Largeur logo 127px */
-    height: var(--height-logo);  /* Hauteur logo 94px */
-    margin-left: 0;              /* Pas de marge (géré par le padding du header) */
+    width: var(--width-logo);    /* Largeur 127px */
+    height: var(--height-logo);  /* Hauteur 94px */
+    margin-left: 0;              /* Sans marge */
 }
 
 .header-title {
-    font-weight: var(--font-weight-light);  /* Poids 300 (léger) */
-    font-size: var(--font-size-header);     /* 40px */
-    line-height: 59px;                      /* Espacement vertical texte */
-    color: var(--color-white);              /* Texte blanc */
-    margin-left: var(--spacing-lg);         /* 40px depuis le logo */
-    margin-bottom: 0 !important;            /* Override Bootstrap */
+    font-weight: var(--font-weight-light);  /* Graisse 300 */
+    font-size: var(--font-size-header);     /* Taille 40px */
+    line-height: 1.5;                       /* Interligne 1.5 */
+    color: var(--color-white);              /* Blanc */
+    margin-left: var(--spacing-lg);         /* Marge gauche 40px */
+    margin-bottom: 0 !important;            /* Sans marge basse */
 }
 
 /* ==========================================
@@ -84,7 +89,7 @@ body {
    Zone centrale contenant toutes les sections de films
 */
 .main-content {
-    padding: var(--spacing-xl) var(--spacing-lg) 75px var(--spacing-lg); /* 60px haut, 40px côtés, 75px bas */
+    padding: var(--spacing-xl) var(--spacing-lg) 75px var(--spacing-lg); /* Espacement 60px 40px 75px */
 }
 
 /* ==========================================
@@ -97,37 +102,37 @@ body {
 
 /* Titre "Meilleur film" */
 .bestFilm h1 {
-    font-size: var(--font-size-best-title); /* 36px */
-    margin-bottom: var(--spacing-md);       /* 20px sous le titre */
-    font-weight: var(--font-weight-bold);   /* Gras (700) */
+    font-size: var(--font-size-best-title); /* Taille 36px */
+    margin-bottom: var(--spacing-md);       /* Marge inférieure 20px */
+    font-weight: var(--font-weight-bold);   /* Graisse 700 */
 }
 
-/* Conteneur principal : bordure noire + layout flex */
+/* Conteneur principal */
 .best-movie-container {
     border: 6px solid var(--color-black);  /* Bordure noire épaisse */
-    padding: var(--spacing-md);            /* 20px de marge interne */
-    margin-bottom: var(--spacing-lg);      /* 40px sous la section */
-    display: flex;                         /* Layout horizontal */
-    align-items: stretch;                  /* Étire poster et infos à même hauteur */
-    gap: var(--spacing-md);                /* 20px entre poster et infos */
+    padding: var(--spacing-md);            /* Espacement interne 20px */
+    margin-bottom: var(--spacing-lg);      /* Marge inférieure 40px */
+    display: flex;                         /* Disposition horizontale */
+    align-items: stretch;                  /* Étirement vertical */
+    gap: var(--spacing-md);                /* Espacement 20px */
 }
 
-/* Zone du poster (partie gauche) */
+/* Zone du poster */
 .best-movie-poster-container {
-    flex-shrink: 0;                        /* Ne rétrécit pas si manque d'espace */
-    position: relative;                    /* Pour positionnement fallback absolu */
-    min-height: var(--height-fallback-min); /* Hauteur min 300px */
-    display: flex;                         /* Centre le poster */
-    align-items: center;                   /* Centre verticalement */
-    justify-content: center;               /* Centre horizontalement */
+    flex-shrink: 0;                        /* Sans rétrécissement */
+    position: relative;                    /* Contexte de positionnement */
+    min-height: var(--height-fallback-min); /* Hauteur minimale 300px */
+    display: flex;                         /* Disposition flex */
+    align-items: center;                   /* Centrage vertical */
+    justify-content: center;               /* Centrage horizontal */
 }
 
-/* Zone des informations (partie droite) */
+/* Zone des informations */
 .best-movie-info {
-    padding-left: var(--spacing-md);       /* 20px depuis le poster */
-    display: flex;                         /* Layout vertical */
-    flex-direction: column;                /* Titre → Description → Bouton */
-    justify-content: space-between;        /* Espace entre éléments */
+    padding-left: var(--spacing-md);       /* Espacement gauche 20px */
+    display: flex;                         /* Disposition verticale */
+    flex-direction: column;                /* Organisation en colonne */
+    justify-content: space-between;        /* Espacement équilibré */
 }
 
 /* ==========================================
@@ -140,10 +145,10 @@ body {
 .category2 h1, 
 .otherFilms h1 {
     font-family: var(--font-primary);      /* Police Oswald */
-    font-size: var(--font-size-section);   /* 48px - très gros */
-    font-weight: var(--font-weight-semibold); /* Semi-gras (600) */
-    line-height: 100%;                     /* Espacement serré */
-    margin: var(--spacing-lg) 0 var(--spacing-md) 0; /* 60px dessus, 20px dessous */
+    font-size: var(--font-size-section);   /* Taille 48px */
+    font-weight: var(--font-weight-semibold); /* Graisse 600 */
+    line-height: 100%;                     /* Interligne serré */
+    margin: var(--spacing-lg) 0 var(--spacing-md) 0; /* Marges 60px 0 20px 0 */
 }
 
 /* ==========================================
@@ -152,27 +157,27 @@ body {
    Cette section a un titre + sélecteur de genre
 */
 
-/* Conteneur titre + sélecteur (côte à côte desktop) */
+/* Conteneur titre et sélecteur */
 .otherFilms .title-selector-container {
-    display: flex;                         /* Layout horizontal */
-    justify-content: space-between;        /* Titre à gauche, sélecteur à droite */
-    align-items: center;                   /* Alignement vertical centré */
+    display: flex;                         /* Disposition horizontale */
+    justify-content: space-between;        /* Espacement maximal */
+    align-items: center;                   /* Centrage vertical */
     margin: var(--spacing-lg) 0 var(--spacing-md) 0; /* Marges verticales */
 }
 
-/* Titre "Autres films" (grandit pour prendre l'espace) */
+/* Titre de la section */
 .otherFilms .title-selector-container h1 {
-    margin: 0;                             /* Pas de marge par défaut */
-    flex-grow: 1;                          /* Prend tout l'espace disponible */
+    margin: 0;                             /* Sans marge */
+    flex-grow: 1;                          /* Expansion maximale */
 }
 
-/* Wrapper du sélecteur Bootstrap */
+/* Conteneur du sélecteur */
 .otherFilms .title-selector-container .mb-3 {
-    margin-bottom: 0 !important;           /* Override Bootstrap */
-    margin-left: var(--spacing-md);        /* 20px depuis le titre */
+    margin-bottom: 0 !important;           /* Sans marge basse */
+    margin-left: var(--spacing-md);        /* Marge gauche 20px */
 }
 
-/* Le sélecteur <select> lui-même */
+/* Élément select */
 .otherFilms .title-selector-container .form-select {
     min-width: 200px;                      /* Largeur minimale */
     max-width: 250px;                      /* Largeur maximale */
@@ -185,18 +190,18 @@ body {
    Utilise le système Bootstrap avec marges négatives
 */
 
-/* Conteneur de la grille (row Bootstrap) */
+/* Conteneur de la grille */
 .movie-grid {
-    margin: 0 calc(-1 * var(--spacing-cards-half)); /* Marges négatives -22.5px */
-    display: flex;                         /* Layout flexbox */
-    flex-wrap: wrap;                       /* Retour à la ligne si nécessaire */
+    margin: 0 calc(-1 * var(--spacing-cards-half)); /* Marges négatives */
+    display: flex;                         /* Disposition flexbox */
+    flex-wrap: wrap;                       /* Retour à la ligne */
 }
 
-/* Wrapper de chaque carte de film */
+/* Wrapper de carte */
 .movie-card-wrapper {
-    margin-bottom: var(--spacing-cards);   /* 45px sous chaque carte */
-    padding: 0 var(--spacing-cards-half);  /* 22.5px de padding horizontal */
-    position: relative;                    /* Pour positionnement overlay */
+    margin-bottom: var(--spacing-cards);   /* Marge inférieure 45px */
+    padding: 0 var(--spacing-cards-half);  /* Espacement horizontal 22.5px */
+    position: relative;                    /* Contexte de positionnement */
 }
 
 /* ==========================================
@@ -205,77 +210,17 @@ body {
    Affichés pendant le chargement API
 */
 .loading-text {
-    color: var(--color-loading);           /* Gris #6c757d */
-    font-style: italic;                    /* En italique */
-}
-
-/* ==========================================
-   ÉLÉMENT 9 : OVERLAY TITRE SUR CARTES
-   ==========================================
-   Apparaît au survol d'une carte de film
-*/
-
-/* Carte de film (conteneur) */
-.movie-card-original {
-    position: relative;                    /* Pour overlay en position absolute */
-    overflow: hidden;                      /* Cache débordements */
-}
-
-/* Fallback image en arrière-plan */
-.movie-fallback {
-    z-index: 5;                           /* Derrière l'overlay (z-index 10) */
-}
-
-/* Overlay titre + bouton (apparaît au survol) */
-.movie-title-overlay {
-    position: absolute;                    /* Positionnement absolu sur la carte */
-    top: 50%;                             /* Centre verticalement */
-    left: 50%;                            /* Centre horizontalement */
-    transform: translate(-50%, -50%);     /* Décalage pour centrage parfait */
-    background: rgba(0, 0, 0, 0.7);       /* Fond noir semi-transparent */
-    color: white;                         /* Texte blanc */
-    padding: 15px;                        /* Espacement interne */
-    border-radius: 8px;                   /* Coins arrondis */
-    text-align: center;                   /* Texte centré */
-    opacity: 0;                           /* Invisible par défaut */
-    transition: opacity 0.3s ease;        /* Animation apparition douce */
-    z-index: 10;                          /* Au-dessus de tout */
-}
-
-/* Activation de l'overlay au survol */
-.movie-card-original:hover .movie-title-overlay {
-    opacity: 1;                           /* Devient visible */
-}
-
-/* Texte du titre dans l'overlay */
-.movie-title-text {
-    display: block;                       /* Bloc complet */
-    font-weight: bold;                    /* Texte gras */
-    margin-bottom: 10px;                  /* Espace avant le bouton */
-    font-size: 14px;                      /* Taille de police */
-}
-
-/* Bouton "Détails" dans l'overlay */
-.movie-details-btn {
-    background: #007bff;                  /* Fond bleu Bootstrap */
-    color: white;                         /* Texte blanc */
-    border: none;                         /* Pas de bordure */
-    padding: 8px 16px;                    /* Espacement interne */
-    border-radius: 4px;                   /* Coins légèrement arrondis */
-    cursor: pointer;                      /* Curseur pointeur */
-    font-size: 12px;                      /* Petite police */
-    transition: background 0.3s ease;     /* Animation changement couleur */
-}
-
-/* Survol du bouton détails */
-.movie-details-btn:hover {
-    background: #0056b3;                  /* Bleu plus foncé */
+    color: var(--color-loading);           /* Gris de chargement */
+    font-style: italic;                    /* Italique */
 }
 
 /**
  * ========================================
  * FIN DU FICHIER LAYOUT.CSS
  * ========================================
+ * 
+ * NOTE: Les styles des cartes films, overlays, boutons et fallbacks
+ * sont définis dans components.css pour éviter les doublons.
  * 
  * HIÉRARCHIE VISUELLE :
  * Body → Header → Main-content → Sections → Grilles → Cartes

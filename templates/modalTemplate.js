@@ -1,11 +1,11 @@
 /**
  * MODAL TEMPLATE
- * Templates pour l'affichage des détails de films dans les modales
- * Génère le contenu HTML pour les sections desktop et mobile des modales
+ * Templates pour l'affichage des détails de films en modale
+ * Génère le contenu HTML des sections desktop et mobile
  */
 
 /**
- * Génère le HTML pour la section titre
+ * Génère le HTML du titre
  * @param {Object} movie - Données du film
  * @returns {string} HTML du titre
  */
@@ -14,7 +14,7 @@ function generateTitleSection(movie) {
 }
 
 /**
- * Génère le HTML pour la section détails
+ * Génère le HTML des détails
  * @param {Object} movie - Données du film
  * @returns {string} HTML des détails
  */
@@ -28,7 +28,7 @@ function generateDetailsSection(movie) {
 }
 
 /**
- * Génère le HTML pour la section réalisateur
+ * Génère le HTML du réalisateur
  * @param {Object} movie - Données du film
  * @returns {string} HTML du réalisateur
  */
@@ -40,7 +40,7 @@ function generateDirectorSection(movie) {
 }
 
 /**
- * Génère le HTML pour la section résumé
+ * Génère le HTML du résumé
  * @param {Object} movie - Données du film
  * @returns {string} HTML du résumé
  */
@@ -49,7 +49,7 @@ function generateSummarySection(movie) {
 }
 
 /**
- * Génère le HTML pour la section acteurs
+ * Génère le HTML des acteurs
  * @param {Object} movie - Données du film
  * @returns {string} HTML des acteurs
  */
@@ -64,7 +64,7 @@ function generateActorsSection(movie) {
  * Configure une image de poster avec gestion d'erreur
  * @param {HTMLImageElement} poster - Élément image
  * @param {Object} movie - Données du film
- * @param {boolean} isMobile - Si c'est la version mobile
+ * @param {boolean} isMobile - Version mobile
  */
 function configurePosterImage(poster, movie, isMobile = false) {
     poster.src = movie.image_url;
@@ -79,7 +79,7 @@ function configurePosterImage(poster, movie, isMobile = false) {
 }
 
 /**
- * Génère le template d'erreur pour la modale
+ * Génère le template d'erreur
  * @param {Error} error - Erreur survenue
  * @returns {string} HTML d'erreur
  */

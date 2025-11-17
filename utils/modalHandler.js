@@ -1,12 +1,12 @@
 /**
  * MODAL HANDLER
- * Gestionnaire pour l'affichage des détails de films dans les modales
- * Utilise apiService et modalTemplate pour une architecture propre
+ * Gestionnaire d'affichage des détails de films en modale
+ * Utilise apiService et modalTemplate
  */
 
 /**
- * Classe pour gérer l'affichage des modales de films
- * Coordonne l'appel API, la génération de templates et la mise à jour du DOM
+ * Classe de gestion des modales
+ * Coordonne l'appel API, les templates et le DOM
  */
 class ModalHandler {
     constructor() {
@@ -16,7 +16,7 @@ class ModalHandler {
 
     /**
      * Récupère l'ID du film depuis l'URL
-     * @returns {string|null} ID du film ou null si absent
+     * @returns {string|null} ID du film
      */
     getMovieIdFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -24,7 +24,7 @@ class ModalHandler {
     }
 
     /**
-     * Met à jour toutes les sections titre (desktop et mobile)
+     * Met à jour les sections titre
      * @param {Object} movie - Données du film
      */
     updateTitleSections(movie) {
@@ -37,7 +37,7 @@ class ModalHandler {
     }
 
     /**
-     * Met à jour toutes les sections détails (desktop et mobile)
+     * Met à jour les sections détails
      * @param {Object} movie - Données du film
      */
     updateDetailsSections(movie) {
@@ -50,7 +50,7 @@ class ModalHandler {
     }
 
     /**
-     * Met à jour toutes les sections réalisateur (desktop et mobile)
+     * Met à jour les sections réalisateur
      * @param {Object} movie - Données du film
      */
     updateDirectorSections(movie) {
@@ -63,7 +63,7 @@ class ModalHandler {
     }
 
     /**
-     * Met à jour toutes les images de poster (desktop et mobile)
+     * Met à jour les images de poster
      * @param {Object} movie - Données du film
      */
     updatePosterImages(movie) {
@@ -76,7 +76,7 @@ class ModalHandler {
     }
 
     /**
-     * Met à jour toutes les sections résumé (desktop et mobile)
+     * Met à jour les sections résumé
      * @param {Object} movie - Données du film
      */
     updateSummarySections(movie) {
@@ -89,7 +89,7 @@ class ModalHandler {
     }
 
     /**
-     * Met à jour toutes les sections acteurs (desktop et mobile)
+     * Met à jour les sections acteurs
      * @param {Object} movie - Données du film
      */
     updateActorsSections(movie) {
@@ -102,7 +102,7 @@ class ModalHandler {
     }
 
     /**
-     * Met à jour tout le contenu de la modale avec les données du film
+     * Met à jour tout le contenu de la modale
      * @param {Object} movie - Données complètes du film
      */
     updateModalContent(movie) {
@@ -127,11 +127,11 @@ class ModalHandler {
 
     /**
      * Charge et affiche les détails d'un film
-     * @param {string} movieId - ID du film à charger
+     * @param {string} movieId - ID du film
      */
     async loadMovieDetails(movieId) {
         try {
-            // Utilisation du service API centralisé (pas de fetch direct)
+            // Utilisation du service API centralisé
             const movie = await window.ApiService.getMovieDetails(movieId);
             
             this.movie = movie;
@@ -154,8 +154,7 @@ class ModalHandler {
     }
 
     /**
-     * Initialise la modale au chargement de la page
-     * Point d'entrée principal appelé par le DOMContentLoaded
+     * Initialise la modale au chargement
      */
     async initialize() {
         this.movieId = this.getMovieIdFromUrl();

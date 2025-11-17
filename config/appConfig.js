@@ -1,13 +1,16 @@
 /**
  * CONFIGURATION APPLICATION
- * Centralisation de toutes les constantes et configurations
- * Fichier de configuration principale de l'application JustStreamIt
+ * Centralisation des constantes et paramètres
+ * Configuration principale de JustStreamIt
  */
 
 /**
  * Configuration des sections de films
- * Definit toutes les sections affichees sur la page d'accueil
- * Chaque section a un titre, un endpoint API, une classe CSS et une identification
+ * Définit les sections affichées sur la page d'accueil
+ * @property {Object} bestRated - Films les mieux notés
+ * @property {Object} action - Films d'action
+ * @property {Object} mystery - Films mystery
+ * @property {Object} adventure - Autres films
  */
 const FILM_SECTIONS = {
     bestRated: {
@@ -38,8 +41,10 @@ const FILM_SECTIONS = {
 
 /**
  * Messages de l'application
- * Centralise tous les messages affiches dans la console pour le debogage
- * Organise les messages par type (chargement, succes, modes d'affichage)
+ * Messages de débogage et d'information
+ * @property {Object} loading - Messages de chargement
+ * @property {Object} success - Messages de succès
+ * @property {Object} modes - Modes d'affichage
  */
 const APP_MESSAGES = {
     loading: {
@@ -60,25 +65,24 @@ const APP_MESSAGES = {
 };
 
 /**
- * Configuration des breakpoints responsive
- * Seuils de largeur d'ecran pour determiner le type d'appareil
+ * Breakpoints responsive
+ * Seuils de largeur d'écran pour la détection du type d'appareil
  */
 const RESPONSIVE_BREAKPOINTS = {
-    mobile: 768,  // Seuil mobile/tablette
-    tablet: 992   // Seuil tablette/desktop
+    mobile: 457,  // Seuil phone/tablette (correspond à --breakpoint-phone + 1)
+    tablet: 789   // Seuil tablette/desktop (correspond à --breakpoint-desktop)
 };
 
 /**
  * Utilitaires de configuration
- * Objet principal qui expose toutes les fonctions utilitaires de configuration
+ * Expose les fonctions de configuration de l'application
  */
 const AppConfig = {
     /**
-     * Genere l'URL complete pour un endpoint
-     * Construit l'URL finale en ajoutant la base URL et le parametre page_size
-     * @param {string} endpoint - Endpoint relatif de l'API (ex: '/titles/?sort_by=-imdb_score')
-     * @param {number} pageSize - Nombre de films par page selon l'ecran
-     * @returns {string} URL complete prete pour fetch (ex: 'http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=6')
+     * Génère l'URL complète pour un endpoint
+     * @param {string} endpoint - Endpoint relatif de l'API
+     * @param {number} pageSize - Nombre de films par page
+     * @returns {string} URL complète
      */
     buildApiUrl(endpoint, pageSize) {
         const baseUrl = 'http://localhost:8000/api/v1';
@@ -87,21 +91,8 @@ const AppConfig = {
     },
 
     /**
-     * Determine le mode d'affichage actuel
-     * Identifie le type d'appareil selon la largeur d'ecran actuelle
-     * @returns {string} Mode d'affichage ('PC', 'Tablette', ou 'Mobile')
-     */
-    getCurrentDisplayMode() {
-        const width = window.innerWidth;
-        if (width >= RESPONSIVE_BREAKPOINTS.tablet) return APP_MESSAGES.modes.pc;
-        if (width >= RESPONSIVE_BREAKPOINTS.mobile) return APP_MESSAGES.modes.tablet;
-        return APP_MESSAGES.modes.mobile;
-    },
-
-    /**
-     * Retourne toutes les sections configurees
-     * Donne acces a la configuration complete des sections de films
-     * @returns {Object} Objet contenant toutes les sections (bestRated, action, mystery, adventure)
+     * Retourne les sections configurées
+     * @returns {Object} Configuration des sections
      */
     getFilmSections() {
         return FILM_SECTIONS;
@@ -109,8 +100,7 @@ const AppConfig = {
 
     /**
      * Retourne les messages de l'application
-     * Donne acces a tous les messages de debogage et d'information
-     * @returns {Object} Objet contenant les messages organises par type
+     * @returns {Object} Messages par type
      */
     getMessages() {
         return APP_MESSAGES;

@@ -1,20 +1,15 @@
 /**
  * BEST MOVIE TEMPLATE
- * Template pour la section du meilleur film de la page d'accueil
- * Gere l'affichage du film avec le meilleur score IMDb
+ * Template pour la section héro du meilleur film
  */
 
 /**
- * Genere le template HTML pour le meilleur film
- * Cree la structure HTML complete pour afficher le meilleur film avec :
- * - Image du poster avec gestion d'erreur de chargement
- * - Titre et description du film
- * - Bouton pour ouvrir les details en modal
- * @param {Object} movie - Objet contenant les donnees du film (title, image_url, description, etc.)
- * @returns {string} Chaine HTML prete a etre injectee dans le DOM
+ * Génère le template HTML du meilleur film
+ * @param {Object} movie - Données du film
+ * @returns {string} HTML complet de la section
  */
 function generateBestMovieTemplate(movie) {
-    // Gestion de l'image avec fallback robuste pour eviter les erreurs CORS
+    // Gestion d'image avec fallback
     const imageHtml = movie.image_url ? 
         `<img src="${movie.image_url}" alt="Poster de ${movie.title}" class="best-movie-poster" style="cursor: pointer;" 
          onerror="handleImageError(this, 'best-movie-fallback')"
@@ -38,10 +33,9 @@ function generateBestMovieTemplate(movie) {
 }
 
 /**
- * Genere le template d'erreur pour la section du meilleur film
- * Affiche un message d'erreur comprehensible a l'utilisateur avec option de rechargement
- * @param {Error} error - Objet Error contenant les details de l'erreur survenue
- * @returns {string} HTML d'erreur avec message explicatif et bouton de rechargement
+ * Génère le template d'erreur
+ * @param {Error} error - Erreur survenue
+ * @returns {string} HTML d'erreur avec rechargement
  */
 function generateBestMovieErrorTemplate(error) {
     return `

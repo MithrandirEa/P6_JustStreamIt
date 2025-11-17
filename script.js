@@ -5,6 +5,7 @@
 
 /**
  * Charge et affiche le meilleur film selon le score IMDb
+ * Récupère le film avec le score le plus élevé et l'affiche dans la section héro
  */
 async function loadBestMovie() {
     try {
@@ -16,7 +17,7 @@ async function loadBestMovie() {
         const bestMovies = movies.filter(film => parseFloat(film.imdb_score) === bestScore);
         const movie = bestMovies[Math.floor(Math.random() * bestMovies.length)];
         
-        // Récupération des détails complets
+        // Récupération des détails complètement
         try {
             const detailData = await window.ApiService.getMovieDetails(movie.id);
             let fullDescription = detailData.long_description || detailData.description || movie.description;
@@ -55,7 +56,8 @@ async function loadBestMovie() {
 
 
 /**
- * Charger tous les genres disponibles
+ * Récupère tous les genres disponibles depuis l'API
+ * @returns {Promise<Array>} Liste triée des genres
  */
 async function loadAllGenres() {
     try {
@@ -67,7 +69,9 @@ async function loadAllGenres() {
 }
 
 /**
- * Charger une section de films
+ * Charge une section de films depuis l'API
+ * @param {string} endpoint - URL de l'endpoint API
+ * @param {string} sectionClass - Classe CSS de la section cible
  */
 async function loadMovieSection(endpoint, sectionClass) {
     try {
@@ -75,10 +79,10 @@ async function loadMovieSection(endpoint, sectionClass) {
         const movies = data.results;
         const validMovies = movies.filter(movie => movie.image_url);
 
-        // Selection de la section cible dans le DOM
+        // Sélection de la section cible
         const movieSection = document.querySelector(`.${sectionClass}`);
         
-        // Creation de la grille via template centralise
+        // Création de la grille
         const movieList = window.SectionTemplate.createMovieGrid();
 
         validMovies.forEach((movie, index) => {
@@ -97,7 +101,7 @@ async function loadMovieSection(endpoint, sectionClass) {
             if (movieCard && movieList) movieList.appendChild(movieCard);
         });
 
-        // Pagination si pas assez de films
+        // Pagination si nécessaire
         if (validMovies.length < ResponsiveUtils.getPageSize() && data.next) {
             const nextResponse = await fetch(data.next);
             const nextData = await nextResponse.json();
@@ -108,7 +112,7 @@ async function loadMovieSection(endpoint, sectionClass) {
         const title = movieSection.querySelector('h1');
         movieSection.innerHTML = '';
 
-        // Gestion speciale section "Autres films"
+        // Gestion de la section "Autres films"
         if (sectionClass === 'otherFilms') {
             const genres = await loadAllGenres();
             const titleSelectorContainer = document.createElement('div');
@@ -121,11 +125,8 @@ async function loadMovieSection(endpoint, sectionClass) {
             selectContainer.className = 'mb-3';
             
             const select = document.createElement('select');
-            select.className = 'form-select'; // Classe Bootstrap pour les selects
+            select.className = 'form-select';
             
-            // Les genres sont deja tries dans loadAllGenres()
-            
-
             select.innerHTML = `
                 <option value="">Selectionnez un genre</option>
                 ${genres.map(genre => `<option value="${genre}">${genre}</option>`).join('')}
@@ -134,7 +135,7 @@ async function loadMovieSection(endpoint, sectionClass) {
 
             select.addEventListener('change', async (e) => {
                 if (e.target.value) {
-                    // Construction de la nouvelle URL avec le genre selectionne
+                    // Construction de l'URL avec le genre sélectionné
                     const newEndpoint = `http://localhost:8000/api/v1/titles/?genre=${e.target.value}&sort_by=-imdb_score&page_size=${ResponsiveUtils.getPageSize()}`;
 
                     await loadMovieSection(newEndpoint, sectionClass);
@@ -175,7 +176,8 @@ async function loadMovieSection(endpoint, sectionClass) {
 }
 
 /**
- * Ouverture de la fenetre modale
+ * Ouvre la fenêtre modale pour un film spécifique
+ * @param {string|number} movieId - Identifiant unique du film
  */
 function openModal(movieId) {
 
@@ -194,11 +196,9 @@ function openModal(movieId) {
 
 
 /**
- * Initialisation de l'application
+ * Initialise l'application au chargement
+ * Utilise le gestionnaire centralisé AppInitializer
  */
-
-
-
 async function initializePage() {
     // Utilisation du gestionnaire d'initialisation centralise
     const initializer = new window.AppInitializer();
@@ -206,7 +206,8 @@ async function initializePage() {
 }
 
 /**
- * Gestion du responsive
+ * Gestion du redimensionnement de la fenêtre
+ * Recharge la page après 250ms d'inactivité
  */
 window.addEventListener('resize', () => {
 
@@ -220,6 +221,7 @@ window.addEventListener('resize', () => {
 
 /**
  * Initialisation au chargement du DOM
+ * Vérifie la présence des sections et démarre l'application
  */
 document.addEventListener('DOMContentLoaded', () => {
     const sections = ['.bestFilm', '.bestRatedFilms', '.category1', '.category2', '.otherFilms'];

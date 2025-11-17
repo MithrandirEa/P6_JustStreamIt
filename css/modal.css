@@ -1,23 +1,29 @@
 /**
  * ========================================
- *  MODAL.CSS - FENTRES MODALES DTAILS FILMS
+ * MODAL.CSS - FENÊTRES MODALES DE DÉTAILS
  * ========================================
  * 
- * Ce fichier style la page modalWindows.html
- * Affiche les dtails complets d'un film dans une fentre ddie
+ * Styles de la page modalWindows.html affichant les détails complets d'un film.
+ * Implémente une architecture responsive adaptative selon la taille d'écran.
  * 
- * ARCHITECTURE RESPONSIVE DOUBLE :
- * - Desktop (> 788px) : Layout 2 colonnes (Infos | Poster)
- * - Mobile ( 788px) : Layout vertical (Titre  Rsum  Poster  Acteurs)
+ * ARCHITECTURE RESPONSIVE :
+ * - Desktop (> 788px) : Disposition en 2 colonnes (informations | poster)
+ * - Mobile (≤ 788px) : Disposition verticale (titre → résumé → poster → acteurs)
  * 
- * BREAKPOINT SPCIAL : 788px (diffrent du reste du site)
+ * NOTE TECHNIQUE :
+ * Les breakpoints sont définis dans variables.css (--breakpoint-tablet: 788px).
+ * CSS ne supportant pas var() dans @media, les valeurs sont dupliquées.
  * 
- * SECTIONS :
- * 1. Structure de base (body + conteneur)
- * 2. Bouton fermer X (mobile/tablet uniquement)
- * 3. Version DESKTOP (> 788px)
- * 4. Version MOBILE ( 788px)
- * 5. Adaptations crans trs petits
+ * ORGANISATION DES SECTIONS :
+ * 1. Structure de base et conteneur principal
+ * 2. Bouton de fermeture (mobile/tablette uniquement)
+ * 3. Version desktop (disposition horizontale)
+ * 4. Version mobile (disposition verticale)
+ * 5. Adaptations pour petits écrans
+ * 
+ * @author MithrandirEa
+ * @project JustStreamIt - OpenClassrooms P6
+ * @version 2.0
  */
 
 /* ==========================================
@@ -28,28 +34,28 @@
 body.modal-page {
   font-family: var(--font-primary);        /* Police Oswald */
   background-color: var(--modal-bg);       /* Fond blanc */
-  margin: 0;                               /* Pas de marge externe */
-  padding: var(--modal-border-width);      /* Padding 6px pour bordure */
-  font-size: var(--modal-text-desktop);    /* Texte 14px par défaut */
-  line-height: 1.4;                        /* Interligne 140% */
+  margin: 0;                               /* Sans marge */
+  padding: var(--modal-border-width);      /* Espacement 6px */
+  font-size: var(--modal-text-desktop);    /* Taille 14px */
+  line-height: 1.4;                        /* Interligne 1.4 */
   border: solid var(--modal-border-color) var(--modal-border-width); /* Bordure noire 6px */
-  box-sizing: border-box;                  /* Inclut padding dans dimensions */
-  min-height: 100vh;                       /* Hauteur minimale = hauteur écran */
+  box-sizing: border-box;                  /* Boîte inclusive */
+  min-height: 100vh;                       /* Hauteur minimale viewport */
 }
 
-/* Conteneur principal de la modale */
+/* Conteneur principal */
 .modal-container {
-  width: 100%;                             /* Largeur complte */
-  max-width: var(--modal-max-width);       /* Max 1000px desktop */
-  margin: 0 auto;                          /* Centr horizontalement */
-  padding: var(--modal-padding-desktop);   /* Padding 20px */
+  width: 100%;                             /* Largeur pleine */
+  max-width: var(--modal-max-width);       /* Maximum 1000px */
+  margin: 0 auto;                          /* Centrage horizontal */
+  padding: var(--modal-padding-desktop);   /* Espacement 20px */
   background-color: var(--modal-bg);       /* Fond blanc */
-  position: relative;                      /* Pour positionnement bouton X */
-  min-height: calc(100vh - 12px);         /* Hauteur min - bordures */
+  position: relative;                      /* Contexte de positionnement */
+  min-height: calc(100vh - 12px);         /* Hauteur minimale ajustée */
 }
 
 /* Adaptation mobile du conteneur */
-@media (max-width: 788px) {
+@media (max-width: 788px) { /* var(--breakpoint-tablet) de variables.css */
   .modal-container {
     width: 100%;                           /* Largeur complte mobile */
     margin: 0;                             /* Pas de marge */
@@ -65,34 +71,34 @@ body.modal-page {
    Desktop utilise bouton "Fermer" texte en bas
 */
 .btn-close-x {
-  position: absolute;                        /* Positionn dans .modal-container */
-  top: var(--modal-close-position-top);      /* 15px du haut */
-  right: var(--modal-close-position-right);  /* 20px de la droite */
-  background-color: var(--color-secondary);  /* Rouge #dc3545 */
+  position: absolute;                        /* Positionnement absolu */
+  top: var(--modal-close-position-top);      /* Position haute 15px */
+  right: var(--modal-close-position-right);  /* Position droite 20px */
+  background-color: var(--color-secondary);  /* Fond secondaire */
   color: var(--color-white);                 /* Texte blanc */
-  border: none;                              /* Pas de bordure */
-  width: var(--modal-close-size);            /* Carr 30x30px */
+  border: none;                              /* Sans bordure */
+  width: var(--modal-close-size);            /* Dimensions 30x30px */
   height: var(--modal-close-size);
-  border-radius: var(--border-radius-sm);    /* Coins lgrement arrondis */
-  font-size: var(--modal-close-font-size);   /* Texte X 16px */
-  cursor: pointer;                           /* Curseur pointeur */
-  z-index: 10;                               /* Au-dessus du contenu */
-  display: none;                             /* Cach par dfaut (desktop) */
-  align-items: center;                       /* Centre le X verticalement */
-  justify-content: center;                   /* Centre le X horizontalement */
-  transition: background-color var(--transition-fast); /* Animation survol */
+  border-radius: var(--border-radius-sm);    /* Rayon léger */
+  font-size: var(--modal-close-font-size);   /* Taille 16px */
+  cursor: pointer;                           /* Pointeur actif */
+  z-index: 10;                               /* Plan supérieur */
+  display: none;                             /* Masqué par défaut */
+  align-items: center;                       /* Centrage vertical */
+  justify-content: center;                   /* Centrage horizontal */
+  transition: background-color var(--transition-fast); /* Transition 0.2s */
 }
 
 /* Affichage du bouton X sur mobile/tablet */
-@media (max-width: 788px) {
+@media (max-width: 788px) { /* var(--breakpoint-tablet) de variables.css */
   .btn-close-x {
     display: flex;                           /* Visible sur mobile */
   }
 }
 
-/* tat survol du bouton X */
+/* État de survol */
 .btn-close-x:hover {
-  background-color: var(--color-secondary-hover); /* Rouge plus fonc */
+  background-color: var(--color-secondary-hover); /* Fond accentué */
 }
 
 /* ==========================================
@@ -109,7 +115,7 @@ body.modal-page {
 }
 
 /* Cache version desktop sur mobile */
-@media (max-width: 788px) {
+@media (max-width: 788px) { /* var(--breakpoint-tablet) de variables.css */
   .modal-desktop {
     display: none;                           /* Invisible mobile */
   }
@@ -123,32 +129,32 @@ body.modal-page {
 
 /* Titre du film */
 .modal-desktop .film-title-section h1 {
-  font-size: var(--modal-title-desktop);     /* 24px */
-  font-weight: var(--font-weight-bold);      /* Gras (700) */
-  margin-bottom: var(--spacing-md);          /* 20px sous le titre */
-  margin-top: 0;                             /* Pas de marge au-dessus */
+  font-size: var(--modal-title-desktop);     /* Taille 24px */
+  font-weight: var(--font-weight-bold);      /* Graisse 700 */
+  margin-bottom: var(--spacing-md);          /* Marge inférieure 20px */
+  margin-top: 0;                             /* Sans marge haute */
 }
 
-/* Dtails : Anne, Dure, Score IMDb */
+/* Détails du film */
 .modal-desktop .film-details-section p {
-  margin-bottom: var(--spacing-sm);          /* 10px entre chaque ligne */
-  font-size: var(--modal-text-desktop);      /* 14px */
-  font-weight: var(--font-weight-bold);      /* Gras (700) */
+  margin-bottom: var(--spacing-sm);          /* Marge inférieure 10px */
+  font-size: var(--modal-text-desktop);      /* Taille 14px */
+  font-weight: var(--font-weight-bold);      /* Graisse 700 */
 }
 
 .modal-desktop .film-details-section strong {
-  font-weight: var(--font-weight-bold);      /* Labels en gras */
+  font-weight: var(--font-weight-bold);      /* Graisse 700 */
 }
 
-/* Section ralisateur */
+/* Section réalisateur */
 .modal-desktop .film-director-section {
-  margin-top: var(--spacing-md);             /* 20px au-dessus */
+  margin-top: var(--spacing-md);             /* Marge supérieure 20px */
 }
 
 .modal-desktop .film-director-section p {
-  margin-bottom: var(--spacing-xs);          /* 5px espacement serré */
-  font-size: var(--modal-text-desktop);      /* 14px */
-  font-weight: var(--font-weight-bold);      /* Gras */
+  margin-bottom: var(--spacing-xs);          /* Marge inférieure 5px */
+  font-size: var(--modal-text-desktop);      /* Taille 14px */
+  font-weight: var(--font-weight-bold);      /* Graisse 700 */
 }
 
 /* ==========================================
@@ -157,22 +163,22 @@ body.modal-page {
    Image du film dans colonne droite (col-lg-5)
 */
 
-/* Image poster desktop */
+/* Image poster */
 .modal-desktop .modal-poster {
-  width: 100%;                               /* Largeur complte de la colonne */
-  max-width: var(--modal-poster-max-desktop); /* Max 300px */
+  width: 100%;                               /* Largeur pleine */
+  max-width: var(--modal-poster-max-desktop); /* Maximum 300px */
   height: auto;                              /* Hauteur proportionnelle */
-  border: 1px solid var(--color-black);      /* Bordure noire fine */
-  object-fit: cover;                         /* Rogne pour conserver aspect */
+  border: 1px solid var(--color-black);      /* Bordure noire */
+  object-fit: cover;                         /* Ajustement proportionnel */
 }
 
 /* Conteneur du poster */
 .modal-desktop .poster {
-  position: relative;                        /* Pour fallback absolu */
-  display: flex;                             /* Centre le poster */
-  align-items: center;                       /* Centre verticalement */
-  justify-content: center;                   /* Centre horizontalement */
-  min-height: var(--modal-poster-min-height); /* Hauteur min 400px */
+  position: relative;                        /* Contexte de positionnement */
+  display: flex;                             /* Disposition flex */
+  align-items: center;                       /* Centrage vertical */
+  justify-content: center;                   /* Centrage horizontal */
+  min-height: var(--modal-poster-min-height); /* Hauteur minimale 400px */
 }
 
 /*  FALLBACK POSTER DESKTOP (image manquante) */
@@ -187,8 +193,8 @@ body.modal-page {
   align-items: center !important;            /* Centre vertical */
   justify-content: center !important;        /* Centre horizontal */
   text-align: center !important;             /* Texte centr */
-  background-color: #f5f5f5 !important;      /* Fond gris clair */
-  border: 2px solid #ddd !important;         /* Bordure grise */
+  background-color: var(--color-fallback) !important; /* Fond gris clair */
+  border: 2px solid var(--color-border-light) !important; /* Bordure grise */
   color: var(--color-fallback-text) !important; /* Texte gris fonc */
   font-size: var(--modal-text-desktop) !important; /* 14px */
   font-weight: var(--font-weight-bold) !important; /* Gras */
@@ -202,31 +208,31 @@ body.modal-page {
    Sections pleine largeur sous le layout 2 colonnes
 */
 
-/* Section rsum du film */
+/* Section résumé */
 .modal-desktop .modal-summary-section {
-  margin-bottom: var(--spacing-sm);          /* 10px en bas */
-  margin-top: var(--spacing-md);             /* 20px en haut */
+  margin-bottom: var(--spacing-sm);          /* Marge inférieure 10px */
+  margin-top: var(--spacing-md);             /* Marge supérieure 20px */
 }
 
-/* Texte du rsum */
+/* Texte du résumé */
 .modal-desktop .summarized p {
-  font-size: var(--modal-text-desktop);      /* 14px */
-  line-height: 1.6;                          /* Interligne 160% */
-  text-align: justify;                       /* Justifi */
-  margin-bottom: 0;                          /* Pas de marge en bas */
-  max-height: none;                          /* Pas de limite */
-  word-wrap: break-word;                     /* Coupe mots longs */
+  font-size: var(--modal-text-desktop);      /* Taille 14px */
+  line-height: 1.6;                          /* Interligne 1.6 */
+  text-align: justify;                       /* Justification */
+  margin-bottom: 0;                          /* Sans marge basse */
+  max-height: none;                          /* Sans limite */
+  word-wrap: break-word;                     /* Césure automatique */
 }
 
 /* Section acteurs */
 .modal-desktop .modal-actors-section {
-  margin-bottom: var(--spacing-md);          /* 20px en bas */
+  margin-bottom: var(--spacing-md);          /* Marge inférieure 20px */
 }
 
 /* Liste des acteurs */
 .modal-desktop .actors_section p {
-  font-size: var(--modal-text-desktop);      /* 14px */
-  margin-bottom: 0;                          /* Pas de marge */
+  font-size: var(--modal-text-desktop);      /* Taille 14px */
+  margin-bottom: 0;                          /* Sans marge */
 }
 
 /* ==========================================
@@ -235,24 +241,24 @@ body.modal-page {
    Gros bouton rouge "Fermer" en bas
 */
 .modal-desktop .btn-close-modal {
-  background-color: var(--color-secondary);  /* Rouge #dc3545 */
+  background-color: var(--color-secondary);  /* Fond secondaire */
   color: var(--color-white);                 /* Texte blanc */
-  padding: var(--modal-close-btn-padding);   /* 12px 30px */
-  text-decoration: none;                     /* Pas de soulignement */
-  font-size: var(--modal-text-desktop);      /* 14px */
-  font-weight: var(--font-weight-bold);      /* Gras (700) */
-  border-radius: var(--border-radius-xl);    /* Coins trs arrondis (25px) */
-  display: inline-block;                     /* Layout inline-block */
-  margin-top: var(--spacing-md);             /* 20px au-dessus */
-  min-width: var(--modal-close-btn-min-width); /* Min 95px */
-  transition: background-color var(--transition-fast); /* Animation survol */
+  padding: var(--modal-close-btn-padding);   /* Espacement 12px 30px */
+  text-decoration: none;                     /* Sans soulignement */
+  font-size: var(--modal-text-desktop);      /* Taille 14px */
+  font-weight: var(--font-weight-bold);      /* Graisse 700 */
+  border-radius: var(--border-radius-xl);    /* Rayon 25px */
+  display: inline-block;                     /* Affichage en ligne */
+  margin-top: var(--spacing-md);             /* Marge supérieure 20px */
+  min-width: var(--modal-close-btn-min-width); /* Largeur minimale 95px */
+  transition: background-color var(--transition-fast); /* Transition 0.2s */
 }
 
-/* Survol du bouton fermer */
+/* État de survol */
 .modal-desktop .btn-close-modal:hover {
-  background-color: var(--color-secondary-hover); /* Rouge plus fonc */
-  color: var(--color-white);                      /* Garde le texte blanc */
-  text-decoration: none;                          /* Pas de soulignement */
+  background-color: var(--color-secondary-hover); /* Fond accentué */
+  color: var(--color-white);                      /* Texte blanc */
+  text-decoration: none;                          /* Sans soulignement */
 }
 
 /* ==========================================
@@ -281,23 +287,7 @@ body.modal-page {
 }
 
 /* ==========================================
-    SOUS-SECTION 3F : CRANS MOYENS DESKTOP
-   ==========================================
-   Adaptation 989px - 1199px
-*/
-@media (min-width: 989px) and (max-width: 1199px) {
-  .modal-container {
-    max-width: var(--modal-max-width-medium);  /* Max 950px */
-    padding: 25px;                             /* Padding moyen */
-  }
-  
-  .modal-desktop .film-title-section h1 {
-    font-size: var(--modal-title-desktop-medium); /* 26px */
-  }
-}
-
-/* ==========================================
-    SECTION 4 : VERSION MOBILE/TABLET ( 788px)
+    SECTION 4 : VERSION MOBILE/TABLET ( var(--breakpoint-tablet))
    ==========================================
    Layout vertical : Titre  Rsum  Poster  Acteurs
    Utilise bouton X en haut  droite
@@ -310,9 +300,9 @@ body.modal-page {
 }
 
 /* Affichage mobile */
-@media (max-width: 788px) {
+@media (max-width: 788px) { /* var(--breakpoint-tablet) de variables.css */
   .modal-mobile {
-    display: block;                          /* Visible sur mobile */
+    display: block;                        /* Visible mobile */
   }
 }
 
@@ -322,37 +312,37 @@ body.modal-page {
    Titre + Dtails + Ralisateur en haut
 */
 .mobile-header-section {
-  margin-bottom: var(--spacing-sm);          /* 10px en bas */
+  margin-bottom: var(--spacing-sm);          /* Marge inférieure 10px */
 }
 
-/* Titre du film mobile */
+/* Titre du film */
 .mobile-header-section .film-title-section h1 {
-  font-size: var(--modal-title-mobile);      /* 18px */
-  font-weight: var(--font-weight-bold);      /* Gras (700) */
-  margin-bottom: 8px;                        /* Espacement serr */
-  margin-top: 0;                             /* Pas de marge haut */
+  font-size: var(--modal-title-mobile);      /* Taille 18px */
+  font-weight: var(--font-weight-bold);      /* Graisse 700 */
+  margin-bottom: 8px;                        /* Marge inférieure 8px */
+  margin-top: 0;                             /* Sans marge haute */
 }
 
-/* Dtails mobile (Anne, Dure, Score) */
+/* Détails du film */
 .mobile-header-section .film-details-section p {
-  margin-bottom: 2px;                        /* Espacement trs serr */
-  font-size: var(--modal-text-mobile);       /* 12px */
-  font-weight: var(--font-weight-bold);      /* Gras */
+  margin-bottom: 2px;                        /* Marge inférieure 2px */
+  font-size: var(--modal-text-mobile);       /* Taille 12px */
+  font-weight: var(--font-weight-bold);      /* Graisse 700 */
 }
 
 .mobile-header-section .film-details-section strong {
-  font-weight: var(--font-weight-bold);      /* Labels en gras */
+  font-weight: var(--font-weight-bold);      /* Graisse 700 */
 }
 
-/* Ralisateur mobile */
+/* Réalisateur */
 .mobile-header-section .film-director-section {
-  margin-top: 8px;                           /* Petit espace au-dessus */
+  margin-top: 8px;                           /* Marge supérieure 8px */
 }
 
 .mobile-header-section .film-director-section p {
-  margin-bottom: 2px;                        /* Espacement serr */
-  font-size: var(--modal-text-mobile);       /* 12px */
-  font-weight: var(--font-weight-bold);      /* Gras */
+  margin-bottom: 2px;                        /* Marge inférieure 2px */
+  font-size: var(--modal-text-mobile);       /* Taille 12px */
+  font-weight: var(--font-weight-bold);      /* Graisse 700 */
 }
 
 /* ==========================================
@@ -361,16 +351,16 @@ body.modal-page {
    Synopsis du film aprs le header
 */
 .mobile-summary-section {
-  margin-bottom: var(--spacing-sm);          /* 10px en bas */
+  margin-bottom: var(--spacing-sm);          /* Marge inférieure 10px */
 }
 
-/* Texte rsum mobile */
+/* Texte du résumé */
 .mobile-summary p {
-  font-size: var(--modal-text-mobile-detail); /* 11px - texte compact */
-  line-height: 1.4;                          /* Interligne 140% */
-  text-align: justify;                       /* Justifi */
-  margin-bottom: 0;                          /* Pas de marge bas */
-  word-wrap: break-word;                     /* Coupe mots longs */
+  font-size: var(--modal-text-mobile-detail); /* Taille 11px */
+  line-height: 1.4;                          /* Interligne 1.4 */
+  text-align: justify;                       /* Justification */
+  margin-bottom: 0;                          /* Sans marge basse */
+  word-wrap: break-word;                     /* Césure automatique */
 }
 
 /* ==========================================
@@ -379,20 +369,20 @@ body.modal-page {
    Image aprs le rsum, centre
 */
 .mobile-poster-section {
-  margin: var(--spacing-sm) 0;               /* 10px haut et bas */
-  position: relative;                        /* Pour fallback absolu */
-  display: flex;                             /* Centre le poster */
-  align-items: center;                       /* Centre vertical */
-  justify-content: center;                   /* Centre horizontal */
-  min-height: var(--modal-poster-min-height-mobile); /* Min 250px */
+  margin: var(--spacing-sm) 0;               /* Marges verticales 10px */
+  position: relative;                        /* Contexte de positionnement */
+  display: flex;                             /* Disposition flex */
+  align-items: center;                       /* Centrage vertical */
+  justify-content: center;                   /* Centrage horizontal */
+  min-height: var(--modal-poster-min-height-mobile); /* Hauteur minimale 250px */
 }
 
-/* Image poster mobile */
+/* Image poster */
 .mobile-poster {
-  width: 100%;                               /* Largeur complte */
-  max-width: var(--modal-poster-max-mobile); /* Max 200px */
+  width: 100%;                               /* Largeur pleine */
+  max-width: var(--modal-poster-max-mobile); /* Maximum 200px */
   height: auto;                              /* Hauteur proportionnelle */
-  border: 1px solid var(--color-black);      /* Bordure noire fine */
+  border: 1px solid var(--color-black);      /* Bordure noire */
 }
 
 /*  FALLBACK POSTER MOBILE */
@@ -407,8 +397,8 @@ body.modal-page {
   align-items: center !important;            /* Centre vertical */
   justify-content: center !important;        /* Centre horizontal */
   text-align: center !important;             /* Texte centr */
-  background-color: #f5f5f5 !important;      /* Fond gris clair */
-  border: 2px solid #ddd !important;         /* Bordure grise */
+  background-color: var(--color-fallback) !important; /* Fond gris clair */
+  border: 2px solid var(--color-border-light) !important; /* Bordure grise */
   color: var(--color-fallback-text) !important; /* Texte gris fonc */
   font-size: var(--modal-text-mobile) !important; /* 12px */
   font-weight: var(--font-weight-bold) !important; /* Gras */
@@ -422,14 +412,14 @@ body.modal-page {
    Liste des acteurs en bas
 */
 .mobile-actors-section {
-  margin-top: var(--spacing-sm);             /* 10px au-dessus */
+  margin-top: var(--spacing-sm);             /* Marge supérieure 10px */
 }
 
-/* Liste acteurs mobile */
+/* Liste acteurs */
 .mobile-actors p {
-  font-size: var(--modal-text-mobile-detail); /* 11px - texte compact */
-  margin-bottom: 0;                          /* Pas de marge bas */
-  line-height: 1.3;                          /* Interligne serr */
+  font-size: var(--modal-text-mobile-detail); /* Taille 11px */
+  margin-bottom: 0;                          /* Sans marge basse */
+  line-height: 1.3;                          /* Interligne 1.3 */
 }
 
 /* ==========================================
@@ -438,15 +428,15 @@ body.modal-page {
    S'appliquent aux 2 versions (desktop + mobile)
 */
 
-/* Force le gras sur dtails et ralisateur */
+/* Graisse des détails et réalisateur */
 .film-details-section p,
 .film-director-section p {
   font-weight: var(--font-weight-bold) !important;
 }
 
-/* Noms des acteurs en poids normal */
+/* Noms des acteurs */
 .actors_names {
-  font-weight: var(--font-weight-normal);    /* Poids 400 (normal) */
+  font-weight: var(--font-weight-normal);    /* Graisse 400 */
 }
 
 /* ==========================================
@@ -454,19 +444,19 @@ body.modal-page {
    ==========================================
    Adaptations pour smartphones compacts
 */
-@media (max-width: 456px) {
-  /* Titre encore plus petit */
+@media (max-width: 456px) { /* var(--breakpoint-phone) de variables.css */
+  /* Titre réduit */
   .mobile-header-section .film-title-section h1 {
     font-size: var(--modal-title-mobile-small); /* 16px */
   }
   
-  /* Dtails et ralisateur rduits */
+  /* Détails et réalisateur compacts */
   .mobile-header-section .film-details-section p,
   .mobile-header-section .film-director-section p {
     font-size: var(--modal-text-mobile-detail); /* 11px */
   }
   
-  /* Rsum encore plus compact */
+  /* Résumé compact */
   .mobile-summary p {
     font-size: var(--modal-text-mobile-small); /* 10px */
   }
